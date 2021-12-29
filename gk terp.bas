@@ -68,10 +68,13 @@ REM set up the success/failure flags
 REM If GO {NSEWUD}
 362 IFNV(0)=1 AND NV(1)<7 THEN 610
 
+REM Debug: beep when processing of auto-actions begins
+REM 363 IFNV(0)=0 V.7
+
 REM Divide action data value by 150 to get verb-code V. If V=0 then this is an automatic action.
 REM All automatic actions must precede all non-automatic actions.
-REM365 FORX=0TOCL:V=INT(CA(X,0)/150):IF NV(0)=0 IFV<>0 x=X:X=CL:NEXTX:X=x:RETURN
-365 FORX=0TOCL:V=INT(CA(X,0)/150):N=CA(X,0)-V*150
+REM365 FORX=0TOCL:V=INT(CA(X,0)/150):N=CA(X,0)-V*150
+365 FORX=-I%*(NV(0)<>0)TOCL:V=INT(CA(X,0)/150):N=CA(X,0)-V*150
 
 REM If continue-flag set: if either V or N non-zero then return, else process conditions. 
 366 IF NOT cont ELSE IF V OR N cont=0:x=X:X=CL:NEXTX:X=x:RETURN ELSE G.400
@@ -353,6 +356,7 @@ REM *** Load game init data ***
 REM 1260 W=INT((IL+INT(CL/2)+INT(NL/10)+RL+ML)/12):REM PRINTW+1;"MINUTES TO LOAD."
 1270 DIMNV(1),CA(CL,7),NV$(NL,1),IA$(IL),IA(IL),RS$(RL),RM(RL,5),MS$(ML),NT$(1),I2(IL)
 1280 FORX=0TOCL:INPUT#d,CA(X,0),CA(X,1),CA(X,2),CA(X,3),CA(X,4),CA(X,5),CA(X,6),CA(X,7):NEXT
+1282 INPUT#d,I%
 1290 FORX=0TONL:FORY=0TO1:INPUT#d,NV$(X,Y)
 1297 NEXTY,X
 1300 FORX=0TORL:INPUT#d,RM(X,0),RM(X,1),RM(X,2),RM(X,3),RM(X,4),RM(X,5),RS$(X):NEXT
