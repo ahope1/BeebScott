@@ -38,7 +38,8 @@ IF Z ELSE IFX=1 IFY<7 K$=LEFT$(K$,ln)
 REM Change any synonym to the base-word that it's a synonym of
 IF Z ELSE IF NT$(X)=K$ NV(X)=Y:Y=NL:NEXT:NV(X)=NV(X)+1:REPEAT NV(X)=NV(X)-1:UNTIL LEFT$(NV$(NV(X),X),1)<>"*" ELSE NEXT
 REMNEXT:F=NV(0)<1ORLEN(NT$(1))>0ANDNV(1)<1:ENDPROC
-NEXT:F=NV(0)<1:IFLEN(NT$(1))>0 AND NV(1)<1 F4=-1:F=0:ENDPROC ELSE F4=0:ENDPROC
+REM If verb unrecognised then return. If noun absent then return. If noun present and unrecognised then flag and return.
+NEXT:F=NV(0)<1:IF F ENDPROC ELSE IFLEN(NT$(1))>0 IF NV(1)<1 F4=-1:F=0:ENDPROC ELSE F4=0:ENDPROC
 
 
 
