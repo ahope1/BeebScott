@@ -4,7 +4,7 @@ use warnings;
 use feature qw(say);
 use IO::File;
 
-# (1) Reads in either (i) a .sao file created by ScottKit or (ii) an "original" TRS-80 .DAT game data file, and then (2) outputs a BBC BASIC program that will write the game data to a BBC Micro filesystem in a format suitable for use with BeebScott.
+# (1) Reads in either (i) a .sao file created by ScottKit or (ii) an "original" TRS-80 .DAT game data file, and then (2) outputs a BBC BASIC program that will write the game data to a BBC Micro filesystem in a format suitable for use with the BeebScott interpreter.
 
 # filename (eventually)
 my $fname = $ARGV[0];
@@ -225,8 +225,8 @@ push @basic, "DATA $nonautoindex";
 push @basic, "\nREM vocab";
 for(my $i = 0; $i <= $words; $i++)
 {
-	my $wordpair = $words[$i];
-	
+	my $wordpair = $words[$i];	
+
 	my $dirn = "";
 	if ($i==1){ $dirn = substr("NORTH",0,$wordlen); $wordpair =~ s/,"$dirn"/,"NORTH"/; }
 	elsif ($i==2){ $dirn = substr("SOUTH",0,$wordlen); $wordpair =~ s/,"$dirn"/,"SOUTH"/; }
@@ -234,8 +234,14 @@ for(my $i = 0; $i <= $words; $i++)
 	elsif ($i==4){ $dirn = substr("WEST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"WEST"/; }
 	elsif ($i==6){ $dirn = substr("DOWN",0,$wordlen); $wordpair =~ s/,"$dirn"/,"DOWN"/; }
 	elsif ($i==18){ $dirn = substr("DROP",0,$wordlen); $wordpair =~ s/^"[^"]*",/"$dirn",/; }
-	elsif ($i!=0){ if ($wordpair =~ /^"\*?([^"]*)","\*?([^"]*)"/) { if (length $1 > $wordlen || length $2 > $wordlen) { die "***\n*** Word too long!: $wordpair\n***\n"; } } }
-	
+	elsif ($i!=0)
+	{ 
+		if ($wordpair =~ /^"\*?([^"]*)","\*?([^"]*)"/) 
+		{ 
+			if (length $1 > $wordlen || length $2 > $wordlen) { die "***\n*** Word too long!: $wordpair\n***\n"; } 
+		}
+		else { die " ***\n*** Malformed word data!: $wordpair\n***\n"; } 
+	}
 	push @basic, "DATA $wordpair";
 }
 
