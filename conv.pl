@@ -10,6 +10,7 @@ use IO::File;
 # 2021-02-04 00:57. Add DOWN to vocab correction code.
 # 2021-02-05 -----  Allow for message that starts with line-break.
 # 2021-02-12 19:43  Fixed nonautoindex. Fixed dates in these comments!
+# 2021-02-19 -----  Detect and record use of manual newlines.
 
 my $fname = $ARGV[0];
 
@@ -137,6 +138,9 @@ $blank = <$fh>;
 
 ########################################
 
+# manual newline flag
+my $w = 0;
+
 say"\nREM messages";
 for(my $i = 0; $i <= $messages; $i++)
 {
@@ -159,6 +163,9 @@ for(my $i = 0; $i <= $messages; $i++)
 		die "Message too long!:\n$message\n";
 	}
 	
+	# test for presence of manual newlines
+	if ($w==0 && $message =~ /\|/) { $w = -1; }
+	
 	if (length $message>230)
 	{
 		$message = substr($message,1);
@@ -175,6 +182,8 @@ for(my $i = 0; $i <= $messages; $i++)
 		say "DATA $message";
 	}
 }
+
+say "DATA $w";
 
 $blank = <$fh>;
 
@@ -243,6 +252,7 @@ P."-- ML -- MS$(ML)"
 FORX=0TOML:READ A$
 IF RIGHT$(A$,1)<>"[" MS$(X)=A$ ELSE MS$(X)=STRING$(255,"*"):MS$(X)=LEFT$(A$,(LENA$)-1):REP.READ A$:IF RIGHT$(A$,1)="[" MS$(X)=MS$(X)+LEFT$(A$,(LENA$)-1):U.0 EL.MS$(X)=MS$(X)+A$:U.1
 P."MS$(";X;")="MS$(X):NEXT
+READ W%
 OS."FX21":V.7,10,13,136:P."PRESS A KEY"':IFGET
 
 P."-- IL -- IA$(IL)"
@@ -259,6 +269,7 @@ NEXT
 
 FORX=0TOML:PRINT#D,MS$(X)
 NEXT
+PRINT#D,W%
 
 FORX=0TOIL:PRINT#D,IA$(X),IA(X)
 NEXT
@@ -286,6 +297,7 @@ FORY=0TO5:IFAA(Y)<>RM(X,Y)ORA$<>RS$(X)THEN PROC6790 ELSE NEXT Y,X
 
 FORX=0TOML:INPUT#D,A$
 IFA$<>MS$(X)THEN PROC6790 ELSE NEXT
+INPUT#D,Z:IF W%<>Z PROC6790
 
 FORX=0TOIL:INPUT#D,A$,AA(0)
 IFAA(0)<>IA(X)ORA$<>IA$(X)THEN PROC6790 ELSE NEXT
