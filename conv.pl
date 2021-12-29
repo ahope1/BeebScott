@@ -12,6 +12,7 @@ use IO::File;
 # 2021-02-12 19:43  Fixed nonautoindex. Fixed dates in these comments!
 # 2021-02-19 -----  Detect and record use of manual newlines.
 # 2021-02-19 21:45  Moved W% flag to first DATA line in BASIC prog.
+# 2021-02-22 12:55  Bittified W%
 
 my $fname = $ARGV[0];
 
@@ -167,7 +168,7 @@ for(my $i = 0; $i <= $messages; $i++)
 	}
 	
 	# test for presence of manual newlines
-	if ($w==0 && $message =~ /\|/) { $w = -1; }
+	if ($w==0 && $message =~ /\|/) { $w |= 1; }
 	
 	if (length $message>230)
 	{
