@@ -6,6 +6,7 @@ use IO::File;
 
 # 2020-02-03 20:24. Add EAST and WEST to vocab correction code.
 # 2020-02-04 00:57. Add DOWN to vocab correction code.
+# 2020-02-05 -----  Allow for message that starts with line-break.
 
 my $fname = $ARGV[0];
 
@@ -133,7 +134,7 @@ for(my $i = 0; $i <= $messages; $i++)
 {
 	chomp(my $message=<$fh>);
 	
-	if (substr($message,-1) ne '"')
+	if (substr($message,-1) ne '"' || $message eq '"')
 	{
 		do 
 		{
