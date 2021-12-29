@@ -4,17 +4,7 @@ use warnings;
 use feature qw(say);
 use IO::File;
 
-# Reads in a .sao file created by ScottKit and outputs a BBC BASIC program that will write the data from the .sao file to a BBC Micro filesystem in a format suitable for use with BeebScott.
-
-# 2021-02-03 20:24 Add EAST and WEST to vocab correction code.
-# 2021-02-04 00:57 Add DOWN to vocab correction code.
-# 2021-02-05 ----- Allow for message that starts with line-break.
-# 2021-02-12 19:43 Fixed nonautoindex. Fixed dates in these comments!
-# 2021-02-19 ----- Detect and record use of manual newlines.
-# 2021-02-19 21:45 Moved W% flag to first DATA line in BASIC prog.
-# 2021-02-22 12:55 Bittified W%
-# 2021-02-23 ----- Added message-concat bit-flag.  
-
+# (1) Reads in either (i) a .sao file created by ScottKit or (ii) an "original" TRS-80 .DAT game data file, and then (2) outputs a BBC BASIC program that will write the game data to a BBC Micro filesystem in a format suitable for use with BeebScott.
 
 # filename (eventually)
 my $fname = $ARGV[0];
@@ -35,7 +25,7 @@ if (defined $fname && $fname =~ /-[nc]{1,2}/)
 }
 
 
-# open .sao file for reading
+# open file for reading
 my $pname = $0; 
 $pname =~ s{^.*[\/]}{};
 my $usage="Usage: $pname [-nc] filename";
@@ -45,20 +35,172 @@ if ((!defined $fname) || ($fname eq ''))
 }
 my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\n$usage\n";
 
+my $gdata = do { local $/; <$fh> };
+close $fh or die "$!\n";
+
+# say $gdata;
 
 # bytes,IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
-chomp (my $bytes = <$fh>);
-chomp (my $objects = <$fh>);
-chomp (my $actions = <$fh>);
-chomp (my $words = <$fh>);
-chomp (my $rooms = <$fh>);
-chomp (my $mx = <$fh>);
-chomp (my $start = <$fh>);
-chomp (my $treasures = <$fh>);
-chomp (my $wordlen = <$fh>);
-chomp (my $lt = <$fh>);
-chomp (my $messages = <$fh>);
-chomp (my $treasury = <$fh>);
+my $bytes; my $objects; my $actions; my $words; my $rooms; my $mx; my $start; my $treasures; my $wordlen; my $lt; my $messages; my $treasury;
+
+if ($gdata =~ /^[\s\n]*([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([\-]?[0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([\-]?[0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)/)
+{
+	$bytes = $1;
+	$objects = $2;
+	$actions = $3;
+	$words = $4;
+	$rooms = $5;
+	$mx = $6;
+	$start = $7;
+	$treasures = $8;
+	$wordlen = $9;
+	$lt = $10;
+	$messages = $11;
+	$treasury = $12;
+}
+else { die "Malformed header!\n"; }
+
+# say "bytes: $bytes";
+# say "\$objects: $objects";
+# say "\$actions: $actions";
+# say "\$words: $words";
+# say "\$rooms: $rooms";
+# say "\$mx: $mx";
+# say "\$start: $start";
+# say "\$treasures: $treasures";
+# say "\$wordlen: $wordlen";
+# say "\$lt: $lt";
+# say "\$messages: $messages"; 
+# say "\$treasury: $treasury";
+
+$gdata = $';
+
+# say $gdata;
+
+my $nonautoindex = 0;
+my $found = 0;
+my @actions;
+my $n_actions = 0;
+do
+{
+	if ($gdata =~ /^[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)/)
+	{
+		push @actions, "$1,$2,$3,$4,$5,$6,$7,$8";
+		$gdata = $';
+	}
+	else { die "Malformed action data!\n"; }
+		
+	if ($found==0 && $actions[$n_actions] =~ /(^[0-9]+),/)
+	{
+		if ($1 > 100)
+		{
+			$nonautoindex = $n_actions;
+			$found = 1;
+		}
+	}	
+	
+	$n_actions++;
+
+} while ($n_actions <= $actions);
+
+# say for @actions;
+# say "Nonautoindex: $nonautoindex";
+# say "#actions: $n_actions";
+
+my @words;
+my $n_words = 0;
+do
+{
+	if ($gdata =~ /^[\s\n]*("[^"]*")[\s\n]*("[^"]*")/)
+	{
+		push @words, "$1,$2";
+		$gdata = $';
+	}
+	else { die "Malformed vocabulary data!\n"; }
+
+	$n_words++;
+	
+} while ($n_words <= $words);
+
+# say for @words;
+# say $n_words;
+
+my @rooms;
+my $n_rooms = 0;
+do
+{
+	if ($gdata =~ /^[\s\n]*([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]*("[^"]*")/)
+	{
+		push @rooms, "$1,$2,$3,$4,$5,$6,$7";
+		$gdata = $';
+	}
+	else { die "Malformed room data!\n"; }
+
+	$n_rooms++;
+		
+} while ($n_rooms <= $rooms);
+
+# say for @rooms;
+# say $n_rooms;
+
+my @messages;
+my $n_messages = 0;
+do
+{
+	if ($gdata =~ /^[\s\n]*("[^"]*")/)
+	{
+		push @messages, $1;
+		$gdata = $';
+	}
+	else { die "Malformed message data!\n"; }
+
+	$n_messages++;
+		
+} while ($n_messages <= $messages);
+
+# say for @messages;
+# say $n_messages;
+
+my @objects;
+my $n_objects = 0;
+do
+{
+	if ($gdata =~ /^[\s\n]*("[^"]*")[\s\n]*([\-]?[0-9]+)/)
+	{
+		push @objects, "$1,$2";
+		$gdata = $';
+	}
+	else { die "Malformed object data!\n"; }
+
+	$n_objects++;
+		
+} while ($n_objects <= $objects);
+
+# say for @objects;
+# say $n_objects;
+
+my $n_comments = 0;
+do
+{
+	if ($gdata =~ /^[\s\n]*("[^"]*")/)
+	{
+		$gdata = $';
+	}
+	else { die "Malformed comment!\n"; }
+	
+	$n_comments++;
+	
+} while ($n_comments <= $actions);
+
+my $version; my $advnum; my $checksum;
+if ($gdata =~ /^[\s\n]*([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)/)
+{
+	my $version = $1;
+	my $advnum = $2;
+	my $checksum = $3;
+}	
+else { die "Malformed footer!\n"; }
+
 
 say 'NEW';
 say 'AUTO';
@@ -66,52 +208,24 @@ say 'AUTO';
 say 'REM Program must be run on a BBC Micro with a 65(C)02 Co-processor';
 say 'LOMEM=&C000';
 say 'HIMEM=&F800';
-
 say "ONERROR:ONERROROFF:P.:REPORT:P.'ERL:CLOSE#0:END\n";
 
 my @basic;
-
 push @basic, 'REM header';
 push @basic, 'REM IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR';
-
 push @basic, "DATA $objects,$actions,$words,$rooms,$mx,$start,$treasures,$wordlen,$lt,$messages,$treasury\n";
 
-my $blank = <$fh>;
-
-########################################
-
 push @basic, 'REM actions';
-
-my $nonautoindex = 0;
-my $found = 0;
-
-for(my $i = 0; $i <= $actions; $i++)
+for(@actions)
 {
-	chomp(my $action=<$fh>);
-	$action =~ tr/ /,/;
-	push @basic, "DATA $action";
-	
-	if ($found==0 && $action =~ /([0-9]+),/)
-	{
-		if ($1 > 100)
-		{
-			$nonautoindex = $i;
-			$found = 1;
-		}
-	}
+	push @basic, "DATA $_";
 }
-
 push @basic, "DATA $nonautoindex";
-
-$blank = <$fh>; 
-
-########################################
 
 push @basic, "\nREM vocab";
 for(my $i = 0; $i <= $words; $i++)
 {
-	chomp(my $wordpair=<$fh>);
-	$wordpair =~ s/" "/","/g;
+	my $wordpair = $words[$i];
 	
 	my $dirn = "";
 	if ($i==1){ $dirn = substr("NORTH",0,$wordlen); $wordpair =~ s/,"$dirn"/,"NORTH"/; }
@@ -123,65 +237,30 @@ for(my $i = 0; $i <= $words; $i++)
 	push @basic, "DATA $wordpair";
 }
 
-$blank = <$fh>;
-
-########################################
-
 push @basic, "\nREM rooms";
-for(my $i = 0; $i <= $rooms; $i++)
+for(@rooms)
 {
-	chomp(my $room=<$fh>);
-	$room =~ s/([0-9]+) /$1,/g;
-	
-	if (substr($room,-1) ne '"')
-	{
-		do 
-		{
-			$room .= ' '.<$fh>;
-			chomp $room;
-		}
-		while (substr($room,-1) ne '"')
-	}
-
-	$room =~ tr/`/'/;	
-	
+	my $room = $_;
+	$room =~ tr/`/'/;
+	$room =~ s/\n/ /;
 	push @basic, "DATA $room";
 }
 
-$blank = <$fh>;
-
-########################################
-
 push @basic, "\nREM messages";
-for(my $i = 0; $i <= $messages; $i++)
+for(@messages)
 {
-	chomp(my $message=<$fh>);
-	
-	if (substr($message,-1) ne '"' || $message eq '"')
-	{
-		do 
-		{
-			$message .= $n.<$fh>;
-			chomp $message;
-		}
-		while (substr($message,-1) ne '"')
-	}
-	
+	my $message = $_;
 	$message =~ tr/`/'/;
-
-	if (length $message>255)
-	{
-		die "Message too long!:\n$message\n";
-	}
+	$message =~ s/\n/$n/g;
 	
 	# test for presence of manual newlines
 	if (($w & 1)==0 && $message =~ /\|/) { $w |= 1; }
 	
-	if (length $message>230)
+	if (length $message>227)
 	{
 		$message = substr($message,1);
 
-		my @array = ( $message =~ m/.{1,230}/g );
+		my @array = ( $message =~ m/.{1,224}/g );
 		
 		foreach(@array[0..$#array-1])
 		{
@@ -199,42 +278,15 @@ say "REM optional bit-flags\nDATA $w\n";
 
 say for @basic;
 
-$blank = <$fh>;
-
-########################################
-
 say"\nREM objects";
-for(my $i = 0; $i <= $objects; $i++)
+for(@objects)
 {
-	chomp(my $object=<$fh>);
-	$object =~ s/ ([\-]?[0-9]+)$/,$1/;
-	
+	my $object = $_;
 	$object =~ tr/`/'/;
-	
 	say "DATA $object";
 }
-
-$blank = <$fh>;
-
-########################################
-
-for(my $i = 0; $i <= $actions; $i++)
-{
-	<$fh>;
-}
-
-$blank = <$fh>; say"";
-
-########################################
-
-chomp(my $version=<$fh>);
-chomp(my $advnum=<$fh>);
-chomp(my $checksum=<$fh>);
-
-########################################
-
-close $fh or die "$!\n";
-
+say"";
+	
 my $prog = <<'END_MSG';
 
 RESTORE
