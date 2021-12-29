@@ -6,7 +6,21 @@ use IO::File;
 
 my $fname = $ARGV[0];
 
-my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\n";
+# manual newline separator
+my $n = ' ';
+
+if (defined $fname && $fname eq '-n') 
+{ 
+	$n = '|';
+	$fname = $ARGV[1];
+}
+
+if ((!defined $fname) || ($fname eq ''))
+{
+	die "Usage: $0 [-n] filename\n";
+}
+
+my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\nUsage: $0 [-n] filename\n";
 
 # bytes, IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
 
@@ -82,7 +96,7 @@ say"\nREM rooms";
 for(my $i = 0; $i <= $rooms; $i++)
 {
 	chomp(my $room=<$fh>);
-	$room =~ s/([0-9]+) /\1,/g;
+	$room =~ s/([0-9]+) /$1,/g;
 	
 	if (substr($room,-1) ne '"')
 	{
@@ -112,7 +126,7 @@ for(my $i = 0; $i <= $messages; $i++)
 	{
 		do 
 		{
-			$message .= '|'.<$fh>;
+			$message .= $n.<$fh>;
 			chomp $message;
 		}
 		while (substr($message,-1) ne '"')
@@ -134,7 +148,7 @@ for(my $i = 0; $i <= $messages; $i++)
 		{
 			say "DATA ".'"'."$_".'["';
 		}
-		say "DATA ".'"'."@array[$#array]";
+		say "DATA ".'"'."$array[$#array]";
 	}
 	else 
 	{
@@ -150,7 +164,7 @@ say"\nREM objects";
 for(my $i = 0; $i <= $objects; $i++)
 {
 	chomp(my $object=<$fh>);
-	$object =~ s/ ([\-]?[0-9]+)$/,\1/;
+	$object =~ s/ ([\-]?[0-9]+)$/,$1/;
 	
 	$object =~ tr/`/'/;
 	
