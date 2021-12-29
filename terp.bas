@@ -42,7 +42,7 @@ NEXT:F=NV(0)<1ORLEN(NT$(1))>0ANDNV(1)<1:ENDPROC
 
 REM ***  Display room ***
 
-DEFPROC240:IF SF AND 2^15 IF IA(9)<>-1 AND IA(9)<>R PRINT"I CAN'T SEE, ITS TOO DARK.":ENDPROC
+DEFPROC240:PROCb:IF SF AND 2^15 IF IA(9)<>-1 AND IA(9)<>R PRINT"I CAN'T SEE, ITS TOO DARK.":ENDPROC
 K=-1:IFLEFT$(RS$(R),1)="*"PROCo(MID$(RS$(R),2)+".")ELSEPROCo("I'm in a "+RS$(R)+".")
 K$="":FORZ=0TOIL:IF K IF IA(Z)=R PRINT'"VISIBLE ITEMS HERE:":K=0
 IF IA(Z)=R PROC280:K$=K$+TP$+". "
@@ -392,8 +392,8 @@ DEFFNb:LOCAL A%,B%,I%:VDU 11:A%=?&34B*256+?&34A:VDU 10:FOR I%=0 TO L%-1 STEP 4
 B%=A%+I%:B%=B%+&400*(B%>&7FFF)
 IF !B%<>&20202020 I%=L%-1:NEXT:=FALSE ELSE NEXT:=TRUE
 
-REM If at start of line, then print a blank line if prev line isn't blank.
-DEFPROCb:IFPOS ENDPROC ELSE IF FNb ENDPROC ELSE PRINT:ENDPROC
+REM If at start of line (but not at 0,0), then print a blank line if prev line isn't blank.
+DEFPROCb:IFPOS ENDPROC ELSE IF VPOS=0 IF POS=0 ENDPROC ELSE IF FNb ENDPROC ELSE PRINT:ENDPROC
 
 REM If using machine-code newlines, just print the string; else call PROCo
 DEFPROCp($S%):IF W%=1 PRINT $S%:ENDPROC ELSE PROCo($S%):ENDPROC
