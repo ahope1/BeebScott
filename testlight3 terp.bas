@@ -7,8 +7,9 @@ REM L% = screen width in chars
 20 MODE7:VDU23,0,10,8;0;0;0;23,0,11,12;0;0;0;:PRINT:D=-1:DIM S% 255:L%=40:*FX11,0
 
 REM X=Y=Z:K=R=V:N=LL=F:TP$=K$:W=IP=P:
+REM 40 K=0:Z$="I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-":GOSUB1240:GOTO100
 
-40 K=0:Z$="I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-":GOSUB1240:GOTO100
+40 cont=0:K=0:Z$="I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-":GOSUB1240:GOTO100
 
 50 CLS:PRINT'"*** WELCOME TO ADVENTURE LAND.(#4.6) ***":PRINT:PRINT" UNLESS TOLD DIFFERENTLY YOU MUST FIND"'"*TREASURES* AND RETURN THEM TO THEIR"'"PROPER PLACE!"
 60 PRINT:PRINT"I'M YOUR PUPPET. GIVE ME ENGLISH"'"COMMANDS THAT ";
@@ -72,14 +73,20 @@ REM set up the success/failure flags
 REM If GO {NSEWUD}
 362 IFNV(0)=1 AND NV(1)<7 THEN 610
 
-REM Divide action data value by 150 to get verb-code V. If V=0 then this is an auto action.
-REM I've commented out the code that stops searching for auto actions when a non-auto is found: 
-REM now auto actions don't need to be grouped together ahead of all non-auto actions. Will this
-REM cause trouble later..?! Yes, it'll probably slow the action scanning down. ???
-365 FORX=0TOCL:V=INT(CA(X,0)/150):IF NV(0)=0 IFV<>0 x=X:X=CL:NEXTX:X=x:RETURN
+REM Divide action data value by 150 to get verb-code V. If V=0 then this is an automatic action.
+REM All automatic actions must precede all non-automatic actions.
+REM365 FORX=0TOCL:V=INT(CA(X,0)/150):IF NV(0)=0 IFV<>0 x=X:X=CL:NEXTX:X=x:RETURN
+365 FORX=0TOCL:V=INT(CA(X,0)/150):N=CA(X,0)-V*150
+
+REM If continue-flag set: if either V or N non-zero then return, else process conditions. 
+366 IF NOT cont ELSE IF V OR N cont=0:x=X:X=CL:NEXTX:X=x:RETURN ELSE G.400
+
+REM If non-auto action is hit when processing auto actions then return.
+367 IF NV(0)=0 IFV<>0 x=X:X=CL:NEXTX:X=x:RETURN
 
 REM If the parsed verb doesn't match V then NEXT action, else get this action's noun-code N.
-370 IF NV(0)<>V THEN NEXTX:GOTO990 ELSE N=CA(X,0)-V*150
+REM370 IF NV(0)<>V THEN NEXTX:GOTO990 ELSE N=CA(X,0)-V*150
+370 IF NV(0)<>V THEN NEXTX:GOTO990
 
 REM If auto action then if RND < N then start processing conditions, else NEXT action.
 380 IF NV(0)<>0 ELSE F=0:IF RND(100)<=N THEN G.400 ELSE NEXTX:GOTO990
@@ -143,7 +150,8 @@ REM *** Process the commands ***
 560 IP=0:FORY=1TO4:K=INT((Y-1)/2)+6:ON Y GOTO570,580,570,580
 570 AC=INT(CA(X,K)/150):GOTO590
 580 AC=CA(X,K)-INT(CA(X,K)/150)*150
-590 IF AC>101 THEN600 ELSE IFAC=0 THEN960 ELSE IFAC<52 THEN PROCp(MS$(AC)):GOTO960:ELSE ON AC-51 GOTO660,700,740,760,770,780,790,760,810,830,840,850,860,870,890,920,930,940,950,710,750
+REM590 IF AC>101 THEN600 ELSE IFAC=0 THEN960 ELSE IFAC<52 THEN PROCp(MS$(AC)):GOTO960:ELSE ON AC-51 GOTO660,700,740,760,770,780,790,760,810,830,840,850,860,870,890,920,930,940,950,710,750
+590 IF AC>101 THEN600 ELSE IFAC=0 THEN960 ELSE IFAC<52 THEN PROCp(MS$(AC)):GOTO960:ELSE ON AC-51 GOTO660,700,740,760,770,780,790,760,810,830,840,850,860,870,890,920,930,940,950,710,750,955
 600 PROCp(MS$(AC-50)):GOTO960
 
 REM610 L=DF:IFL THEN L=DF AND IA(9)<>R AND IA(9)<>-1:IF L PRINT"DANGEROUS TO MOVE IN THE DARK!"
@@ -155,7 +163,8 @@ REM630 K=RM(R,NV(1)-1):IFK>=1 ELSE IFL THENPRINT"I FELL DOWN AND BROKE MY NECK."
 650 R=K:GOSUB240:GOTO1040
 
 REM 52. GETx
-660 L=0:FORZ=1TOIL:IFIA(Z)=-1LETL=L+1
+REM660 L=0:FORZ=1TOIL:IFIA(Z)=-1LETL=L+1
+660 L=0:FORZ=0TOIL:IFIA(Z)=-1LETL=L+1
 670 NEXTZ
 REM680 IF L>=MX PRINT Z$:GOTO970
 680 IF MX>=0 IF L>=MX PRINT Z$:GOTO970
@@ -210,7 +219,8 @@ REM 64. DspRM
 860 GOSUB240:GOTO960
 
 REM 65. SCORE
-870 L=0:FORZ=1TOIL:IFIA(Z)=TR IFLEFT$(IA$(Z),1)="*"LET L=L+1
+REM870 L=0:FORZ=1TOIL:IFIA(Z)=TR IFLEFT$(IA$(Z),1)="*"LET L=L+1
+870 L=0:FORZ=0TOIL:IFIA(Z)=TR IFLEFT$(IA$(Z),1)="*"LET L=L+1
 880 NEXTZ:PRINT"I'VE STORED ";L;" TREASURES."'"ON A SCALE OF 0 TO 100 THAT RATES A ";INT(L/TT*100):IFL=TT THENPRINT"WELL DONE.":GOTO850 ELSE960
 
 REM 66. INV
@@ -231,22 +241,28 @@ REM940 LX=LT:IA(9)=-1:GOTO960
 REM 70. CLS
 950 PROCcls:GOTO960
 
+REM 73. CONT
+955 cont=-1:GOTO960
+
 REM Next command
 960 NEXTY
 
-REM Stop processing non-automatic actions
-970 IF NV(0)<>0 THEN x=X:X=CL:NEXTX:X=x:GOTO990
+REM Stop processing non-automatic and non-continued actions
+REM970 IF NV(0)<>0 THEN x=X:X=CL:NEXTX:X=x:GOTO990
+970 IF NV(0)<>0 AND NOT cont THEN x=X:X=CL:NEXTX:X=x:GOTO990
 
-REM Next automatic action
+REM Next automatic or continued action
 980 NEXTX
 990 :
-1000 IFNV(0)=0THEN1040
+REM1000 IFNV(0)=0THEN1040
+1000 IFNV(0)=0 OR cont THEN1040
 1010 GOSUB1060
 1020 IF F PRINT"I DON'T UNDERSTAND YOUR COMMAND":GOTO1040
 1030 IF NOT F2 PRINT"I CAN'T DO THAT YET":GOTO1040
 
 REM Return from action-matching routine
-1040 RETURN
+REM1040 RETURN
+1040 cont=0:RETURN
 
 REM Get param from condition list
 1050 IP=IP+1:W=CA(X,IP):P=INT(W/20):M=W-P*20:IF M<>0 THEN1050 ELSE RETURN
@@ -256,12 +272,6 @@ REM *** Automatically GET or DROP ***
 
 REM 10=GET, 18=DROP
 1060 IF NV(0)<>10 AND NV(0)<>18 OR F3 THEN 1230
-
-REM Am attempting to allow an autoget/drop even when there's a GET/DROP action that
-REM explicitly matches the noun but blocks the GET/DROP (because if that action's 
-REM conditions fail, why not allow an autoget/drop?). ???
-REM 1060 IF (NV(0)=10 OR NV(0)=18) AND NOT F2 F2=-1 ELSE IF NV(0)<>10 AND NV(0)<>18 OR F3 THEN GOTO 1230
-
 1070 IF NV(1)=0 PRINT"WHAT?":GOTO1180
 1080 IF NV(0)<>10 THEN 1110
 1090 L=0:FORZ=0TOIL:IFIA(Z)=-1THENL=L+1
