@@ -83,6 +83,19 @@ for(my $i = 0; $i <= $rooms; $i++)
 {
 	chomp(my $room=<$fh>);
 	$room =~ s/([0-9]+) /\1,/g;
+	
+	if (substr($room,-1) ne '"')
+	{
+		do 
+		{
+			$room .= ' '.<$fh>;
+			chomp $room;
+		}
+		while (substr($room,-1) ne '"')
+	}
+
+	$room =~ tr/`/'/;	
+	
 	say "DATA $room";
 }
 
@@ -95,6 +108,18 @@ for(my $i = 0; $i <= $messages; $i++)
 {
 	chomp(my $message=<$fh>);
 	
+	if (substr($message,-1) ne '"')
+	{
+		do 
+		{
+			$message .= '|'.<$fh>;
+			chomp $message;
+		}
+		while (substr($message,-1) ne '"')
+	}
+	
+	$message =~ tr/`/'/;
+
 	if (length $message>255)
 	{
 		die "Message too long!:\n$message\n";
@@ -125,7 +150,10 @@ say"\nREM objects";
 for(my $i = 0; $i <= $objects; $i++)
 {
 	chomp(my $object=<$fh>);
-	$object =~ s/ ([0-9]+)$/,\1/;
+	$object =~ s/ ([\-]?[0-9]+)$/,\1/;
+	
+	$object =~ tr/`/'/;
+	
 	say "DATA $object";
 }
 
