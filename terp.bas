@@ -8,7 +8,7 @@ REM converted to BBC BASIC in 2020
 REM L% = screen width in chars
 MODE7:VDU23,0,10,8;0;0;0;23,0,11,12;0;0;0;:PRINT:DIM S% 255:L%=40:*FX11,0
 
-DIM arr 5,CT(8):CT=0:!arr=0:arr!2=0:cont=0:K=0:TP$=STRING$(40,"*"):K$=TP$+TP$:TP$="":K$="":Z$="I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-":PROC1240:*FX21,0
+DIM arr 5,CT(8):CT=0:!arr=0:arr!2=0:K=0:TP$=STRING$(40,"*"):K$=TP$+TP$:TP$="":K$="":Z$="I'VE TOO MUCH TOO CARRY. TRY -TAKE INVENTORY-":PROC1240:*FX21,0
 
 R=AR:CT(8)=LT:SF=0:INPUT"USE OLD 'SAVED' GAME? "K$
 IFLEFT$(K$,1)="Y" INPUT"READY SAVED TAPE "K$:d=OPENIN("SAV"):INPUT#d,SF,R,CT:FORX=0TOIL:INPUT#d,IA(X):NEXT:FORX=0TO8:INPUT#d,CT(X):NEXT:FORX=0TO5:BGET#d,arr?X:NEXT:CLOSE#d
@@ -62,6 +62,9 @@ REM *** Search for matching actions ***
 
 REM set up the success/failure flags
 DEFPROC360:F2=-1:F=-1:F3=0
+
+REM clear the continue-flag
+cont=0
 
 REM If GO {N/S/E/W/U/D}
 IFNV(0)=1 AND NV(1)<7 PROC610:ENDPROC
