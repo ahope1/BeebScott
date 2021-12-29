@@ -35,15 +35,32 @@ say "DATA $objects,$actions,$words,$rooms,$mx,$start,$treasures,$wordlen,$lt,$me
 
 my $blank = <$fh>;
 
+########################################
+
 say "REM actions";
+
+my $nonautoindex = 0;
+
 for(my $i = 0; $i <= $actions; $i++)
 {
 	chomp(my $action=<$fh>);
 	$action =~ tr/ /,/;
 	say "DATA $action";
+	
+	if ($nonautoindex==0 && $action =~ /([0-9]+),/)
+	{
+		if ($1 > 100)
+		{
+			$nonautoindex = $i;
+		}
+	}
 }
 
+say "DATA $nonautoindex";
+
 $blank = <$fh>; 
+
+########################################
 
 say"\nREM vocab";
 for(my $i = 0; $i <= $words; $i++)
@@ -55,6 +72,8 @@ for(my $i = 0; $i <= $words; $i++)
 
 $blank = <$fh>;
 
+########################################
+
 say"\nREM rooms";
 for(my $i = 0; $i <= $rooms; $i++)
 {
@@ -65,6 +84,8 @@ for(my $i = 0; $i <= $rooms; $i++)
 
 $blank = <$fh>;
 
+########################################
+
 say"\nREM messages";
 for(my $i = 0; $i <= $messages; $i++)
 {
@@ -74,6 +95,8 @@ for(my $i = 0; $i <= $messages; $i++)
 
 $blank = <$fh>;
 
+########################################
+
 say"\nREM objects";
 for(my $i = 0; $i <= $objects; $i++)
 {
@@ -82,6 +105,10 @@ for(my $i = 0; $i <= $objects; $i++)
 	say "DATA $object";
 }
 
+$blank = <$fh>;
+
+########################################
+
 for(my $i = 0; $i <= $actions; $i++)
 {
 	<$fh>;
@@ -89,9 +116,13 @@ for(my $i = 0; $i <= $actions; $i++)
 
 $blank = <$fh>; say"";
 
+########################################
+
 chomp(my $version=<$fh>);
 chomp(my $advnum=<$fh>);
 chomp(my $checksum=<$fh>);
+
+########################################
 
 close $fh or die "$!\n";
 
@@ -109,6 +140,8 @@ DIMCA(0,7),NV$(NL,1),IA$(IL),IA(IL),RS$(RL),RM(RL,5),MS$(ML),AA(5),A$(9),A(1,7)
 
 P."-- CL -- CA(1,7)"
 FORZ=0TOCL:FORY=0TO7:READ CA(0,Y):NEXTY:X=0:PRINT#D,CA(X,0),CA(X,1),CA(X,2),CA(X,3),CA(X,4),CA(X,5),CA(X,6),CA(X,7):PRINT';CA(X,0);",";CA(X,1);",";CA(X,2);",";CA(X,3);",";CA(X,4);",";CA(X,5);",";CA(X,6);",";CA(X,7):NEXTZ
+READ Z:PRINT#D,Z:P.Z
+
 OS."FX21":V.7,10,13,136:P."PRESS A KEY"':IFGET
 
 P."-- NL -- NV$(NL,1)"
@@ -159,21 +192,22 @@ INPUT#D,A0,A1,A2,A3,A4,A5,A6,A7,A8,A9,B0
 IFB0<>TR OR A0<>IL OR A1<>CL OR A2<>NL OR A3<>RL OR A4<>MX OR A5<>R OR(A6<>TT) OR A7<>ln OR(A8<>LT) OR A9<>ML THEN PROC6790
 
 FORX=0TOCL:INPUT#D,A(0,0),A(0,1),A(0,2),A(0,3),A(0,4),A(0,5),A(0,6),A(0,7)
-FORZ=0TO7:READ A0:IFA(0,Z)<>A0,THEN PROC6790,ELSE NEXT Z,X
+FORZ=0TO7:READ A0:IFA(0,Z)<>A0,THEN PROC6790 ELSE NEXT Z,X
+READ A0:INPUT#D,Z:IF A0<>Z PROC6790
 
-FORX=0TONL:FORY=0TO1:INPUT#D,A$(0):IFNV$(X,Y)<>A$(0) THEN PROC6790,ELSE NEXTY,X
+FORX=0TONL:FORY=0TO1:INPUT#D,A$(0):IFNV$(X,Y)<>A$(0) THEN PROC6790 ELSE NEXTY,X
 
 FORX=0TORL:INPUT#D,AA(0),AA(1),AA(2),AA(3),AA(4),AA(5),A$
 REMP."Room ";X'AA(0),AA(1),AA(2),AA(3),AA(4),AA(5)'">"A$"<":
-FORY=0TO5:IFAA(Y)<>RM(X,Y)ORA$<>RS$(X)THEN PROC6790,ELSE NEXT Y,X
+FORY=0TO5:IFAA(Y)<>RM(X,Y)ORA$<>RS$(X)THEN PROC6790 ELSE NEXT Y,X
 
 FORX=0TOML:INPUT#D,A$
 REMP."Message ";X'">"A$"<":
-IFA$<>MS$(X)THEN PROC6790,ELSE NEXT
+IFA$<>MS$(X)THEN PROC6790 ELSE NEXT
 
 FORX=0TOIL:INPUT#D,A$,AA(0)
 REMP."Object ";X'">"A$"<"'AA(0):
-IFAA(0)<>IA(X)ORA$<>IA$(X)THEN PROC6790,ELSE NEXT
+IFAA(0)<>IA(X)ORA$<>IA$(X)THEN PROC6790 ELSE NEXT
 
 CLOSE#D:PRINT"DATA TAPE VERIFIED"
 
