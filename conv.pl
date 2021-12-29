@@ -59,7 +59,7 @@ say"\nREM rooms";
 for(my $i = 0; $i <= $rooms; $i++)
 {
 	chomp(my $room=<$fh>);
-	$room =~ s/([0-9]) /\1,/g;
+	$room =~ s/([0-9]+) /\1,/g;
 	say "DATA $room";
 }
 
@@ -78,7 +78,7 @@ say"\nREM objects";
 for(my $i = 0; $i <= $objects; $i++)
 {
 	chomp(my $object=<$fh>);
-	$object =~ s/ ([0-9])$/,\1/;
+	$object =~ s/ ([0-9]+)$/,\1/;
 	say "DATA $object";
 }
 
