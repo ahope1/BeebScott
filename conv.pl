@@ -5,6 +5,7 @@ use feature qw(say);
 use IO::File;
 
 # 2020-02-03 20:24. Add EAST and WEST to vocab correction code.
+# 2020-02-04 00:57. Add DOWN to vocab correction code.
 
 my $fname = $ARGV[0];
 
@@ -93,6 +94,7 @@ for(my $i = 0; $i <= $words; $i++)
 	if ($i==2){ $dirn = substr("SOUTH",0,$wordlen); $wordpair =~ s/,"$dirn"/,"SOUTH"/; }
 	if ($i==3){ $dirn = substr("EAST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"EAST"/; }
 	if ($i==4){ $dirn = substr("WEST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"WEST"/; }
+	if ($i==6){ $dirn = substr("DOWN",0,$wordlen); $wordpair =~ s/,"$dirn"/,"DOWN"/; }
 	
 	say "DATA $wordpair";
 }
