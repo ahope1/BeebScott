@@ -383,6 +383,6 @@ IF !B%<>&20202020 I%=L%-1:NEXT:=FALSE ELSE NEXT:=TRUE
 REM If at start of line, then print a blank line if prev line isn't blank.
 DEFPROCb:IFPOS ENDPROC ELSE IFNOT(FNb)PRINT:ENDPROC ELSEENDPROC
 
-REM Now PROCp is only for printing messages
-DEFPROCp($S%):P.$S%:END.
+REM If using machine-code newlines, just print the string; else call PROCo
+DEFPROCp($S%):IF W%=1 PRINT $S%:ENDPROC ELSE PROCo($S%):ENDPROC
 
