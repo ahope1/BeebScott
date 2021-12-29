@@ -85,6 +85,10 @@ for(my $i = 0; $i <= $words; $i++)
 {
 	chomp(my $wordpair=<$fh>);
 	$wordpair =~ s/" "/","/g;
+	
+	if ($i==1){ $wordpair =~ s/,"NORT"/,"NORTH"/; }
+	if ($i==2){ $wordpair =~ s/,"SOUT"/,"SOUTH"/; }
+	
 	say "DATA $wordpair";
 }
 
