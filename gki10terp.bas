@@ -68,18 +68,22 @@ IFNV(0)=1 AND NV(1)<7 PROC610:ENDPROC
 
 REM Debug: beep when processing of auto-actions begins
 REM IFNV(0)=0 V.7
+REMIF NV(0)=0 P."Start auto-actions"
 
 REM Divide action data value by 150 to get verb-code V. If V=0 then this is an automatic action.
 REM All automatic actions must precede all non-automatic actions.
 FORX=-I%*(NV(0)<>0)TOCL:V=CA%(X,0)DIV150:N=CA%(X,0)MOD150
 
-REM If continue-flag set: if either V or N non-zero then return, else process conditions. 
-IF cont IF V OR N cont=0:X=CL:NEXT:ENDPROC
+REM If non-auto action is hit when processing auto or continued actions then return.
+IF NV(0)=0 OR cont IFV<>0 X=CL:NEXT:cont=0:ENDPROC
+REMIF NV(0)=0 OR cont IFV<>0 x=X:X=CL:NEXT:cont=0:P.STRING$(-(NV(0)=0),STR$(x)+" Finished autos HIT"):ENDPROC
 
-REM If non-auto action is hit when processing auto actions then return.
-IF cont ELSE IF NV(0)=0 IFV<>0 X=CL:NEXT:ENDPROC
+REM If continue-flag is set: 
+REM  If V is zero but N isn't then reset the continue-flag:
+REM   If auto action, then process conditions, else return. 
+IF NOT cont ELSE IF V<>0 ELSE IF N=0 ELSE cont=0:IF NV(0)=0 ELSE X=CL:NEXT:ENDPROC
 
-REM If the parsed verb doesn't match V then NEXT action, else get this action's noun-code N.
+REM If the parsed verb doesn't match V then NEXT action.
 IF cont ELSE IF NV(0)<>V NEXT:PROC990:ENDPROC
 
 REM If auto action then if RND<=N then start processing conditions, else NEXT action.
@@ -94,8 +98,10 @@ REM *** Process the conditions ***
 
 REM                                         K=condition code, LL="number"
 F2=-1:F=0:F3=-1:FORY=1TO5:W=CA%(X,Y):LL=W DIV20:K=W MOD20:F1=-1
+
 IFK>13EL.IF K=1PROC430 EL.IFK=2PROC450 EL.IFK=3PROC470 EL.IFK=4PROC490 EL.IFK=5PROC500 EL.IFK=6PROC510 EL.IFK=7PROC520 EL.IFK=8PROC530 EL.IFK=9PROC540 EL.IFK=10PROC410 EL.IFK=11PROC420 EL.IFK=12PROC440 EL.IFK=13PROC460
 IFK<14EL.IFK=14PROC480 EL.IFK=15PROC542 EL.IFK=16PROC543 EL.IFK=17PROC546 EL.IFK=18PROC547 EL.IFK=19PROC544
+
 F2=F2 AND F1:IF F2 NEXT ELSE Y=5:NEXT,:PROC990:ENDPROC
 
 
@@ -120,6 +126,10 @@ NEXT:PROC990:ENDPROC
 
 REM Finish processing actions. AUTOGET/DROP if necessary.
 DEFPROC990
+
+REMIF NV(0)=0 P."Finished auto-actions 990"
+REMIF cont P."Continued action in PROC990":STOP
+
 IFNV(0)=0 OR cont cont=0:ENDPROC
 REM            10=GET,       18=DROP
 IF NV(0)<>10 AND NV(0)<>18 OR F3 ELSE PROC1060
@@ -366,8 +376,11 @@ DEFPROC955:cont=-1:ENDPROC
 
 REM *** Word-wrap, etc. ***
 
-DEFPROCo($S%):LOCALA%,Z%,C%,N%,T%:N%=LEN$S%:A%=0:Z%=L%+1-POS:REPEATIFZ%>N%Z%=N%ELSEREPEATZ%=Z%-1:C%=S%?Z%:UNTILC%=32:IFZ%<A%Z%=A%+L%
-T%=S%?Z%:S%?Z%=13:PRINT$(S%+A%);:S%?Z%=T%:VDU32,-8*(POS=1):IFZ%-A%<=L%ANDPOS PRINTELSEIFC%=32A%=A%+1ELSEZ%=Z%-1
+REMDEFPROCo($S%):LOCALA%,Z%,C%,N%,T%:N%=LEN$S%:A%=0:Z%=L%+1-POS:REPEATIFZ%>N%Z%=N%ELSEREPEATZ%=Z%-1:C%=S%?Z%:UNTILC%=32:IFZ%<A%Z%=A%+L%
+REMT%=S%?Z%:S%?Z%=&D:PRINT$(S%+A%);:S%?Z%=T%:VDU32,-8*(POS=1):IFZ%-A%<=L%ANDPOS PRINTELSEIFC%=32A%=A%+1ELSEZ%=Z%-1
+REMA%=Z%+1:Z%=A%+L%+1:UNTILA%>=N%:IFPOS PRINT:ENDPROC ELSEENDPROC
+DEFPROCo($S%):LOCALA%,Z%,C%,N%:N%=LEN$S%:A%=0:Z%=L%+1-POS:REPEATIFZ%>N%Z%=N%ELSEREPEATZ%=Z%-1:C%=S%?Z%:UNTILC%=32:IFZ%<A%STOP
+S%?Z%=&D:PRINT$(S%+A%);:IFZ%<N% IF POS PRINT
 A%=Z%+1:Z%=A%+L%+1:UNTILA%>=N%:IFPOS PRINT:ENDPROC ELSEENDPROC
 
 REM Backtrack to previous non-space char 
@@ -376,12 +389,11 @@ REMDEFPROCj:LOCALA%,C%:A%=&87:REPEATVDU8:C%=(USR(&FFF4)AND&FF00)DIV256:UNTILC%<>
 REM Is the previous line blank?
 REMDEFFNb:LOCALA%,C%,I%:VDU11,8:A%=&87:FORI%=1TOL%:VDU9:C%=(USR(&FFF4)AND&FF00)DIV256:IFC%=32NEXT:VDU10,13:=TRUE ELSEI%=L%:NEXT:VDU10,13:=FALSE
 DEFFNb:LOCAL A%,B%,I%:VDU 11:A%=?&34B*256+?&34A:VDU 10:FOR I%=0 TO L%-1 STEP 4
-REMB%=A%+I%:IF B%>&7FFF B%=B%-&8000+&7C00
 B%=A%+I%:B%=B%+&400*(B%>&7FFF)
 IF !B%<>&20202020 I%=L%-1:NEXT:=FALSE ELSE NEXT:=TRUE
 
 REM If at start of line, then print a blank line if prev line isn't blank.
-DEFPROCb:IFPOS ENDPROC ELSE IFNOT(FNb)PRINT:ENDPROC ELSEENDPROC
+DEFPROCb:IFPOS ENDPROC ELSE IF FNb ENDPROC ELSE PRINT:ENDPROC
 
 REM If using machine-code newlines, just print the string; else call PROCo
 DEFPROCp($S%):IF W%=1 PRINT $S%:ENDPROC ELSE PROCo($S%):ENDPROC
