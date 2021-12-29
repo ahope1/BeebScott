@@ -208,7 +208,7 @@ say 'AUTO';
 say 'REM Program must be run on a BBC Micro with a 65(C)02 Co-processor';
 say 'LOMEM=&C000';
 say 'HIMEM=&F800';
-say "ONERROR:ONERROROFF:P.:REPORT:P.'ERL:CLOSE#0:END\n";
+say "ONERROR:ONERROROFF:PRINT:REPORT:PRINT'ERL:CLOSE#0:END\n";
 
 my @basic;
 push @basic, 'REM header';
@@ -292,7 +292,7 @@ my $prog = <<'END_MSG';
 RESTORE
 CLS:INPUT"PREPARE DATA TAPE (HIT ENTER)";TP$:D=-1
 CLS:PRINT"ADVENTURE DATA TAPE BUILDER - WORKING"
-CLOSE#0:D=OPENOUT("DAT"):V.14
+CLOSE#0:D=OPENOUT("DAT"):VDU14
 
 READ W%:PRINT#D,W%
 
@@ -301,32 +301,32 @@ PRINT#D,IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
 PRINT'"IL=";IL;",CL=";CL",NL=";NL;",RL=";RL;",MX=";MX;",R=";R","'"TT=";TT;",ln=";ln;",LT=";LT;",ML=";ML;",TR=";TR'
 DIMCA%(0,7),NV$(NL,1),IA$(IL),IA(IL),RS$(RL),RM(RL,5),MS$(ML),AA(5),A$(9),A%(1,7):A$=STRING$(255,"*"):A$=""
 
-P."-- CL -- CA%(1,7)"
+PRINT"-- CL -- CA%(1,7)"
 FORZ=0TOCL:FORY=0TO7:READ CA%(0,Y):NEXTY:X=0:PRINT#D,CA%(X,0),CA%(X,1),CA%(X,2),CA%(X,3),CA%(X,4),CA%(X,5),CA%(X,6),CA%(X,7):PRINT';CA%(X,0);",";CA%(X,1);",";CA%(X,2);",";CA%(X,3);",";CA%(X,4);",";CA%(X,5);",";CA%(X,6);",";CA%(X,7):NEXTZ
-READ Z:PRINT#D,Z:P.Z
+READ Z:PRINT#D,Z:PRINT Z
 
-OS."FX21":V.7,10,13,136:P."PRESS A KEY"':IFGET
+OSCLI"FX21":VDU7,10,13,136:PRINT"PRESS A KEY"':IFGET
 
-P."-- NL -- NV$(NL,1)"
-FORX=0TONL:FORY=0TO1:READ NV$(X,Y):P."NV$(";X;",";Y;")="NV$(X,Y):NEXTY,X
-OS."FX21":V.7,10,13,136:P."PRESS A KEY"':IFGET
+PRINT"-- NL -- NV$(NL,1)"
+FORX=0TONL:FORY=0TO1:READ NV$(X,Y):PRINT"NV$(";X;",";Y;")="NV$(X,Y):NEXTY,X
+OSCLI"FX21":VDU7,10,13,136:PRINT"PRESS A KEY"':IFGET
 
-P."-- RL -- RM(RL,5), RS$(RL)"
+PRINT"-- RL -- RM(RL,5), RS$(RL)"
 FORX=0TORL:READ RM(X,0),RM(X,1),RM(X,2),RM(X,3),RM(X,4),RM(X,5),RS$(X)
-P.;RM(X,0);" ";RM(X,1);" ";RM(X,2);" ";RM(X,3);" ";RM(X,4);" ";RM(X,5)'RS$(X):NEXT
-OS."FX21":V.7,10,13,136:P."PRESS A KEY"':IFGET
+PRINT;RM(X,0);" ";RM(X,1);" ";RM(X,2);" ";RM(X,3);" ";RM(X,4);" ";RM(X,5)'RS$(X):NEXT
+OSCLI"FX21":VDU7,10,13,136:PRINT"PRESS A KEY"':IFGET
 
-P."-- ML -- MS$(ML)"
+PRINT"-- ML -- MS$(ML)"
 FORX=0TOML:READ A$
-IF RIGHT$(A$,1)<>"[" MS$(X)=A$ ELSE MS$(X)=STRING$(255,"*"):MS$(X)=LEFT$(A$,(LENA$)-1):REP.READ A$:IF RIGHT$(A$,1)="[" MS$(X)=MS$(X)+LEFT$(A$,(LENA$)-1):U.0 EL.MS$(X)=MS$(X)+A$:U.1
-P."MS$(";X;")="MS$(X):NEXT
-OS."FX21":V.7,10,13,136:P."PRESS A KEY"':IFGET
+IF RIGHT$(A$,1)<>"[" MS$(X)=A$ ELSE MS$(X)=STRING$(255,"*"):MS$(X)=LEFT$(A$,(LENA$)-1):REPEAT READ A$:IF RIGHT$(A$,1)="[" MS$(X)=MS$(X)+LEFT$(A$,(LENA$)-1):UNTIL0 ELSE MS$(X)=MS$(X)+A$:UNTIL1
+PRINT"MS$(";X;")="MS$(X):NEXT
+OSCLI"FX21":VDU7,10,13,136:PRINT"PRESS A KEY"':IFGET
 
-P."-- IL -- IA$(IL)"
-FORX=0TOIL:READ A$,IA(X):IA$(X)=A$:P."IA$(";X;")=";IA$(X)'"IA(";X;")=";IA(X):NEXT
-OS."FX21":V.7,10,13,136:P."PRESS A KEY"':IFGET
+PRINT"-- IL -- IA$(IL)"
+FORX=0TOIL:READ A$,IA(X):IA$(X)=A$:PRINT"IA$(";X;")=";IA$(X)'"IA(";X;")=";IA(X):NEXT
+OSCLI"FX21":VDU7,10,13,136:PRINT"PRESS A KEY"':IFGET
 
-P."Writing data to storage medium..."
+PRINT"Writing data to storage medium..."
 
 FORX=0TONL:FORY=0TO1:PRINT#D,NV$(X,Y)
 NEXTY,X
@@ -341,7 +341,7 @@ FORX=0TOIL:PRINT#D,IA$(X),IA(X)
 NEXT
 
 CLOSE#D
-P.'"Finished writing data."'
+PRINT'"Finished writing data."'
 
 INPUT"REWIND TAPE TO BE VERFIED";TP$
 
