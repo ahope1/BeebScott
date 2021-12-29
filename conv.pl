@@ -4,7 +4,7 @@ use warnings;
 use feature qw(say);
 use IO::File;
 
-# Reads in a .sao file created by ScottKit and outputs a BBC BASIC program that will write the data in the .sao file to a BBC Micro filesystem in a format suitable for use with BeebScott.
+# Reads in a .sao file created by ScottKit and outputs a BBC BASIC program that will write the data from the .sao file to a BBC Micro filesystem in a format suitable for use with BeebScott.
 
 # 2021-02-03 20:24 Add EAST and WEST to vocab correction code.
 # 2021-02-04 00:57 Add DOWN to vocab correction code.
