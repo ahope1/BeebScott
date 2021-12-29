@@ -43,7 +43,7 @@ close $fh or die "$!\n";
 # bytes,IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
 my $bytes; my $objects; my $actions; my $words; my $rooms; my $mx; my $start; my $treasures; my $wordlen; my $lt; my $messages; my $treasury;
 
-if ($gdata =~ /^[\s\n]*([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([\-]?[0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([\-]?[0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)/)
+if ($gdata =~ /^[\s]*([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([\-]?[0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([\-]?[0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)/)
 {
 	$bytes = $1;
 	$objects = $2;
@@ -83,7 +83,7 @@ my @actions;
 my $n_actions = 0;
 do
 {
-	if ($gdata =~ /^[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)/)
+	if ($gdata =~ /^[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)/)
 	{
 		push @actions, "$1,$2,$3,$4,$5,$6,$7,$8";
 		$gdata = $';
@@ -111,7 +111,7 @@ my @words;
 my $n_words = 0;
 do
 {
-	if ($gdata =~ /^[\s\n]*("[^"]*")[\s\n]*("[^"]*")/)
+	if ($gdata =~ /^[\s]*("[^"]*")[\s]*("[^"]*")/)
 	{
 		push @words, "$1,$2";
 		$gdata = $';
@@ -129,7 +129,7 @@ my @rooms;
 my $n_rooms = 0;
 do
 {
-	if ($gdata =~ /^[\s\n]*([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)[\s\n]*("[^"]*")/)
+	if ($gdata =~ /^[\s]*([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]*("[^"]*")/)
 	{
 		push @rooms, "$1,$2,$3,$4,$5,$6,$7";
 		$gdata = $';
@@ -147,7 +147,7 @@ my @messages;
 my $n_messages = 0;
 do
 {
-	if ($gdata =~ /^[\s\n]*("[^"]*")/)
+	if ($gdata =~ /^[\s]*("[^"]*")/)
 	{
 		push @messages, $1;
 		$gdata = $';
@@ -165,7 +165,7 @@ my @objects;
 my $n_objects = 0;
 do
 {
-	if ($gdata =~ /^[\s\n]*("[^"]*")[\s\n]*([\-]?[0-9]+)/)
+	if ($gdata =~ /^[\s]*("[^"]*")[\s]*([\-]?[0-9]+)/)
 	{
 		push @objects, "$1,$2";
 		$gdata = $';
@@ -182,7 +182,7 @@ do
 my $n_comments = 0;
 do
 {
-	if ($gdata =~ /^[\s\n]*("[^"]*")/)
+	if ($gdata =~ /^[\s]*("[^"]*")/)
 	{
 		$gdata = $';
 	}
@@ -193,7 +193,7 @@ do
 } while ($n_comments <= $actions);
 
 my $version; my $advnum; my $checksum;
-if ($gdata =~ /^[\s\n]*([0-9]+)[\s\n]+([0-9]+)[\s\n]+([0-9]+)/)
+if ($gdata =~ /^[\s]*([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)/)
 {
 	my $version = $1;
 	my $advnum = $2;
@@ -229,10 +229,12 @@ for(my $i = 0; $i <= $words; $i++)
 	
 	my $dirn = "";
 	if ($i==1){ $dirn = substr("NORTH",0,$wordlen); $wordpair =~ s/,"$dirn"/,"NORTH"/; }
-	if ($i==2){ $dirn = substr("SOUTH",0,$wordlen); $wordpair =~ s/,"$dirn"/,"SOUTH"/; }
-	if ($i==3){ $dirn = substr("EAST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"EAST"/; }
-	if ($i==4){ $dirn = substr("WEST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"WEST"/; }
-	if ($i==6){ $dirn = substr("DOWN",0,$wordlen); $wordpair =~ s/,"$dirn"/,"DOWN"/; }
+	elsif ($i==2){ $dirn = substr("SOUTH",0,$wordlen); $wordpair =~ s/,"$dirn"/,"SOUTH"/; }
+	elsif ($i==3){ $dirn = substr("EAST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"EAST"/; }
+	elsif ($i==4){ $dirn = substr("WEST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"WEST"/; }
+	elsif ($i==6){ $dirn = substr("DOWN",0,$wordlen); $wordpair =~ s/,"$dirn"/,"DOWN"/; }
+	elsif ($i==18){ $dirn = substr("DROP",0,$wordlen); $wordpair =~ s/^"[^"]*",/"$dirn",/; }
+	elsif ($i!=0){ if ($wordpair =~ /^"\*?([^"]*)","\*?([^"]*)"/) { if (length $1 > $wordlen || length $2 > $wordlen) { die "***\n*** Word too long!: $wordpair\n***\n"; } } }
 	
 	push @basic, "DATA $wordpair";
 }
@@ -242,7 +244,7 @@ for(@rooms)
 {
 	my $room = $_;
 	$room =~ tr/`/'/;
-	$room =~ s/\n/ /;
+	$room =~ s/\R/ /;
 	push @basic, "DATA $room";
 }
 
@@ -251,7 +253,7 @@ for(@messages)
 {
 	my $message = $_;
 	$message =~ tr/`/'/;
-	$message =~ s/\n/$n/g;
+	$message =~ s/\R/$n/g;
 	
 	# test for presence of manual newlines
 	if (($w & 1)==0 && $message =~ /\|/) { $w |= 1; }
