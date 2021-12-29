@@ -4,9 +4,12 @@ use warnings;
 use feature qw(say);
 use IO::File;
 
-# 2020-02-03 20:24. Add EAST and WEST to vocab correction code.
-# 2020-02-04 00:57. Add DOWN to vocab correction code.
-# 2020-02-05 -----  Allow for message that starts with line-break.
+# Reads in a .sao file created by ScottKit and outputs a BBC BASIC program that will write the data in the .sao file to a BBC Micro filesystem in a format suitable for use with BeebScott.
+
+# 2021-02-03 20:24. Add EAST and WEST to vocab correction code.
+# 2021-02-04 00:57. Add DOWN to vocab correction code.
+# 2021-02-05 -----  Allow for message that starts with line-break.
+# 2021-02-12 19:43  Fixed nonautoindex. Fixed dates in these comments!
 
 my $fname = $ARGV[0];
 
@@ -19,12 +22,15 @@ if (defined $fname && $fname eq '-n')
 	$fname = $ARGV[1];
 }
 
+my $pname = $0; 
+$pname =~ s{^.*/}{};
+
 if ((!defined $fname) || ($fname eq ''))
 {
-	die "Usage: $0 [-n] filename\n";
+	die "Usage: $pname [-n] filename\n";
 }
 
-my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\nUsage: $0 [-n] filename\n";
+my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\nUsage: $pname [-n] filename\n";
 
 # bytes, IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
 
@@ -62,6 +68,7 @@ my $blank = <$fh>;
 say "REM actions";
 
 my $nonautoindex = 0;
+my $found = 0;
 
 for(my $i = 0; $i <= $actions; $i++)
 {
@@ -69,11 +76,12 @@ for(my $i = 0; $i <= $actions; $i++)
 	$action =~ tr/ /,/;
 	say "DATA $action";
 	
-	if ($nonautoindex==0 && $action =~ /([0-9]+),/)
+	if ($found==0 && $action =~ /([0-9]+),/)
 	{
 		if ($1 > 100)
 		{
 			$nonautoindex = $i;
+			$found = 1;
 		}
 	}
 }
