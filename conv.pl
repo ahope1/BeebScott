@@ -6,37 +6,47 @@ use IO::File;
 
 # Reads in a .sao file created by ScottKit and outputs a BBC BASIC program that will write the data in the .sao file to a BBC Micro filesystem in a format suitable for use with BeebScott.
 
-# 2021-02-03 20:24. Add EAST and WEST to vocab correction code.
-# 2021-02-04 00:57. Add DOWN to vocab correction code.
-# 2021-02-05 -----  Allow for message that starts with line-break.
-# 2021-02-12 19:43  Fixed nonautoindex. Fixed dates in these comments!
-# 2021-02-19 -----  Detect and record use of manual newlines.
-# 2021-02-19 21:45  Moved W% flag to first DATA line in BASIC prog.
-# 2021-02-22 12:55  Bittified W%
+# 2021-02-03 20:24 Add EAST and WEST to vocab correction code.
+# 2021-02-04 00:57 Add DOWN to vocab correction code.
+# 2021-02-05 ----- Allow for message that starts with line-break.
+# 2021-02-12 19:43 Fixed nonautoindex. Fixed dates in these comments!
+# 2021-02-19 ----- Detect and record use of manual newlines.
+# 2021-02-19 21:45 Moved W% flag to first DATA line in BASIC prog.
+# 2021-02-22 12:55 Bittified W%
+# 2021-02-23 ----- Added message-concat bit-flag.  
 
+
+# filename (eventually)
 my $fname = $ARGV[0];
+
+# bit-flags (W%)
+# bit 0: manual newline
+# bit 1: "new" string-concatenation behaviour 
+my $w = 0;
 
 # manual newline separator
 my $n = ' ';
 
-if (defined $fname && $fname eq '-n') 
+if (defined $fname && $fname =~ /-[nc]{1,2}/) 
 { 
-	$n = '|';
+	if (index($fname,'n')!=-1) { $n = '|'; }
+	if (index($fname,'c')!=-1) { $w |= 2; }
 	$fname = $ARGV[1];
 }
 
-my $pname = $0; 
-$pname =~ s{^.*/}{};
 
+# open .sao file for reading
+my $pname = $0; 
+$pname =~ s{^.*[\/]}{};
+my $usage="Usage: $pname [-nc] filename";
 if ((!defined $fname) || ($fname eq ''))
 {
-	die "Usage: $pname [-n] filename\n";
+	die "$usage\n";
 }
+my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\n$usage\n";
 
-my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\nUsage: $pname [-n] filename\n";
 
-# bytes, IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
-
+# bytes,IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
 chomp (my $bytes = <$fh>);
 chomp (my $objects = <$fh>);
 chomp (my $actions = <$fh>);
@@ -50,12 +60,12 @@ chomp (my $lt = <$fh>);
 chomp (my $messages = <$fh>);
 chomp (my $treasury = <$fh>);
 
-say "NEW";
-say "AUTO";
+say 'NEW';
+say 'AUTO';
 
-say "REM Program must be run on a BBC Micro with a 65(C)02 Co-processor";
-say "LOMEM=&C000";
-say "HIMEM=&F800";
+say 'REM Program must be run on a BBC Micro with a 65(C)02 Co-processor';
+say 'LOMEM=&C000';
+say 'HIMEM=&F800';
 
 say "ONERROR:ONERROROFF:P.:REPORT:P.'ERL:CLOSE#0:END\n";
 
@@ -142,9 +152,6 @@ $blank = <$fh>;
 
 ########################################
 
-# manual newline flag
-my $w = 0;
-
 push @basic, "\nREM messages";
 for(my $i = 0; $i <= $messages; $i++)
 {
@@ -168,13 +175,14 @@ for(my $i = 0; $i <= $messages; $i++)
 	}
 	
 	# test for presence of manual newlines
-	if ($w==0 && $message =~ /\|/) { $w |= 1; }
+	if (($w & 1)==0 && $message =~ /\|/) { $w |= 1; }
 	
 	if (length $message>230)
 	{
 		$message = substr($message,1);
 
 		my @array = ( $message =~ m/.{1,230}/g );
+		
 		foreach(@array[0..$#array-1])
 		{
 			push @basic, "DATA ".'"'."$_".'["';
@@ -187,7 +195,7 @@ for(my $i = 0; $i <= $messages; $i++)
 	}
 }
 
-say "REM manual newline flag\nDATA $w\n";
+say "REM optional bit-flags\nDATA $w\n";
 
 say for @basic;
 
