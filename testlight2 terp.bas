@@ -254,11 +254,13 @@ REM Get param from condition list
 REM *** Automatically GET or DROP ***
 
 REM 10=GET, 18=DROP
-REM 1060 IF NV(0)<>10 AND NV(0)<>18 OR F3 THEN 1230
+1060 IF NV(0)<>10 AND NV(0)<>18 OR F3 THEN 1230
+
 REM Am attempting to allow an autoget/drop even when there's a GET/DROP action that
 REM explicitly matches the noun but blocks the GET/DROP (because if that action's 
 REM conditions fail, why not allow an autoget/drop?). ???
-1060 IF (NV(0)=10 OR NV(0)=18) AND NOT F2 F2=-1 ELSE IF NV(0)<>10 AND NV(0)<>18 OR F3 THEN GOTO 1230
+REM 1060 IF (NV(0)=10 OR NV(0)=18) AND NOT F2 F2=-1 ELSE IF NV(0)<>10 AND NV(0)<>18 OR F3 THEN GOTO 1230
+
 1070 IF NV(1)=0 PRINT"WHAT?":GOTO1180
 1080 IF NV(0)<>10 THEN 1110
 1090 L=0:FORZ=0TOIL:IFIA(Z)=-1THENL=L+1
