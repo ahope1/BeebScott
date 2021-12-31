@@ -17,10 +17,14 @@ my $w = 0;
 # manual newline separator
 my $n = ' ';
 
-if (defined $fname && $fname =~ /-[nc]{1,2}/) 
+# delete empty actions?
+my $z = 0;
+
+if (defined $fname && $fname =~ /-[ncz]{1,3}/) 
 { 
 	if (index($fname,'n')!=-1) { $n = '|'; }
 	if (index($fname,'c')!=-1) { $w |= 2; }
+	if (index($fname,'z')!=-1) { $z = 1; }
 	$fname = $ARGV[1];
 }
 
@@ -28,7 +32,7 @@ if (defined $fname && $fname =~ /-[nc]{1,2}/)
 # open file for reading
 my $pname = $0; 
 $pname =~ s{^.*[\/]}{};
-my $usage="Usage: $pname [-nc] filename";
+my $usage="Usage: $pname [-n|c|z] filename";
 if ((!defined $fname) || ($fname eq ''))
 {
 	die "$usage\n";
@@ -41,7 +45,8 @@ close $fh or die "$!\n";
 # say $gdata;
 
 # bytes,IL,CL,NL,RL,MX,R,TT,ln,LT,ML,TR
-my $bytes; my $objects; my $actions; my $words; my $rooms; my $mx; my $start; my $treasures; my $wordlen; my $lt; my $messages; my $treasury;
+my $bytes; my $objects; my $actions; my $words; my $rooms; my $mx; my $start;
+my $treasures; my $wordlen; my $lt; my $messages; my $treasury;
 
 if ($gdata =~ /^[\s]*([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([\-]?[0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)[\s]+([\-]?[0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)/)
 {
@@ -200,6 +205,28 @@ if ($gdata =~ /^[\s]*([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)/)
 	my $checksum = $3;
 }	
 else { die "Malformed footer!\n"; }
+
+
+# filter out empty actions
+if ($z == 1)
+{
+	my $actions2 = $actions;
+	my $nonautoindex2 = $nonautoindex;
+	my @actions2;
+	
+	for (my $i=0; $i<=$actions; $i++)
+	{
+		if ($actions[$i] =~ /^0+,0+,0+,0+,0+,0+,0+,0+/)
+		{
+			$actions2--;		
+			if ($i < $nonautoindex) { $nonautoindex2--; }
+		}
+		else { push @actions2, $actions[$i]; }
+	}
+	$actions = $actions2;
+	$nonautoindex = $nonautoindex2;
+	@actions = @actions2;
+}
 
 
 say 'NEW';
