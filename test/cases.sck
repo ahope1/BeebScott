@@ -1,0 +1,356 @@
+start workroom 
+maxload 4
+treasury throne
+
+########################################
+
+### Nounlessness Test Room
+
+room workroom "workroom. * Here you can type AR1 or AR2 or BREAK BOLT or WITH FILE. Scott Adams's TRS-80 interpreter ADVENTUR/CMD would allow BREAK BOLT but not (e.g.) BREAK BLAH. * To proceed to the next test, go EAST"
+	exit east cavern
+
+
+### Room Register Test Rooms
+
+room r10 "r10"
+
+room r23 "r23"
+
+room hintroom "** This is the temporary room. *"	
+
+
+### Gettability Test Rooms
+
+room cavern "cavern. * Here you can try GET FOX, GET BAT, etc. * To proceed to the next test, go EAST"
+	exit east grotto
+
+
+### Maxload Test Rooms
+
+room grotto "grotto. * Here you can GO NORTH, GET BELL, GET STONE, BOOM and FETCH. * To proceed to the next test, go EAST"
+	exit north hollow
+	exit east cave
+	
+room hollow "hollow. * Here you can GO SOUTH, GET BELL, GET STONE, BOOM and FETCH."
+	exit south grotto
+	
+
+### Tutorial Test Rooms
+
+room cave "cave mouth. * This is a tutorial adventure. You must find a gold coin and store it"
+	exit east chamber
+
+room chamber "square chamber"
+	exit east dungeon
+	exit north throne
+	exit west cave
+	
+room dungeon "gloomy dungeon"
+	exit west chamber
+	exit north crypt
+
+room crypt "damp, dismal crypt"
+	exit south dungeon
+
+room throne "gorgeously decorated throne room"
+	exit south chamber
+	
+room cell "dungeon cell"
+	exit north dungeon
+
+########################################
+
+### Nounlessness Test Items
+
+item file "Large tempered nail file"
+	called FIL
+	at workroom
+	
+item bolt "Lockable slide bolt"
+	at workroom
+	
+#item void1 ""
+#	called BOL
+#	nowhere
+
+item lock "Broken slide lock"
+	nowhere
+
+
+### Gettability Test Items
+	
+item fox "A fox"
+	called "fox"
+	at cavern
+	
+item box "A box"
+	called "box"
+	at cavern
+
+item bat "A bat"
+	called "bat"
+	at cavern
+
+item hat "A hat"
+	called "hat"
+	at cavern
+
+
+### Maxload Test Items
+
+item bell "A bell"
+	called "bell"
+	at grotto
+	
+item stone "A stone"
+	called "stone"
+	at hollow
+	
+	
+### Tutorial Test Items
+
+item sign "Sign says: leave treasure here, then say SCORE"
+	at throne
+
+item lamp "An old-fashioned brass lamp"
+	called "lamp"
+	at throne
+
+item lit_lamp "A lit lamp"
+	called "lamp" nowhere
+
+item empty_lamp "An empty lamp"
+	called "lamp" nowhere
+
+lightsource lit_lamp
+lighttime 10
+
+item station "A lamp-refilling station" 
+	at cave
+
+item cross "A wooden cross"
+	called "cross"
+	at chamber
+
+item door "A locked door"
+	at dungeon
+	
+item door2 "An open door leads south"
+	nowhere
+
+item vampire "A vampire"
+	at crypt
+
+item key "A brass key"
+	called "key"
+	at crypt
+
+item coin "*Gold coin*"
+	called "coin"
+	at cell
+	
+########################################
+
+### Generic Vocab
+
+verbgroup LOO L
+verbgroup INV I
+verbgroup GET TAK
+verbgroup DRO LEA
+
+
+### Nounlessness Test Vocab
+
+verbgroup CUT BRE FIL TRI
+noungroup FIL NAI
+
+
+### Tutorial Test Vocab
+
+noungroup LAM LAN
+
+########################################
+
+### Initial Autoaction
+
+occur when !flag 1
+	print "WELCOME to the Scott Adams game interpreter test-suite!"
+	set_flag 1
+
+
+### Room Register Test Autoactions
+
+occur when flag 2
+	clear_flag 2
+	swap_room
+	goto hintroom
+	continue
+occur 0%
+	look
+	pause
+	swap_room
+	continue
+occur 0%
+	look
+	print "The room description should have changed briefly to that of the 'temporary room'."
+
+	
+### Gettability Test Autoactions
+
+occur when carried bat and !carried hat and !flag 3
+	set_flag 3
+	print "Oh dear! You shouldn't be able to pick up the bat without first getting the hat!"
+	
+occur when carried fox and !carried box and !flag 4
+	set_flag 4
+	print "Oh dear! You shouldn't be able to pick up the fox without first getting the box!"
+	comment "this action should never be triggered"
+
+occur when carried hat and carried bat and !flag 5
+	set_flag 5
+	print "If you took the hat before taking the bat, then all is well. (You shouldn't be able to do it the other way round.)"
+
+occur when carried box and !carried fox and !flag 6
+	set_flag 6
+	print "Now you still shouldn't be able to GET FOX _ because an explicit GET FOX action hasn't been coded!"
+
+### Tutorial Test Autoactions
+
+occur 25% when at dungeon
+	print "I smell something rotting to the north."
+
+occur 25% when here vampire and !carried cross
+	print "Vampire bites me! I'm dead!"
+	game_over
+	comment "vampire can attack unless cross is carried"
+
+occur when flag 16
+	clear_flag 16
+	swap lit_lamp empty_lamp
+	look
+	comment "The engine sets flag 16 when the lamp runs out"
+
+# flag 15 is on when and only when it is dark
+occur when at chamber and flag 15
+	clear_dark
+	look
+
+occur when at dungeon and !flag 15
+	set_dark
+	look
+
+occur when here vampire and carried cross
+	print "Vampire cowers away from the cross!"
+
+occur when here vampire and !carried cross
+	print "Vampire looks hungrily at me."
+
+########################################
+
+### Generic Actions
+
+action SCO: score
+action LOO: look
+action INV: inventory
+action QUI: game_over
+
+
+### Nounlessness Test Actions
+
+action CUT:
+	print "Tell me with what? Like: WITH FIST"
+
+action WIT FIL when present file and here bolt
+	swap bolt lock
+	look2
+	print OK
+
+action WIT FIL when !present file
+	print "Sorry I can't do that"
+	print "I've a hunch I've been robbed!"
+	comment "NO FILE"
+
+
+### Room Register Test Actions
+
+action AR1:
+	print "This is Alternate Room Registers test 1"
+	swap_specific_room 2
+	goto r10
+	continue	
+occur 0%
+	print "Swapped to room r10"
+	swap_specific_room 2
+	swap_specific_room 5
+	continue	
+occur 0%
+	goto r23
+	print "Swapped to room r23"
+	swap_specific_room 5
+	continue
+occur 0%
+	print "Swapped back to original room"
+	look
+
+action AR2:
+	print "This is Alternate Room Registers test 2"
+	set_flag 2
+	print "You are being transported..."
+	pause
+
+
+### Gettability Test Actions
+
+action GET FOX when !carried box
+	print "You can't get the fox unless you're carrying the box!"
+
+action GET BAT when carried hat
+	set_flag 3
+	get bat
+
+
+### Maxload Test Actions
+
+action boom when carried bell
+	superget stone
+	print "Boom! Performed a 'superget' on the stone."
+	
+action boom when carried stone
+	superget bell
+	print "Boom! Performed a 'superget' on the bell."
+
+action fetch:
+	put_with stone bell
+	print "Brought stone to bell."
+
+
+### Tutorial Test Actions
+
+action light lamp when present lamp
+	swap lamp lit_lamp
+	print "OK, lamp is now lit and will burn for 10 turns."
+	look
+
+action refill lamp when here station and present empty_lamp
+	destroy empty_lamp
+	refill_lamp
+	print "The lamp is now full and lit."
+
+action open door when here door and !present key
+	print "It's locked."
+
+action open door when here door
+	swap door door2
+	print OK
+	look
+
+action go door when here door2
+	goto cell
+	look
+
+action get key when here vampire and !carried cross
+	print "I'm not going anywhere near that vampire!"
+	
+action get key
+	get key
+	print OK
