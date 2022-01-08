@@ -8,4 +8,4 @@ BeebScott is an interpreter for playing Scott Adams text adventure games on a BB
 
 ***terp.bas*** is the BBC BASIC interpreter program. It reads in the game data file and lets the user play the game on a BBC Micro computer or emulator.
 
-For now, you can [run some test cases](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=http://bbcmicro.co.uk//gameimg/discs/1411/cases.ssd).
+For now, you can [run some test cases](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd).
