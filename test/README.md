@@ -1,5 +1,7 @@
 # Tests
 
+You can [run the tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=http://bbcmicro.co.uk//gameimg/discs/1411/cases.ssd) in a BBC Micro emulator.
+
 ***cases.sck*** is written in uncompiled ScottKit format and collates a number of test cases, which were originally discussed [on intfiction.org](https://intfiction.org/t/scott-adams-interpreter-discrepancies/).
 
 ***cases_BOL_ADDED.sao*** is the compiled version of *cases.sck*. I've had to manually edit *cases_BOL_ADDED.sao* to add the "unreferenced" noun BOL because the ScottKit compiler wrongly [drops](https://github.com/MikeTaylor/scottkit/issues/43#issuecomment-1001301926) unreferenced nouns.
