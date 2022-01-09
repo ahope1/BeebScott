@@ -1,1 +1,1 @@
-# Under construction
+# Games written by Scott Adams
