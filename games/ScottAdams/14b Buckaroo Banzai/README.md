@@ -5,3 +5,5 @@ A copy of the text adventure game Buckaroo Banzai converted for use with BeebSco
 [**>> Play in browser <<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/main/games/ScottAdams/14b%20Buckaroo%20Banzai/adv14b-edit.ssd&cpuMultiplier=2)
 
 This version of Buckaroo Banzai derives from the .DAT-format version of the game which is available from [Scott Adams's website](https://www.msadams.com/downloads.htm).
+
+A solution or walkthrough is available [from CASA](http://www.solutionarchive.com/game/id%2C60/Adventures+of+Buckaroo+Banzai%2C+The.html).
