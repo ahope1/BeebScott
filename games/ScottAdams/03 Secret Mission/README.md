@@ -1,1 +1,9 @@
 # Secret Mission
+
+A copy of the text adventure game Secret Mission converted for use with BeebScott. Secret Mission was created by Scott Adams and [published](https://en.wikipedia.org/wiki/The_Adventures_of_Buckaroo_Banzai_Across_the_8th_Dimension#Video_games) by Adventure International in 1979.
+
+[**>> Play in browser <<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/main/games/ScottAdams/03%20Secret%20Mission/adv03-edited.ssd&cpuMultiplier=2)
+
+This version of Buckaroo Banzai derives from the "ScottFree" .DAT-format version of the game which is available [from the IF Archive](https://www.ifarchive.org/indexes/if-archive/scott-adams/games/scottfree/). (A similar collection of .DAT files is available [from Scott Adams's website](https://www.msadams.com/downloads.htm).) The .DAT was converted for use with BeebScott using the [*conv.pl*](https://github.com/ahope1/BeebScott/tree/main/conv.pl) script, via ScottKit. ScottKit was used to remove a small amount of redundant code from the game before conversion with *conv.pl*. 
+
+A solution or walkthrough is available [from CASA](http://www.solutionarchive.com/game/id%2C472/Secret+Mission.html).
