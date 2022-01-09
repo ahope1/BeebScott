@@ -1,0 +1,1408 @@
+# 23 rooms, 73 items, 220 actions
+# 89 messages, 0 treasures, 80 verbs/nouns
+ident 5
+version 115
+wordlen 3
+maxload 7
+lighttime 175
+unknown1 5284
+unknown2 625
+start bed
+
+verbgroup GO RUN WAL ENT USE
+verbgroup LOO EXA
+verbgroup GET TAK PIC CAT REM MOV
+verbgroup OUT EXI
+verbgroup PUT DRO LEA LOW
+verbgroup KIL ATT
+verbgroup CLO SHU
+verbgroup OPE LIF RAI
+verbgroup UNL EXT
+verbgroup LIG BUR IGN
+verbgroup EMP SPI
+verbgroup CUT BRE FIL TRI
+verbgroup PUL RIN
+verbgroup EAT DRI
+verbgroup JAM SMA BUS
+verbgroup SAY YEL
+verbgroup SME SNI
+verbgroup FEE TOU
+
+noungroup SHE END
+noungroup WIN BOX LED
+noungroup POL FLA
+noungroup BAT VAM DRA
+noungroup COF LID
+noungroup FIL NAI
+noungroup BOT BLO
+noungroup POS CAR
+noungroup GAT CRO
+noungroup FIS HAN FOO FEE
+noungroup NEC BIT
+
+room bed "*I'm lying in a large brass bed"
+
+room bedroom "bedroom"
+	exit north castle
+
+room window "*I'm on A ledge outside An open window"
+
+room castle1 "*I'm hanging on the end of a sheet, I made a fold in the sheet
+so I can leave things here. There's a window box here on the
+side of the castle"
+
+room window1 "flower box outside An open window"
+
+room CRYPT "CRYPT"
+	exit south passage
+
+room closet "closet"
+	exit west workroom
+
+room Bathroom "Bathroom"
+	exit south castle
+
+room castle2 "*I'm outside the castle"
+	exit east path
+	exit west castle
+
+room "room" "DOORLESS room"
+
+room castle "hall inside the castle"
+	exit north Bathroom
+	exit south bedroom
+	exit east castle2
+	exit west kitchen
+
+room kitchen "kitchen"
+	exit east castle
+
+room COFFIN "large COFFIN"
+	exit up CRYPT
+
+room pAntry "pAntry"
+
+room OVEN "giant SOLAR OVEN"
+	exit west kitchen
+
+room Dungeon "Dungeon"
+	exit up workroom
+
+room path "Meandering path"
+	exit west castle2
+
+room Pit "Pit"
+
+room passage "Dark passage"
+	exit north CRYPT
+	exit south "room"
+
+room room1 "dumb-waiter by a room"
+
+room workroom "workroom"
+	exit down Dungeon
+
+room you "LOT OF TROUBLE! (And so Are you!)"
+
+item Sheets "Sheets"
+	called SHE
+	at bed
+
+item window "Open window"
+	nowhere
+
+item window1 "Closed window"
+	at bedroom
+
+item Pillow "Pillow"
+	called PIL
+	at bed
+
+item wall "Flag pole in wall"
+	at window
+
+item arms "Coat-of-arms"
+	called COA
+	at castle2
+
+item window2 "Sheet going into window"
+	nowhere
+
+item flAgpole "End of sheet tied to flAgpole"
+	nowhere
+
+item tablet "1 nodoz tablet"
+	called TAB
+	nowhere
+
+item torch "LIT torch"
+	called TOR
+	nowhere
+
+item ledge "Loose end of sheet going over ledge"
+	nowhere
+
+item here "End of sheet hAnging here"
+	at window1
+
+item door "Closed & UNLOCKED door"
+	nowhere
+
+item door1 "Open door"
+	nowhere
+
+item door2 "Locked door"
+	at workroom
+
+item clip "Paper clip"
+	called CLI
+	nowhere
+
+item STAKE "Tent STAKE"
+	called STA
+	carried
+
+item Mirror "Mirror"
+	called MIR
+	at Bathroom
+
+item blood "Bottle of type V blood"
+	called BOT
+	nowhere
+
+item bottle "Empty bottle"
+	called BOT
+	nowhere
+
+item torch1 "Unlit torch"
+	called TOR
+	at Pit
+
+item mAtches "Sulfur mAtches"
+	called MAT
+	at pAntry
+
+item neck "2 small holes in my neck"
+	nowhere
+
+item tablets "3 no-doz tablets"
+	called TAB
+	nowhere
+
+item tablets1 "2 nodoz tablets"
+	called TAB
+	nowhere
+
+item cigArettes "Piles of extinguished cigArettes"
+	at CRYPT
+
+item cigarettes "Pack of Transylvanian cigarettes"
+	called PAC
+	nowhere
+
+item cigArette "LIT cigArette"
+	called CIG
+	nowhere
+
+item COFFIN "Stone COFFIN"
+	nowhere
+
+item open "Coffin is open"
+	nowhere
+
+item closed "Coffin is closed"
+	nowhere
+
+item garlic "Dusty clove of garlic"
+	called GAR
+	at pAntry
+
+item pit "DARK pit"
+	at Dungeon
+
+item Cigarette "Cigarette"
+	called CIG
+	nowhere
+
+item bed "Brass bed"
+	at bedroom
+
+item sheet "The other end of the sheet"
+	called SHE
+	nowhere
+
+item bed1 "Sheet tied to bed"
+	nowhere
+
+item watch "Pocket watch"
+	called WAT
+	at Bathroom
+
+item open1 "Coffin lid is open"
+	at COFFIN
+
+item bolt "Lockable slide bolt"
+	at COFFIN
+
+item lock "Broken slide lock"
+	nowhere
+
+item file "Large tempered nail file"
+	called FIL
+	at OVEN
+
+item Vial "Small Vial"
+	called VIA
+	at closet
+
+item ceiling "Large dark lens set in ceiling"
+	at OVEN
+
+item Oven "Oven"
+	at kitchen
+
+item Package "Package"
+	called PAC
+	nowhere
+
+item box "Empty box"
+	called WIN
+	nowhere
+
+item Postcard "Postcard"
+	called POS
+	nowhere
+
+item pull "Bell pull"
+	at castle2
+
+item me "Castle towering above me"
+	at path
+
+item beyond "Fence with an open gate & a crowd beyond"
+	at path
+
+item Note "Note"
+	called NOT
+	nowhere
+
+item DRACULA "DRACULA"
+	called BAT
+	nowhere
+
+item mallet "Rubber mallet"
+	called MAL
+	at workroom
+
+item wAll "Iron rings in wAll"
+	at Dungeon
+
+item pit1 "Sheet tied to ring going into pit"
+	nowhere
+
+item passage "DARK foreboding passage"
+	nowhere
+
+item "" "."
+	nowhere
+
+item DRACULA1 "Full size portrait of DRACULA"
+	called POR
+	at "room"
+
+item Window "Window"
+	at "room"
+
+item Vent "Vent"
+	at CRYPT
+
+item Daisies "Daisies"
+	called DAI
+	at window1
+
+item Toilet "Toilet"
+	at Bathroom
+
+item waiter "Dumb-waiter"
+	at kitchen
+
+item Vent1 "Vent"
+	at workroom
+
+item Letter "Letter"
+	called LET
+	nowhere
+
+item Dracula "Sign says: `POSITIVELY NO SMOKING ALLOWED HERE!` signed Dracula"
+	at CRYPT
+
+item cage "Mouldy old skeleton with a stake in the rib cage"
+	nowhere
+
+item 1 "."
+	called KEY
+	nowhere
+
+item glass "Broken glass"
+	nowhere
+
+item dust "Century worth of dust"
+	called DUS
+	at closet
+
+item door3 "Memo tacked to the door"
+	at workroom
+
+item 2 "."
+	nowhere
+
+occur
+	dec_counter
+	continue
+	comment "DECRMNT MINUTES"
+
+occur 0% when !flag 1
+	print "Welcome to ADVEWNTURE: 5 `THE COUNT`. Dedicated to Alvin Files.
+"
+	set_counter 3
+	select_counter 0
+	set_counter 65
+	comment "INTRO"
+
+occur 0% when !flag 1
+	print "I see I was put to bed. Its AFternoon & I overslept!"
+	select_counter 3
+	set_counter 0
+	select_counter 3
+	comment "INTRO"
+
+occur 0% when counter_le 10 and counter_gt 1 and !flag 2 and !at Pit and !at CRYPT
+	print "Its getting DARK outside!"
+	comment "18"
+
+occur 0% when counter_le 4 and !flag 4 and counter_gt 1 and !flag 2
+	print "I'm getting very tired"
+	comment "GETTING TIRED"
+
+occur 0% when counter_eq 1
+	set_dark
+	print "The sun has set!"
+	look
+	comment "SUNSET"
+
+occur when here sheet and at window
+	swap sheet ledge
+	comment "SHEET OVER LEDGE"
+
+occur when flag 4
+	select_counter 1
+	dec_counter
+	continue
+	comment "DEC PILL"
+
+occur 0% when counter_le 8 and counter_le 4
+	print "I'm getting very tired"
+	comment "WEARING OFF"
+
+occur 0% when counter_le 0
+	clear_flag 4
+	comment "WORE OFF"
+
+occur 0%
+	select_counter 1
+	comment "RESET COUNTER"
+
+occur 33% when at castle1 and exists flAgpole
+	print "I hear the"
+	print "Flagpole splinter"
+	print "I fall to my death"
+	goto you
+	comment "POLE BROKE"
+
+occur when carried sheet and at castle
+	destroy2 bed1
+	swap sheet Sheets
+	print "Sheet came untied"
+	comment "UNTIE SHEET"
+
+occur when counter_le 0 and !flag 4 and !at you
+	set_flag 2
+	clear
+	comment "FELL ASLEEP"
+
+occur 25% when counter_le 0 and carried garlic and !flag 2 and !at you
+	print "A bAt flew by & LAUGHED At me!"
+	print "He smelled something & flew on"
+	comment "BAT AT NITE"
+
+occur 40% when counter_le 0 and !carried garlic and !flag 2 and !at you
+	print "A bAt flew by & LAUGHED At me!"
+	print "he settled on my NECK!"
+	set_flag 2
+	pause
+	comment "BAT BITE AT NITE"
+
+occur 50% when at castle1 and present torch
+	print "The torch burnt thru the sheet!"
+	print "I fall to my death"
+	goto you
+	comment "BURNT SHEET"
+
+occur when flag 2 and !at you
+	continue
+	goto closet
+	set_flag 3
+	clear_flag 2
+	comment "FELL SLEEP?"
+
+occur 0% when !exists door2
+	goto _ROOM0
+	put door1 workroom
+	destroy2 door
+	comment "OPEN IF DOOR UNLOCKED"
+
+occur 0% when exists STAKE and !here STAKE
+	destroy2 STAKE
+	set_flag 9
+	comment "STEAL STAKE"
+
+occur 0%
+	destroy2 window2
+	destroy2 flAgpole
+	destroy2 ledge
+	destroy2 sheet
+	comment "RETURN SHEE"
+
+occur 0%
+	destroy2 window
+	put window1 bedroom
+	set_counter 65
+	destroy2 pit1
+	comment "CLOSE WINDOW"
+
+occur 0% when exists Package and !here Package
+	destroy2 Package
+	set_flag 9
+	comment "GET PACKAGE"
+
+occur 0% when exists cigarettes and !here cigarettes
+	put cigarettes COFFIN
+	set_flag 9
+	comment "GET CIGS"
+
+occur 0% when at _ROOM0
+	goto bed
+	print "What a DREAM I just had !!!!"
+	comment "DREAMING?"
+
+occur 0% when flag 9
+	clear_flag 9
+	goto bed
+	print "I've a hunch I've been robbed!"
+	comment "RIPPED OFF?"
+
+occur 0%
+	goto bed
+	clear_dark
+	print "I see I was put to bed. Its AFternoon & I overslept!"
+	drop Sheets
+	comment "PUT TO BED"
+
+occur 0% when present blood
+	clear_flag 3
+	swap blood bottle
+	print "Odd, I wasn't bitten last nite!"
+	comment "GET BLOOD"
+
+occur 0%
+	clear_flag 4
+	destroy2 bed1
+	drop Sheets
+	look
+	comment "SHEETS"
+
+occur when flag 3
+	clear_flag 3
+	select_counter 0
+	dec_counter
+	continue
+	comment "DEC DAYS"
+
+occur 0% when counter_le 0
+	print "My neck looks BITTEN!"
+	print "I've turned into A VAMPIRE!"
+	goto you
+	comment "LOST GAME"
+
+occur 0%
+	print "My neck looks BITTEN!"
+	select_counter 0
+	superget neck
+	comment "RESET DAY + REPORT BITE"
+
+occur 50% when exists cigArette and !at COFFIN
+	select_counter 2
+	dec_counter
+	continue
+	comment "CIGARETTE OUT"
+
+occur 0% when counter_eq 0
+	destroy2 cigArette
+	destroy2 COFFIN
+	destroy2 open
+	destroy2 closed
+	comment "GONE OUT?"
+
+occur 0% when at CRYPT and counter_eq 0
+	print "The cigArette went out & the coffin VANISHED"
+	comment "REPORT IT"
+
+occur 0%
+	select_counter 2
+	comment "RESET COUNTER"
+
+occur when at you
+	print "YOU HAVE LOST!"
+	game_over
+	comment "END GAME"
+
+occur 30% when counter_le 25 and !exists Package and !at castle2 and !exists box
+	continue
+	select_counter 0
+	comment "DELIVER PACKAGE"
+
+occur 0% when counter_eq 2
+	put Package castle2
+	put Letter castle2
+	print " 
+A bell rings somewhere: `DING-DONG`.
+"
+	comment "CHECK DAY"
+
+occur 0%
+	select_counter 0
+	comment "RESET COUNTER"
+
+occur when !flag 1
+	set_flag 1
+	comment "MORE INTRO"
+
+occur when counter_le 1 and !present torch
+	set_dark
+	look
+	comment "SUNSET?"
+
+occur when at "room" and counter_gt 0 and flag 15
+	clear_dark
+	look2
+	comment "LITE DOORLW"
+
+occur 29% when counter_le 39 and !exists Postcard and !at castle2
+	put Postcard castle2
+	print " 
+A bell rings somewhere: `DING-DONG`.
+"
+	comment "DELIVER POSTCARD"
+
+action TIE SHE when present Sheets
+	print "Tell me to what? i.e. `TO TREE`"
+
+action GO WIN when at castle1
+	goto window1
+	look2
+	print OK
+
+action GO WIN when at window1
+	goto "room"
+	look2
+	print OK
+
+action LOO MIR when present Mirror and exists neck
+	continue
+	print "My neck looks BITTEN!"
+	print "I appear pale & drained!"
+	print "I think I can only take"
+
+occur 0%
+	select_counter 0
+	print_counter
+	select_counter 0
+	print "more days of this!"
+
+action UNL TOR when present torch
+	swap torch torch1
+	print OK
+	look
+
+action LIG TOR when present torch1 and present mAtches
+	swap torch torch1
+	look2
+	print OK
+
+action EMP BOT when present blood
+	swap blood bottle
+	print OK
+
+action LOO MIR when present Mirror and !exists neck
+	print "TODAY I look healthy..."
+
+action LOO WIN when at bedroom
+	print "I'm up in A cAstle, in the distAnce I see VOODOO CASTLE. There'sstAnding room outside the window"
+
+action CLO WIN when here window
+	swap window window1
+	look2
+	print OK
+	comment "CLO"
+
+action GO WIN when here window and carried sheet
+	goto window
+	drop window2
+	look2
+	print OK
+
+action TO BED when present Sheets and here bed
+	destroy2 Sheets
+	drop sheet
+	drop bed1
+	look2
+
+action TO POL when present Sheets and present wall
+	destroy2 Sheets
+	drop flAgpole
+	drop ledge
+	look2
+
+action CLI when here ledge
+	goto castle1
+	look2
+	print OK
+
+action CLI when here here
+	goto castle1
+	look2
+	print OK
+
+action SLE:
+	set_flag 2
+	clear
+	clear_flag 4
+
+action LOO WAT when present watch
+	print "Strange watch says"
+	print_counter
+	print "moves till sunset"
+
+action GO WIN when at window and carried sheet
+	goto bedroom
+	destroy2 window2
+	look2
+	print OK
+
+action LOO OVE when counter_gt 0 and present Oven
+	print "There's A tremendous Amount of HEAT & SUNLIGHT coming out."
+
+action LOO OVE when present Oven and counter_le 0
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action TO RIN when here wAll
+	destroy2 Sheets
+	put sheet Pit
+	drop pit1
+	look2
+
+action UNT when here pit1
+	destroy2 sheet
+	destroy2 pit1
+	drop Sheets
+	look2
+
+action UNT when here flAgpole
+	destroy2 flAgpole
+	destroy2 ledge
+	drop Sheets
+	look2
+
+action LOO DUM when here waiter
+	print OK
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action EAT TAB when present tablets
+	set_flag 4
+	swap tablets tablets1
+	select_counter 1
+	continue
+
+occur 0%
+	set_counter 40
+	select_counter 1
+	print OK
+	print "I'm real PEPPY now!"
+
+action EAT TAB when present tablets1
+	set_flag 4
+	swap tablets1 tablet
+	select_counter 1
+	continue
+	comment "PILL 2"
+
+occur 0%
+	set_counter 40
+	select_counter 1
+	print OK
+	print "I'm real PEPPY now!"
+
+action LOO PAC when at castle1
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action SMO when present cigArette and at CRYPT and !exists COFFIN
+	print "There's A COUGHIN (sic) in the room."
+	drop COFFIN
+	drop closed
+
+action LOO TOI when here Toilet
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action LOO ROO when at room1
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action LIG CIG when present Cigarette and present mAtches
+	select_counter 2
+	set_counter 8
+	select_counter 2
+	continue
+
+occur 0%
+	swap Cigarette cigArette
+	print OK
+
+action GET CIG when present Cigarette
+	get Cigarette
+	print OK
+
+action LOO POS when present Postcard
+	print "There's writing on it."
+
+action LOO LET when present Letter
+	print "There's writing on it."
+
+action GET CIG when present cigArette
+	get cigArette
+	print OK
+
+action LOO GAT when present beyond
+	print "Mob looks ANGRY"
+
+action LOO COF when here closed
+	print "I see nothing special."
+
+action LOO COF when here open
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action LOO VIA when present Vial and !flag 6
+	print "There's something there, maybe I should"
+	print "empty it?"
+
+action OPE DOO when here door
+	swap door door1
+	look2
+	print OK
+
+action CLO DOO when here door1
+	swap door door1
+	look2
+	print OK
+
+action LOC DOO when here door and present clip
+	swap door door2
+	look2
+	print OK
+
+action LOO CAS when here me
+	print OK
+	print "I see nothing special."
+	print EXCEPT
+	print "I notice a DARK WINDOW UNDER the bedroom window ledge!"
+
+action GET LOC when here door2 and present clip
+	swap door2 door
+	look2
+	print OK
+	comment "."
+
+action REA NOT when present Postcard and !exists Note
+	print "The paper clip is in the way!"
+
+action GO BED when here bed
+	goto bed
+	look2
+	print OK
+
+action GO OVE when present Oven and counter_gt 0
+	print "Sorry I can't do that"
+	print "There's A tremendous Amount of HEAT & SUNLIGHT coming out."
+
+action GO OVE when present Oven and counter_le 0
+	goto OVEN
+	look2
+	print OK
+
+action WIT FIL when present file and here bolt
+	swap bolt lock
+	look2
+	print OK
+
+action OPE WIN when here window1
+	swap window window1
+	look2
+	print OK
+
+action GO DUM when here waiter
+	goto room1
+	look2
+	print OK
+
+action KIL BAT when present DRACULA and present STAKE and present mallet
+	swap DRACULA cage
+	look2
+	print "I drive the stake through his HEART. The townspeople
+come and carry me off cheering! (Don't worry, I tell them I
+owe it all to you!!!!)"
+	game_over
+	comment "WIN"
+
+action GO ROO when !flag 8 and !flag 7 and at room1
+	goto kitchen
+	look2
+	print OK
+
+action EMP VIA when present Vial and !flag 6
+	drop tablets
+	look2
+	set_flag 6
+	comment "."
+
+action UNT when here bed1
+	destroy2 bed1
+	destroy2 window2
+	destroy2 sheet
+	continue
+
+occur 0%
+	destroy2 ledge
+	drop Sheets
+	look2
+
+action CUT FIL when present file
+	print OK
+	print "Some time passes..."
+	dec_counter
+	dec_counter
+
+action WAI when counter_gt 5
+	print "Some time passes..."
+	subtract_from_counter 5
+
+action PUL BEL when here pull
+	print OK
+	print " 
+A bell rings somewhere: `DING-DONG`.
+"
+
+action EAT TAB when present tablet
+	set_flag 4
+	destroy2 tablet
+	select_counter 1
+	continue
+
+occur 0%
+	set_counter 40
+	select_counter 1
+	print OK
+	print "I'm real PEPPY now!"
+
+action WIT FIL when !present file
+	print "Sorry I can't do that"
+	print "I've a hunch I've been robbed!"
+	comment "NO FILE"
+
+action GO PAS when here passage
+	goto passage
+	set_dark
+	look2
+	print OK
+
+action FIN:
+	print "Sorry I can't do that"
+	print "I don't know where to look"
+
+action GO WIN when at "room"
+	goto window1
+	look2
+	print OK
+
+action GET POR when present DRACULA1
+	get DRACULA1
+	put passage "room"
+	print OK
+
+action CLI when here sheet and at Pit
+	goto Dungeon
+	clear_dark
+	look2
+	print OK
+
+action CLI when here pit
+	set_dark
+	goto Pit
+	look2
+	print OK
+
+action GO SHE
+	print "Try: `CLIMB SHEET`"
+
+action GO PIT when here pit
+	set_dark
+	goto Pit
+	look2
+	print OK
+
+action CLO when here open1
+	print "I closed the lid and I suffocated!"
+	game_over
+
+action CLO when here open
+	swap open closed
+	look2
+
+action OPE COF when here COFFIN and exists bolt and counter_gt 0
+	print "Sorry I can't do that"
+	print "Its LOCKED from INSIDE!"
+
+action OPE COF when here COFFIN
+	destroy2 closed
+	drop open
+	look2
+	continue
+
+occur 0% when counter_gt 0
+	put DRACULA COFFIN
+	comment "PUT DRACKY"
+
+action EAT GAR when present garlic
+	print OK
+	destroy2 garlic
+
+action GO GAT when here beyond
+	print "Peasants attack me, I was SUPPOSED to destroy the VAMPIRE!"
+	print "YOU HAVE LOST!"
+	game_over
+
+action GO ROO when at room1 and flag 7
+	goto workroom
+	look2
+	print OK
+
+action REA LET when present Letter
+	print "DeAr DRACKY, Don't open this present till HALLOWEEN.
+ signed COUNT YORGA."
+
+action REA POS when present Postcard and exists Note
+	print "Its for DRACULA, its and EATING & GHOULING bill from a
+local mortuary!"
+
+action REA POS when present Postcard and !exists Note
+	print "Its for DRACULA, its and EATING & GHOULING bill from a
+local mortuary!"
+	print "There's a note PAPER CLIPPED to the postcard"
+
+action REA NOT when present Note
+	print "Postmaster says he'll be delivering a package tomorrow."
+
+action GET CLI when present Postcard and !exists clip
+	superget clip
+	superget Note
+	clear
+	print OK
+
+action UNC when present Postcard and !exists clip
+	superget clip
+	superget Note
+	clear
+	print OK
+
+action GET NOT when present Note
+	superget Note
+	print OK
+
+action GET CLI when present clip
+	superget clip
+	print OK
+
+action OPE PAC when present Package
+	drop box
+	drop cigarettes
+	drop blood
+	continue
+
+occur 0%
+	destroy2 Package
+	print OK
+
+action HEL when here door2
+	print "I'm A pretty good LOCK PICK!"
+
+action LIG MAT when present mAtches and flag 15
+	clear_dark
+	look2
+	print "The match flares up briefly ..."
+	continue
+
+occur 0%
+	pause
+	pause
+	pause
+	print "and then goes out!"
+
+occur 0%
+	set_dark
+	look2
+
+action JUM when at window
+	print "I fall to my death"
+	print "as I fall"
+	print "I notice a DARK WINDOW UNDER the bedroom window ledge!"
+	goto you
+
+action GO ROO when at room1 and flag 8
+	goto pAntry
+	look2
+	print OK
+
+action CLI when at castle1
+	goto window
+	look2
+	print OK
+
+action SAV GAM
+	print OK
+	save_game
+
+action GET SHE when present Sheets
+	get Sheets
+	print OK
+
+action OPE WIN when at castle1
+	print "Sorry I can't do that"
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action GO TOI when here Toilet
+	print OK
+	print "Ah that's much better!"
+
+action TO when present Sheets and !at bed
+	print "Sorry I can't do that"
+
+action GET SHE when present sheet
+	get sheet
+	print OK
+
+action REA MEM when present door3
+	print "Dear Adventurer:
+ I wanted to take this time (1 move!) to thank ALL of you out
+there in ADventureland for the fantastically warm reception
+Adventure has received!
+Happy Adventuring,
+ Scott Adams
+(Chief Adventurer)"
+
+action GET UP when at bed
+	goto bedroom
+	look2
+	print OK
+
+action OUT when at room1
+	print "Try: `GO ROOM`"
+
+action FLY when at _ROOM0
+
+action OPE LET when present Letter
+	print "There's writing on it."
+
+action EAT BOT when present blood
+	goto you
+	print "I've turned into A VAMPIRE!"
+
+action GO DOO when here door1
+	goto closet
+	look2
+	print OK
+
+action PUL:
+	print "Nothing happens."
+
+action SMO when present cigArette
+	print COUGH!
+
+action UNL DOO when here door2
+	print "How?"
+
+action HEL when at room1
+	print "I know how to RAISE and LOWER this thing!"
+
+action QUI:
+	game_over
+
+action CLI POL when here wall
+	clear
+	print "I'm At the tip of the pole"
+	continue
+	print "I hear the"
+
+occur 0%
+	print "Flagpole splinter"
+	print "as I fall"
+	goto you
+	print "I notice a DARK WINDOW UNDER the bedroom window ledge!"
+
+action PUT DUM when at room1 and flag 7
+	print "Sorry I can't do that"
+	print "It won't go any"
+	print lower
+
+action PUT DUM when at room1 and flag 8
+	clear_flag 8
+	print OK
+	put waiter kitchen
+
+action PUT DUM when at room1
+	set_flag 7
+	print OK
+	put waiter workroom
+
+action OPE DUM when at room1 and flag 8
+	print "Sorry I can't do that"
+	print "It won't go any"
+	print higher
+	comment "OPE"
+
+action OPE DUM when flag 7 and at room1
+	clear_flag 7
+	print OK
+	put waiter kitchen
+	comment "RAISE DUMBWAITER"
+
+action OPE DUM when at room1
+	set_flag 8
+	print OK
+	put waiter pAntry
+	comment "RAISE DUMBWAITER"
+
+action GET CIG when present cigarettes
+	get Cigarette
+	print OK
+
+action GO SLE
+	set_flag 2
+	clear
+
+action LOO UP when at castle2
+	print OK
+	print "I see nothing special."
+	print EXCEPT
+	print "I notice a DARK WINDOW UNDER the bedroom window ledge!"
+
+action LOO CAS when at castle2
+	print OK
+	print "I see nothing special."
+	print EXCEPT
+	print "I notice a DARK WINDOW UNDER the bedroom window ledge!"
+
+action LOO UP when here me
+	print OK
+	print "I see nothing special."
+	print EXCEPT
+	print "I notice a DARK WINDOW UNDER the bedroom window ledge!"
+
+action WAI:
+	print "Some time passes..."
+
+action JUM:
+	print OK
+	print "Nothing happens."
+
+action GO COF when here open
+	goto COFFIN
+	look2
+	print OK
+
+action WIT:
+	print "It doesn't work!"
+	print "Nothing happens."
+
+action OUT:
+	print "go there?"
+	print "How?"
+
+action OPE DUM when here waiter
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action GET INV
+	inventory
+
+action CUT:
+	print "Tell me with what? Like: `WITH FIST`"
+
+action LOO NEC
+	inventory
+
+action LOO MIR when !present Mirror
+	print "How?"
+
+action HEL when at bed
+	print "GET UP you sleepy head!"
+
+action HEL:
+	select_counter 3
+	add_to_counter 1
+	continue
+
+occur 0% when counter_gt 4
+	print "I'm getting very tired"
+	print "of you always asking for help!"
+	select_counter 3
+
+occur 0% when counter_le 4
+	print "Try examining things."
+	select_counter 3
+
+action GET GLA when here glass
+	print Yuck!
+	print "Sorry I can't do that"
+
+action LIG CIG when !present Cigarette
+	print "First I need an unlit cigarette."
+
+action LIG MAT when present mAtches
+	print "The match flares up briefly ..."
+	pause
+	pause
+	print "and then goes out!"
+
+action LIG when !carried mAtches
+	print "How?"
+	print "I've no matches!"
+
+action LIG when present mAtches
+	print "Sorry I can't do that"
+	print "I'm not an arsonist!"
+
+action OPE OVE
+	print "Its already open."
+
+action CLO OVE
+	print "Sorry I can't do that"
+
+action GO POL when at window
+	print "Try: `CLIMB POLE`"
+
+action FLU TOI when here Toilet
+	print OK
+
+action SAV:
+	print "Try: `SAVE GAME`"
+
+action TIE:
+	print "Sorry I can't do that"
+
+action GO VEN
+	print "Sorry I can't do that"
+	print "A bat might make it, but not me!"
+
+action LOO DOO when at workroom
+	print "There's something there, maybe I should"
+	print "go there?"
+
+action LOO DUS when present dust
+	print "A choooooo"
+	print "I see nothing special."
+
+action GO WIN when here window and !carried sheet
+	goto window
+	look2
+	print OK
+
+action JAM:
+	print "Maybe I should BREAK it?"
+
+action EAT STA when present DRACULA and present STAKE and present mallet
+	swap DRACULA cage
+	look2
+	print "I drive the stake through his HEART. The townspeople
+come and carry me off cheering! (Don't worry, I tell them I
+owe it all to you!!!!)"
+	game_over
+	comment "DRIVE STAKE"
+
+action GO WIN when at window and !carried sheet
+	goto bedroom
+	look2
+	print OK
+
+action SAY:
+	print OK
+	println_noun
+
+action MAK BED
+	print OK
+
+action SCO:
+	print "How?"
+
+action SME:
+	print OK
+
+action EAT:
+	print Yuck!
+
+action FEE:
+	print OK
+	print "I see nothing special."
+
+action PUT MIR when carried Mirror and !here Pillow
+	destroy2 Mirror
+	drop glass
+	print "Mirror shatters! That's 7 years bad luck!"
+
+action PUT MIR when carried Mirror and here Pillow
+	print OK
+	drop Mirror
+	print "I set the mirror on the pillow."
+
+action LOO COA when present arms
+	print "It bears the Family Crest of DRACULA!"
+
+action REA:
+	print "try looking at it"
+
+action LOO MEM when present door3
+	print "There's writing on it."
+
+action LOO NOT when present Note
+	print "There's writing on it."
+
+action INV:
+	inventory
+
+action LOO:
+	look2
+	print "I see nothing special."
+
