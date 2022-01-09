@@ -1,0 +1,1046 @@
+# 24 rooms, 54 items, 162 actions
+# 82 messages, 0 treasures, 65 verbs/nouns
+ident 3
+version 306
+wordlen 3
+maxload 7
+lighttime 10000
+unknown1 5963
+unknown2 681
+start "room"
+treasury VOID
+
+verbgroup GO ENT WAL RUN
+verbgroup POU SPI EMP
+verbgroup GET TAK MOV
+verbgroup CLE MOP
+verbgroup UNA DIS
+verbgroup DRO PUT LEA REM
+verbgroup CHA FOL
+verbgroup PRE TOU PUS
+verbgroup LOA INS
+verbgroup FIN LOC
+verbgroup LOO EXA
+verbgroup BRE SMA CUT UNB
+verbgroup FRI SEA SHA
+verbgroup ACT STA PLA
+
+noungroup TAP REC
+noungroup PIC PAS BAD AUT
+noungroup WIN GLA
+noungroup FIL CAR
+noungroup ENV MAN
+noungroup CAM BOX
+noungroup SAB HIM THE
+noungroup PAI PLA
+noungroup SUI ANT RAD
+noungroup HAN FIS FOO FEE
+noungroup FLO WAL
+noungroup DIA GAU
+
+room VOID ""
+
+room "room" "briefing room"
+	exit west corridor
+
+room corridor "long sloping grey corridor"
+	exit north hallway
+	exit south room1
+	exit east "room"
+	exit west ""
+	exit up hallway1
+	exit down hallway2
+
+room room1 "grey room"
+	exit north corridor
+
+room me "*I'm sitting in a grey chair
+there's a box pointing at me"
+
+room hallway1 "twisting white hallway"
+	exit north room2
+	exit east hallway
+	exit down corridor
+
+room hallway2 "twisting yellow hallway"
+	exit north room3
+	exit up corridor
+
+room hallway "twisting blue hallway"
+	exit north room4
+	exit south corridor
+	exit west hallway1
+
+room room2 "white room"
+	exit south hallway1
+
+room room3 "yellow room"
+	exit south hallway2
+
+room room4 "blue room"
+	exit south hallway
+
+room "" "maintenance room 1"
+	exit east corridor
+
+room room5 "large white visitors room"
+
+room corridor1 "yellow corridor"
+	exit west 1
+
+room anteroom "blue anteroom"
+	exit west room6
+	exit up room7
+
+room core "*I'm on a ledge outside of a window
+high above the reactor core"
+
+room 1 "maintenance room 2"
+	exit east corridor1
+	exit up room8
+
+room room8 "projectionist room"
+	exit down 1
+
+room core1 "Control room surronding
+the reactor core"
+	exit east room9
+	exit down core2
+
+room room9 "break room"
+	exit west core1
+
+room core2 "reactor core"
+	exit up core1
+
+room room7 "small viewing room"
+	exit down anteroom
+
+room room6 "storage room"
+	exit east anteroom
+
+item map "Torn up map"
+	called MAP
+	nowhere
+
+item security "Picture of me stamped -security-"
+	called PIC
+	nowhere
+
+item armed "Bomb detector flashing yellow (bomb is now armed)"
+	at VOID
+
+item recorder "Large tape recorder"
+	called TAP
+	at "room"
+
+item chair "Box with apparatus pointing at chair"
+	at room1
+
+item floor "Chair bolted to floor"
+	at room1
+
+item yellow "Row of 4 buttons -red white blue yellow-"
+	at me
+
+item visitor "Picture of me stamped: -visitor-"
+	called PIC
+	at VOID
+
+item maintenance "Picture of me stamped -maintenance-"
+	called PIC
+	nowhere
+
+item safe "Surgically implanted bomb detector glows green (bomb's -safe-)"
+	carried
+
+item active "Bomb detector glowing red (final countdown active)"
+	nowhere
+
+item key "Blue key"
+	called KEY
+	nowhere
+
+item key1 "Yellow key"
+	called KEY
+	at core
+
+item it "Closed white door with tv camera mounted over it"
+	at room2
+
+item wires "Plate glass window with embeded red wires"
+	at room5
+
+item green "Panel of buttons -white green-"
+	at room5
+
+item mop "Old fashioned yarn mop"
+	called MOP
+	at 1
+
+item frame "Empty window frame"
+	nowhere
+
+item window "Tv camera mounted over window"
+	at room5
+
+item glass "Broken glass"
+	called WIN
+	at core
+
+item projector "Empty movie projector"
+	at room8
+
+item cartridge "Movie projector with film cartridge"
+	nowhere
+
+item cartridge1 "Movie film cartridge"
+	called FIL
+	at core1
+
+item pail "Empty plastic pail"
+	called PAI
+	at ""
+
+item pail1 "Water filled plastic pail"
+	called PAI
+	nowhere
+
+item water "Vat of heavy water"
+	at room6
+
+item cutters "Wire cutters"
+	called CUT
+	at 1
+
+item suit "Anti-radiation suit"
+	called SUI
+	at room6
+
+item bomb "Very large time bomb"
+	at core2
+
+item wall "Red wire going from bomb into wall"
+	at core2
+
+item plastic "Strange lump of glowing plastic"
+	called PAI
+	nowhere
+
+item Room "Sign `No beverages, Please use Break Room.`"
+	at core1
+
+item it1 "Yellow door with tv camera over it"
+	at room3
+
+item recorder1 "Metal door jammed partially open by remains of a tape recorder"
+	at core1
+
+item it2 "Blue door with tv camera over it"
+	at room4
+
+item "room" "Plain metal door with sign -control room-"
+	at anteroom
+
+item open "The door is partially open"
+	nowhere
+
+item case "Empty pill case"
+	called CAS
+	nowhere
+
+item window1 "6 inch window"
+	at room7
+
+item envelope "Empty manila envelope"
+	called ENV
+	nowhere
+
+item yarn "Piece of yarn"
+	called YAR
+	nowhere
+
+item maintance "Picture of saboteur stamped -window maintance-"
+	called PIC
+	nowhere
+
+item saboteur "Dead saboteur"
+	called SAB
+	nowhere
+
+item wall1 "Loose red wire going into wall"
+	nowhere
+
+item core "Steps leading down into the reactor core"
+	at core1
+
+item button "Yellow button"
+	at corridor1
+
+item button1 "Blue button"
+	at anteroom
+
+item buttons "Keyholes under buttons"
+	at me
+
+item everywhere "Exposed dials and gauges everywhere"
+	at core1
+
+item leaflet "A leaflet"
+	called LEA
+	nowhere
+
+item VOID ""
+	nowhere
+
+item VOID1 ""
+	nowhere
+
+item VOID2 ""
+	nowhere
+
+item VOID3 ""
+	nowhere
+
+occur 15% when !exists wall
+	destroy2 safe
+	comment "WIRE CUT BOOM SOON"
+
+occur when !exists safe and !carried active
+	destroy2 armed
+	print "My bomb detector"
+	print "wails ALARMINGLY!"
+	superget active
+	comment "BOOOM SOON"
+
+occur 30% when !present recorder and !exists saboteur and !moved recorder
+	destroy2 recorder
+	comment "STEAL TAPE PLAYER"
+
+occur
+	dec_counter
+	comment "DEC COUNTER"
+
+occur 9% when carried active
+	clear
+	inventory
+	print "*   B O O O O O O O O O M ! * * * * * *"
+	game_over
+	comment "BOOOM"
+
+occur when counter_le 40 and counter_gt 0 and !carried active
+	print "Final countdown starts in"
+	print_counter
+	print turns!
+	comment "MSG DOOM"
+
+occur when !flag 12
+	print "Welcome to Adventure number 3|`MISSION IMPOSSIBLE` by Scott Adams,| Dedicated to Maegen Adams.|"
+	print "A minute ago someone ran out of this|room! By the way I seem to be carrying|something!|"
+	set_flag 12
+	set_counter 300
+	comment "FIRST IN"
+
+occur 30% when !exists saboteur and !at room3 and counter_le 275
+	put saboteur room3
+	print "In the distance you hear a dull thud; asif someone fell or dropped something|heavy."
+	comment "SABETOUR"
+
+occur 30% when !exists saboteur and !at room1 and counter_le 275
+	put saboteur room1
+	print "In the distance you hear a dull thud; asif someone fell or dropped something|heavy."
+	comment "SABETOUR"
+
+occur 30% when !exists saboteur and !at corridor and counter_le 275
+	put saboteur corridor
+	print "In the distance you hear a dull thud; asif someone fell or dropped something|heavy."
+	comment "SABETOUR"
+
+occur 25% when at room3
+	print "Metallic voice says:"
+	print "`Show authorization please`
+"
+	comment "VOICE"
+
+occur 15% when !exists saboteur
+	print "Someone came in the room, he saw me and|ran out!"
+	comment "RAN IN AND LEFT"
+
+occur 25% when at room2
+	print "Metallic voice says:"
+	print "`Show authorization please`|"
+	comment "SHOW AUTHORIZATION"
+
+occur 25% when at room4
+	print "Metallic voice says:"
+	print "`Show authorization please`|"
+	comment "SHOW AUTHORIZATION"
+
+occur 80% when at room5 and flag 13
+	print "TV camera is slow scanning the window|area."
+	comment "TV"
+
+occur 40% when at room5 and !flag 13
+	print "TV camera is powered down.|"
+	comment "TV"
+
+occur when flag 1 and carried safe
+	clear_flag 1
+	comment "ALREADY SET DETECTOR"
+
+occur when flag 2 and carried armed
+	clear_flag 2
+	comment "DITTO"
+
+occur when flag 1 and exists safe
+	print "My bomb detector"
+	swap safe armed
+	print "politely beeps...
+"
+	clear_flag 1
+	comment "SET GREEN"
+
+occur when flag 2 and exists safe
+	print "My bomb detector"
+	swap safe armed
+	print "angrily buzzes...
+"
+	clear_flag 2
+	comment "SET YELLO"
+
+occur 80% when at core2 and carried pail1
+	swap pail1 plastic
+	print "The radiation did something to my pail!"
+	print "the water soaks into the floor"
+	comment "PAIL"
+
+occur 80% when at core2 and carried suit
+	print "Holding a Radiation Suit"
+	print "doesn't provide much protection for me|as I fall down retching I hear/FEEL THE|BOMB explode!|"
+	game_over
+	comment "NO SUIT"
+
+occur 80% when at core2 and exists suit
+	print "A business suit"
+	print "doesn't provide much protection for me|as I fall down retching I hear/FEEL THE|BOMB explode!|"
+	game_over
+	comment "NO SUIT"
+
+occur when counter_le 0
+	destroy2 safe
+	comment "BOMB TRIGGED"
+
+action SHO PIC when at room5 and !present saboteur and present maintance and flag 13
+	print "Metallic voice says:"
+	print "`Authorization INSUFFICIENT for access`|"
+	print "`Owner of badge is not present!`"
+	comment "NEED SAB TOO"
+
+action REA LEA when present leaflet
+	clear
+	print "Hi! Look for Adventure number 4: `VOODOOCASTLE` at your favorite computer store!(Now back to our current program.)"
+	comment "."
+
+action FRI MOP when present mop and !exists key
+	drop key
+	print "Something fell to the floor."
+	comment "."
+
+action OPE DOO when !at anteroom
+	print "I can't do that"
+	print "It appears locked"
+	print "Most doors & windows are under automatedsecurity control."
+	comment "."
+
+action PRE WHI when !carried safe and here yellow
+	set_flag 1
+	goto VOID
+	continue
+	print CLICK!
+	comment "GIVE BADGES"
+
+occur 0% when here security
+	put security room1
+	goto me
+	print "There's a Bright flash & I hear|something fall to the floor.|I can't see what it is from here though."
+	comment "SECURITY BADGE"
+
+occur 0% when here maintenance
+	put maintenance room1
+	goto me
+	print "There's a Bright flash & I hear|something fall to the floor.|I can't see what it is from here though."
+	comment "MAINTANCE BADGE"
+
+occur 0% when here visitor
+	put visitor room1
+	goto me
+	print "There's a Bright flash & I hear|something fall to the floor.|I can't see what it is from here though."
+	comment "VISITOR BADGE"
+
+occur 0% when at VOID
+	goto me
+	print "Nothing happened"
+	print "Strange..."
+	comment "NO PIC"
+
+action CLE when present mop and exists key
+	print "HUH?"
+	print "Nothing happened"
+
+action JUM when at core
+	print "Oh Boy...I think I did something..."
+	print "*   B O O O O O O O O O M ! * * * * * *"
+	game_over
+
+action LOO MOP when present mop and !exists key
+	print "It made an odd sound."
+
+action PRE RED when here yellow and !carried armed
+	set_flag 2
+	print CLICK!
+	comment "DANGER"
+
+action UNL BUT
+	print "say again & use a color!"
+	comment "."
+
+action PRE BLU when !flag 4 and here yellow
+	print "I can't do that"
+	print "It appears locked"
+	comment "LOCKED"
+
+action PRE YEL when !flag 3 and here yellow
+	print "I can't do that"
+	print "It appears locked"
+	comment "LOCKED"
+
+action PRE BLU when here yellow and !exists security
+	put security VOID
+	print CLICK!
+	comment "MOVE PICTURE"
+
+action PRE BUT
+	print "say again & use a color!"
+
+action PRE YEL when here yellow and !exists maintenance
+	put maintenance VOID
+	print CLICK!
+	comment "MOVE PIC"
+
+action PRE RED when here yellow and carried armed
+	print CLICK!
+	destroy2 safe
+	comment "CLICK?"
+
+action PRE when here yellow
+	print CLICK!
+	comment "."
+
+action ACT UP when at me
+	goto room1
+	clear
+	look
+	comment "STAND UP"
+
+action GET TAP when present recorder
+	get recorder
+	comment "TAPE"
+
+action GET UP when at me
+	goto room1
+	clear
+	look
+	comment "STAND UP"
+
+action INV when exists suit
+	clear
+	inventory
+
+action INV when !exists suit
+	clear
+	inventory
+	print "I'm WEARING an anti-radiation suit."
+
+action LOO TAP when present recorder
+	print "Try starting it."
+
+action SAV GAM
+	save_game
+
+action QUI:
+	print "*   B O O O O O O O O O M ! * * * * * *"
+	game_over
+
+action LOO SAB when present saboteur
+	print "I see nothing special."
+	print "Maybe I should FRISK him?"
+
+action PRE GRE when here green and exists projector
+	print "Click!|Room lights dim and a screen drops from|the ceiling.|You hear a hidden projector start."
+	print "Strange..."
+	print "The screen illuminates for awhile, but|no movie!?"
+	print "The projector stops, the screen rises,|and the lights return."
+	comment "MOVIE"
+
+action PRE GRE when here green and !exists projector
+	clear
+	print "Click!|Room lights dim and a screen drops from|the ceiling.|You hear a hidden projector start."
+	print "A movie runs telling about the reactor|and its construction|interesting highlights:| 1) Plastic DEFORMS strangely in|radiation| 2) Even short exposure to HIGH|radiation is LETHAL, so suit up|"
+	print "The projector stops, the screen rises,|and the lights return."
+	comment "MOVIE"
+
+action ACT TAP when present recorder
+	clear
+	print "Good morning Mr. Phelps. Your Mission|(should you decide to accept it) is to|prevent this automated nuclear reactor|from being destroyed by a saboteur's|TIME BOMB!|"
+	print "The saboteur (who also rewired the|security system) is a heart patient. He plans to SUICIDE with the reactor! He isstill loose in the building.|You'll find Security keys & a map in themanila envelope lying next to the tape|player."
+
+action UNL when here yellow and present key and !flag 4
+	set_flag 4
+	print Blue
+	print "button is now unlocked"
+
+action UNL when here yellow and present key1 and !flag 3
+	set_flag 3
+	print Yellow
+	print "button is now unlocked"
+	comment "UNLOCK"
+
+action GET INV when exists suit
+	clear
+	inventory
+
+action GET INV when !exists suit
+	clear
+	inventory
+	print "I'm WEARING an anti-radiation suit."
+
+action PRE WHI when at room5
+	print CLICK!
+	goto room2
+	print "The door opens just long enough for me|to scurry through."
+
+action PRE YEL when at corridor1
+	clear
+	print CLICK!
+	print "The door opens just long enough for me|to scurry through."
+	goto room3
+
+action GO WIN when here frame and flag 13
+	destroy2 safe
+	goto core
+	clear
+	look
+	comment "BOOM SOON"
+
+action GO WIN when here frame and !flag 13
+	goto core
+	clear
+	look
+	comment "THRU WINDOW SAFE"
+
+action GO WIN when at core
+	goto room5
+	clear
+	look
+
+action PRE BLU when at anteroom
+	clear
+	print CLICK!
+	print "The door opens just long enough for me|to scurry through."
+	goto room4
+
+action LOA when present cartridge1 and present projector
+	swap projector cartridge
+	destroy2 cartridge1
+	clear
+	look
+
+action UNL when present cartridge
+	get cartridge1
+	swap cartridge projector
+	clear
+	look
+	comment "UNLOAD MOVIE"
+
+action BRE BOM when present bomb
+	print "Tell me with what? Example: `WITH FIST`"
+	set_flag 8
+
+action WIT when flag 8 and present bomb
+	clear_flag 8
+	print "It made an odd sound."
+	destroy2 safe
+	print "Oh Boy...I think I did something..."
+	comment "END IS NEAR"
+
+action GET BOM when here bomb and !exists wall
+	get bomb
+
+action CHA:
+	print "I see no one here."
+
+action GET BOM when here bomb and !exists wall1
+	print "I can't do that"
+	print "its still connected"
+
+action DRO BOM when carried bomb
+	print "It made an odd sound."
+	destroy2 safe
+	print "Oh Boy...I think I did something..."
+	drop bomb
+	comment "BOOM NEAR"
+
+action POU when at core1 and present pail1 and present bomb
+	clear
+	print "the water spills on the bomb and"
+	print "the control panel which immediately shorts|out triggering the bomb"
+	game_over
+
+action POU when at room9 and present pail1 and present bomb
+	print "the water spills on the bomb and"
+	print "defuses it! FANTASTIC, You completed an|IMPOSSIBLE mission!"
+	game_over
+	comment "WON!!!"
+
+action BRE WIR when here wall and present cutters
+	swap wall1 wall
+	set_flag 2
+	clear
+	look
+
+action DRO MOP when carried mop and !exists key
+	print "Strange..."
+	print "It made an odd sound."
+	drop mop
+
+action POU when present pail1
+	swap pail1 pail
+	print "the water soaks into the floor"
+
+action SHO PIC when at room2 and carried visitor
+	print "Metallic voice says:"
+	print "`ACCEPTED`"
+	print "The door opens just long enough for me|to scurry through."
+	goto room5
+
+action SHO PIC when at room2 and carried maintenance
+	print "Metallic voice says:"
+	print "`ACCEPTED`"
+	print "The door opens just long enough for me|to scurry through."
+	goto room5
+
+action SHO PIC when at room2 and carried security
+	print "Metallic voice says:"
+	print "`ACCEPTED`"
+	print "The door opens just long enough for me|to scurry through."
+	goto room5
+
+action DRO MOP when carried mop and exists key
+	drop mop
+
+action SHO PIC when at room3 and carried security
+	print "Metallic voice says:"
+	print "`ACCEPTED`"
+	print "The door opens just long enough for me|to scurry through."
+	goto corridor1
+
+action SHO PIC when at room3 and carried maintenance
+	print "Metallic voice says:"
+	print "`ACCEPTED`"
+	print "The door opens just long enough for me|to scurry through."
+	goto corridor1
+
+action SHO PIC when at room4 and carried security
+	print "Metallic voice says:"
+	print "`ACCEPTED`"
+	print "The door opens just long enough for me|to scurry through."
+	goto anteroom
+
+action SHO PIC when at room3
+	clear
+	print "Metallic voice says:"
+	print "`Authorization INSUFFICIENT for access`|"
+
+
+action SHO PIC when at room2
+	clear
+	print "Metallic voice says:"
+	print "`Authorization INSUFFICIENT for access`|"
+
+action SHO PIC when at room4
+	clear
+	print "Metallic voice says:"
+	print "`Authorization INSUFFICIENT for access`|"
+
+action CLE when present mop and !exists key
+	print "Oh Boy...I think I did something..."
+	print "It made an odd sound."
+
+action BRE WIN when here wires and present recorder
+	print "Tell me with what? Example: `WITH FIST`"
+	set_flag 7
+	set_flag 10
+
+action WIT TAP when here wires and present recorder and flag 7
+	continue
+	put recorder VOID
+	clear
+	print "Recorder goes flying thru the glass|landing in the control room. Boy what a|MESS!|"
+	comment "BREAK WINDOW"
+
+occur 0%
+	clear_flag 7
+	set_flag 2
+	swap frame wires
+	set_flag 13
+
+action GET CHA
+	print "I can't do that"
+	print "It won't budge!"
+
+action LOO WIN when at room5
+	print "I'm on the 2nd floor. Below I see the|control room surronding the reactor|core. There's a wide ledge just under|the window."
+
+action SCO:
+	clear
+	print "In this Adventure there's NO score.|Either you make it or ...|"
+
+action SIT when here floor
+	clear
+	goto me
+	look
+
+action OPE WIN
+	print "I can't do that"
+	print "It appears locked"
+	print "Most doors & windows are under automatedsecurity control."
+
+action BRE MOP when present mop
+	set_flag 10
+	set_flag 11
+	print "Tell me with what? Example: `WITH FIST`"
+
+action WIT CUT when present cutters and flag 11
+	drop key
+	print "Something fell to the floor."
+	clear_flag 10
+	clear_flag 11
+
+action UNL WIN
+	print "Nothing happened"
+	print "Most doors & windows are under automatedsecurity control."
+
+action SHO PIC when present saboteur and at room5 and present maintance
+	clear_flag 13
+	print "Metallic voice says:"
+	print "`TV deactivated`
+"
+
+action GO CHA when at room1
+	print "It seems safe. Shall I sit down?"
+
+action LOO CHA when at room1
+	print "It seems safe. Shall I sit down?"
+	comment "."
+
+action LOO BOM when present bomb
+	print "Its a seamless box with 1 small hole forthe red wire."
+
+action LOO DET
+	inventory
+
+action DRO SUI when !exists suit
+	drop suit
+
+action DRO SUI when carried suit
+	drop suit
+
+action LOO WIN when at room7
+	clear
+	print "I'm looking into the control room. I|notice that the door is blocked by some debris."
+
+action GET WAT when present pail and here water
+	swap pail pail1
+
+action WEA SUI when present suit
+	destroy2 suit
+	comment "PUT ON SUIT"
+
+action GET TAP when here recorder1
+	print "I can't do that"
+	print "It won't budge!"
+
+action OPE DOO when here recorder1
+	print "I can't do that"
+	print "It won't budge!"
+
+action GO DOO when here recorder1 and carried bomb
+	print "Something won't fit thru the door."
+
+action GO DOO when here recorder1
+	clear
+	goto anteroom
+	look
+
+action OPE DOO when here "room"
+	print "Strange..."
+	print "I turn the knob and push"
+	print "gently on the door"
+	print "It won't budge!"
+	comment "OPE"
+
+action PRE DOO when here "room"
+	print "Strange..."
+	print "I turn the knob and push"
+	print "gently on the door"
+	print "It won't budge!"
+
+action PRE HAR when here "room" and !here open
+	print "I turn the knob and push"
+	print "hard on the door"
+	print "it opens slightly"
+	drop open
+
+action PRE HAR when here "room" and here open
+	print "Strange..."
+	print "I turn the knob and push"
+	print "hard on the door"
+	print "It won't budge!"
+
+action GO DOO when here "room" and here open
+	goto core1
+	clear
+	look
+
+action GO DOO when here "room" and !here open
+	print "I can't do that"
+	print "its closed"
+
+action KIC DOO when here "room" and !here open
+	print "OW! That HURT! Anyway"
+	print "it opens slightly"
+	drop open
+
+action CLO DOO
+	print "It won't budge!"
+
+action SUI UP when present suit
+	destroy2 suit
+
+action SHO PIC when at room5 and flag 13
+	print "Metallic voice says:"
+	print "`Authorization INSUFFICIENT for access`|"
+
+action UNL DOO
+	print "Nothing happened"
+	print "Most doors & windows are under automatedsecurity control."
+
+action FRI SAB when present saboteur and !exists envelope
+	drop envelope
+	drop yarn
+	drop maintance
+	continue
+
+occur 0%
+	drop map
+	drop case
+	print "Something fell to the floor."
+	drop leaflet
+	comment "FRISKING SABOTEUR"
+
+occur 0% when !exists recorder
+	drop recorder
+	comment "RETURN STOLEN TAPE TOO"
+
+action KNO when at room2
+	clear
+	print "Metallic voice says:"
+	print "`Show authorization please`
+"
+
+action HEL:
+	print "Only help I can think of is to: `Examineeverything closely!`
+"
+
+action PUL:
+	print "It won't budge!"
+
+action PRE:
+	print "Nothing happened"
+
+action KNO when at room3
+	clear
+	print "Metallic voice says:"
+	print "`Show authorization please`
+"
+
+action KNO when at room4
+	clear
+	print "Metallic voice says:"
+	print "`Show authorization please`
+"
+
+action KNO:
+	print "Nothing happened"
+
+action WIT when !flag 10
+	print "HUH?"
+
+action WIT HAN when flag 10
+	clear_flag 10
+	print "OW! That HURT! Anyway"
+	print "Nothing happened"
+	comment "."
+
+action FRI:
+	print "Nothing happened"
+
+action KIC:
+	print "OW! That HURT! Anyway"
+	print "Nothing happened"
+
+action SHO:
+	print "Strange..."
+	print "Nothing happened"
+
+action REA:
+	print "I can't do that"
+	print "its unreadable"
+
+action FIN:
+	print "I can't do that"
+	print "I don't know where to look"
+
+action BRE:
+	print "Tell me with what? Example: `WITH FIST`"
+	set_flag 10
+
+action WIT when flag 10
+	clear_flag 10
+	print "Strange..."
+	print "Nothing happened"
+	print "Be sure I'm carrying it!"
+
+action ACT:
+	print "Tell me how?"
+
+action WAI:
+	subtract_from_counter 30
+	print "Some time passes..."
+
+action UNA:
+	print "Tell me how?"
+
+action LOO LEA when present leaflet
+	print "There is something written there"
+
+action LOO CAM when at room5 and flag 13
+	print "TV camera is slow scanning the window|area."
+
+action LOO CAM when at room5 and !flag 13
+	print "TV camera is powered down.|"
+
+action LOO:
+	print "I see nothing special."
+	look2
+
