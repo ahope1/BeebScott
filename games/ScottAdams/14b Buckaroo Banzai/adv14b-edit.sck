@@ -1,0 +1,1288 @@
+# 36 rooms, 61 items, 267 actions
+# 96 messages, 0 treasures, 111 verbs/nouns
+ident 14
+version 0
+wordlen 4
+maxload 5
+lighttime 35
+unknown1 0
+unknown2 0
+start office
+
+verbgroup GO WALK RUN ENTE
+verbgroup LOOK EXAM L DESC READ
+verbgroup GET TAKE GRAB PICK REMO
+verbgroup OPEN UNLO
+verbgroup CHEC TEST
+verbgroup LIGH FLAS
+verbgroup CUT SLIC HIT CHOP
+verbgroup REPL RECO
+verbgroup CONN TAPE ATTA
+verbgroup PUT INSE
+verbgroup FUEL REFU FILL
+verbgroup UNCO DISC
+verbgroup MAKE MIX
+verbgroup SWIM WADE
+verbgroup WASH RINS CLEA
+verbgroup THRO CAST
+verbgroup PUSH PULL PRES FLIP LIFT
+verbgroup USE WITH
+verbgroup SLID MOVE
+verbgroup SAY YELL SCRE TALK
+
+noungroup BOOT CASH
+noungroup YOYO BUIL
+noungroup PIPE PADL
+noungroup HARD STOR
+noungroup PILE TRAS
+noungroup TOOL BOX
+noungroup DUCT TAPE
+noungroup CAR JET TANK
+noungroup FLAS LIGH
+noungroup BOMB CANI
+noungroup LINE PHON
+noungroup COCK WIND DOOR
+noungroup GLOV COMP
+noungroup ANTE LEAD
+noungroup TUNE DIAL
+noungroup JAR FLUI
+noungroup MINE SHAF
+noungroup " " STON
+noungroup ME MYSE
+noungroup CODE MESS
+
+room office "Yoyodyne office"
+	exit west Hickory
+
+room Laboratory "Basement Laboratory"
+
+room Hickory "*I'm at the corner of Main & Hickory"
+	exit north View
+	exit south ramp
+	exit east Ave
+	exit west Ave1
+
+room View "*I'm at the corner of Main & Mountain View"
+	exit north lot
+	exit south Hickory
+	exit east View1
+	exit west View1
+
+room ramp "*I'm at a highway access ramp"
+	exit north Hickory
+	exit south freeway
+	exit east grass
+
+room Ave "*I'm on Hickory Ave"
+	exit east Hickory1
+	exit west Hickory
+
+room Ave1 "*I'm on Hickory Ave"
+	exit east Hickory
+	exit west Hickory2
+
+room Station "Gas Station"
+	exit east Hickory
+
+room Booth "Cashiers Booth"
+	exit north Station
+
+room Hickory1 "Cul-de-sac at East end of Hickory"
+	exit west Ave
+
+room grass "field of tall grass"
+	exit west ramp
+
+room freeway "*I'm on a freeway"
+	exit east freeway
+	exit west freeway
+
+room equipment "shed full of radio equipment"
+	exit north Ave1
+
+room Shaft "Mine Shaft"
+	exit south mountain
+
+room Hickory2 "Cul-de-sac at West end of Hickory"
+	exit east Ave1
+
+room house "living room of a large house"
+	exit east Hickory2
+
+room store "hardware store"
+	exit east View
+
+room lot "*I'm at the east end of a parking lot"
+	exit north mountain1
+	exit south View
+	exit west lot1
+
+room lot1 "*I'm at the west end of a parking lot"
+	exit north beach
+	exit east lot
+
+room beach "*I'm on a beach"
+	exit north lake
+	exit south lot1
+
+room lake "cold shallow lake"
+	exit south beach
+	exit east mountain1
+
+room mountain1 "*I'm at the foot of a mountain"
+	exit south lot
+	exit west lake
+
+room ledge "*I'm on a small mountain ledge"
+	exit down mountain1
+
+room mountain "cavern inside the mountain"
+	exit north Shaft
+
+room shack "lifeguard shack"
+	exit east beach
+
+room house1 "*I'm in the garage of a large house"
+	exit south Hickory1
+
+room View1 "*I'm behind the mountain on Mountain View"
+	exit east View
+	exit west View
+
+room car "cockpit of the jet car"
+
+room VOID5 ""
+
+room hereafter "*I'm in the hereafter."
+
+item Staircase "Staircase"
+	at Laboratory
+
+item building "Yoyodyne building"
+	at Hickory
+
+item Station "Gas Station"
+	at Hickory
+
+item store "Hardware store"
+	at View
+
+item Quartz "Quartz"
+	at ledge
+
+item antenna "Shed with antenna"
+	at Ave1
+
+item house "Large house"
+	at Hickory1
+
+item toolbox "Small toolbox"
+	called TOOL
+	at house1
+
+item shaft "Mine shaft"
+	at mountain
+
+item on "Flashlight (on)"
+	called FLAS
+	nowhere
+
+item house1 "Large house"
+	at Hickory2
+
+item Pumps "Gas Pumps"
+	at Station
+
+item Booth "Cashiers Booth"
+	at Station
+
+item tank "Filler pipe to underground gas tank"
+	at Station
+
+item Console "Control Console"
+	at Booth
+
+item Pile "Trash Pile"
+	at Booth
+
+item "down" "Staircase going down"
+	at office
+
+item Table "Table"
+	at office
+
+item safe "Floor safe"
+	nowhere
+
+item battery "Old car battery"
+	called BATT
+	nowhere
+
+item toolbox1 "Open toolbox"
+	called TOOL
+	nowhere
+
+item Key "Key"
+	called KEY
+	nowhere
+
+item tape "Roll of duct tape"
+	called DUCT
+	nowhere
+
+item Pick "Climbers Pick"
+	called PICK
+	at store
+
+item pipe "Unlocked filler pipe"
+	nowhere
+
+item Hydrometer "Hydrometer"
+	called HYDR
+	at store
+
+item pump "Manual hand pump"
+	called PUMP
+	at store
+
+item Car "Jet Car"
+	at lot1
+
+item Key1 "Key"
+	called KEY
+	nowhere
+
+item shack "Lifeguard shack"
+	at beach
+
+item radio "Small Ham radio"
+	called RADI
+	at shack
+
+item off "Flashlight (off)"
+	called FLAS
+	nowhere
+
+item housing "Bomb housing"
+	at mountain
+
+item Envelope "Envelope"
+	called ENVE
+	nowhere
+
+item hole "large hole"
+	nowhere
+
+item hole1 "Another large hole"
+	nowhere
+
+item line "20 ft of phone line"
+	called LINE
+	nowhere
+
+item above "Phone line dangling from above"
+	nowhere
+
+item Quartz1 "Quartz"
+	called QUAR
+	nowhere
+
+item paper "Sheet of paper"
+	called PAPE
+	nowhere
+
+item hose "Fuel hose"
+	called HOSE
+	nowhere
+
+item Formula "Formula"
+	called FORM
+	nowhere
+
+item Dashboard "Dashboard"
+	at car
+
+item lead "Antenna lead"
+	at equipment
+
+item radio1 "Battery attached to radio"
+	called BATT
+	nowhere
+
+item Jug "Empty chemical Jug"
+	called JUG
+	nowhere
+
+item gasoline "Jug of gasoline"
+	called JUG
+	at VOID5
+
+item vat "Mixing vat"
+	at Laboratory
+
+item Sand "Sand"
+	called SAND
+	at beach
+
+item Fluid "Jar of glowing Fluid"
+	called JAR
+	nowhere
+
+item fuel "Jug of jet fuel"
+	called JUG
+	at VOID5
+
+item Cables "Jumper Cables"
+	called CABL
+	at store
+
+item door "Heavy stone door"
+	at Shaft
+
+occur when !at Laboratory and !at mountain and flag 15 and !flag 6 and !at Shaft
+	set_flag0
+	continue
+
+occur 0% when flag 0
+	clear_flag 27
+	clear_flag0
+	clear_dark
+	look
+
+occur when flag 16 and !flag 28
+	get off
+	set_flag 28
+	look
+
+occur when at mountain and !carried on and !flag 27
+	set_dark
+	set_flag 27
+	look
+
+occur when carried radio
+	clear_flag 14
+
+occur when here lead and here radio1 and flag 30 and flag 14
+	print "I hear the bomb will explode in"
+	select_counter 1
+	print_counter
+	continue
+
+occur 0%
+	select_counter 1
+	print moves
+
+occur when here radio and carried radio1
+	drop radio1
+
+occur when here radio1 and carried radio
+	superget radio1
+
+occur when !flag 2
+	set_counter 750
+	set_flag 4
+	select_counter 1
+	continue
+
+occur 0%
+	set_flag 2
+	print "`Buckaroo Banzai`"
+	print "Adventure by Scott Adams & Phillip Case"
+
+occur
+	select_counter 1
+
+occur when counter_eq 0
+	goto hereafter
+	look
+	print "An atomic explosion erupts."
+	print "I'm fried Banzai."
+
+occur
+	select_counter 1
+
+occur
+	select_counter 1
+	dec_counter
+	select_counter 1
+
+occur when !at Station and carried pump
+	clear_flag 12
+
+occur when at hereafter
+	game_over
+
+occur when carried Cables
+	clear_flag 9
+	clear_flag 10
+
+occur when carried Car
+	clear_flag 10
+
+occur when flag 9 and flag 10 and flag 11 and flag 31
+	set_flag 30
+
+occur when at Shaft and !flag 9
+	set_dark
+	look
+
+occur when !flag 3 and at freeway
+	set_flag 3
+	set_counter 2
+	select_counter 1
+
+occur when at View1
+	clear_flag 6
+	clear_dark
+	look
+
+action PUMP when !carried Jug
+	print "I can't,"
+	print "there's no"
+	print empty
+	print container
+
+action STAR PUMP when at _ROOM0
+
+action FIND when at _ROOM0
+
+action PUSH COCK when at Shaft
+	print "I go thru door. Slam!!!"
+	goto View1
+
+action UNCO HOSE when carried pump and flag 13
+	clear_flag 13
+	clear_flag 12
+	superget hose
+	print "O.K."
+
+action PUMP GAS when flag 12 and here pipe and carried Jug
+	print "O.K."
+	swap gasoline Jug
+	set_flag0
+	continue
+
+occur 0% when flag 0
+	clear_flag0
+	set_flag 20
+
+action PUT HOSE when here pipe and carried pump and flag 13
+	print "It does"
+	print "reach the gasoline."
+	set_flag 12
+
+action PUT HOSE when here pipe and carried hose
+	print "O.K."
+	print "I lose it in the tank."
+	destroy2 hose
+
+action PUT HOSE when here pipe and carried pump and !flag 13
+	print "It doesn't"
+	print "reach the gasoline."
+
+action CONN HOSE when carried hose and carried pump and carried tape
+	set_flag 13
+	print "tape holds it"
+	print "attached to pump."
+	destroy2 hose
+
+action CONN HOSE when carried hose and carried pump and !carried tape
+	print "it won't stay"
+	print "attached to pump."
+
+action CONN PUMP when carried pump
+	print "In 2 words, connect to what?, i.e. CONNECT PIPE"
+
+action LOOK PUMP when present pump and flag 13
+	print "I see"
+	print "the hose is"
+	print 10
+	print "ft long"
+
+action LOOK PUMP when present pump and !flag 13
+	print "I see"
+	print "the hose is"
+	print 6
+	print "ft long"
+
+action TRAN WARF when at equipment and flag 14 and flag 29 and flag 30
+	set_flag0
+	continue
+
+occur 0% when flag 0 and !flag 1
+	print nothing
+	print special
+	print happens
+	continue
+
+occur 0% when flag 0 and !flag 1
+	clear_flag0
+	continue
+
+occur 0% when flag 0
+	print "Bomb acknowledges code"
+	clear_flag0
+	set_flag 17
+
+action TRAN YOYO when at equipment and flag 14 and flag 17 and flag 29 and flag 30
+	print "O.K."
+	print "Bomb acknowledges code"
+	print "The earth is safe again."
+	game_over
+
+action GO STAT when here Station
+	goto Station
+	print "O.K."
+
+action GO BOOT when here Booth
+	goto Booth
+	print "O.K."
+
+action GO YOYO when here building
+	goto office
+	print "O.K."
+
+action LOOK STAI when here "down"
+	print "I see"
+	print darkness
+
+action GO STAI when here "down"
+	goto Laboratory
+	print "O.K."
+	set_dark
+	look
+
+action LOOK PIPE when here tank
+	print "I see"
+	print "it's padlocked."
+
+action GO HOUS when here house1
+	goto house
+	print "O.K."
+
+action GO HOUS when here house
+	goto house1
+	print "O.K."
+
+action GO HARD when here store
+	goto store
+	print "O.K."
+
+action LOOK PUMP when here Pumps
+	print "I see"
+	print "their turned off."
+
+action LOOK CONS when here Console
+	print "I see"
+	print "a switch to the gas pumps."
+
+action PUSH SWIT when here Console
+	print nothing
+	print happens
+
+action PUSH TABL when here Table
+	put safe office
+	print "O.K."
+
+action THRO SWIT when here Console
+	print nothing
+	print happens
+
+action SLID TABL when here Table
+	put safe office
+	print "O.K."
+
+action LOOK PILE when here Pile and !moved battery
+	put battery Booth
+	print "O.K."
+	print "I see"
+	print something
+
+action OPEN TOOL when present toolbox and !moved tape
+	swap toolbox toolbox1
+	superget Key
+	continue
+
+occur 0%
+	superget tape
+	superget off
+	print "I got"
+	print something
+
+action LOOK DOWN when at office
+	print "I see"
+	print darkness
+
+action OPEN PIPE when here tank and carried Key
+	swap pipe tank
+	print "O.K."
+
+action LOOK SAFE when here safe
+	print "I see"
+	print "it's a key safe."
+
+action GET BATT when here radio1
+	destroy2 radio1
+	clear_flag 29
+	superget battery
+
+action GET BATT when here battery
+	get battery
+
+action DROP BATT when carried radio1
+	destroy2 radio1
+	drop battery
+	clear_flag 14
+
+action DROP BATT when carried battery
+	drop battery
+
+action GO SHAC when at beach
+	print "O.K."
+	goto shack
+
+action FUEL BATT when present battery and at lake
+	set_flag 31
+	print "O.K."
+
+action LOOK BATT when present battery and !flag 31
+	print "I see"
+	print "there's no"
+	print "water in the battery."
+
+action LOOK BATT when present battery and flag 31
+	print "I see"
+	print "water in the battery."
+
+action LOOK TOOL when present toolbox
+	print "Sticker says: Sam's Service Station."
+
+action CHEC BATT when present battery and carried Hydrometer and flag 30
+	print "Battery tests:"
+	print Weak
+
+action CHEC BATT when present battery and carried Hydrometer and !flag 30
+	print "Battery tests:"
+	print Dead
+
+action CHEC BATT when present tape and carried Hydrometer and flag 30
+	print "Battery tests:"
+	print Weak
+
+action CHEC BATT when present radio1 and carried Hydrometer and !flag 30
+	print "Battery tests:"
+	print Dead
+
+action LOOK GLOV when at car and !flag 18
+	print "I got"
+	print something
+	superget Formula
+	continue
+
+occur 0%
+	set_flag 18
+	superget Fluid
+
+action LIGH ON when flag 16 and present off
+	print "I can't,"
+	print "batterys are dead"
+
+action LIGH ON when present off
+	swap on off
+	look
+	print "O.K."
+
+action LIGH OFF when present on
+	swap on off
+	look
+	print "O.K."
+
+action LOOK BOMB when at mountain and carried on and !flag 1
+	print "I see"
+	print light
+	print "marked 'RFI Shield' is"
+	continue
+
+occur 0%
+	print on
+	print "I see"
+	print "a switch"
+
+occur 0% when !moved Envelope
+	print "and an envelope"
+
+action PUSH SWIT when at mountain and carried on
+	set_flag 1
+	print "I see"
+	print something
+	print happens
+
+action LOOK BOMB when at mountain and carried on and flag 1
+	print light
+	print "marked 'RFI Shield' is"
+	print off
+	continue
+
+occur 0% when !moved Envelope
+	print "and an envelope"
+
+action GET ENVE when at mountain and !moved Envelope and carried on
+	print "O.K."
+	get Envelope
+
+occur 0%
+
+action OPEN ENVE when carried Envelope and !carried Key1
+	print "I got"
+	print something
+	superget Key1
+
+action LOOK MOUN when at mountain1
+	print "I see"
+	print "a ledge about 15' up with a small peak."
+
+action DIG when at grass and carried Pick and !flag 26
+	set_flag 26
+	print "O.K."
+	continue
+
+occur 0%
+	put hole grass
+
+action DIG when flag 26 and carried Pick and at grass
+	put hole1 grass
+	print "O.K."
+
+action LOOK HOLE when here hole and !moved line
+	print "I see"
+	print "an underground phone line."
+
+action CUT LINE when here hole and carried Pick and !flag 25 and !moved line
+	print "I see"
+	print "the line is severed."
+	set_flag 25
+
+action CUT LINE when here hole1 and flag 25 and carried Pick and !moved line
+	set_flag 24
+	print "I see"
+	print "the line is severed."
+
+action PUSH LINE when here hole1 and flag 24 and !moved line
+	get line
+	print "O.K."
+	print "I got"
+	print something
+
+action GET LINE when here hole1 and flag 24 and !moved line
+	get line
+	print "O.K."
+
+action THRO LINE when carried line and at mountain1
+	destroy2 line
+	drop above
+
+action CLIM LINE when here above and loaded
+	print "I can't,"
+	print "while carrying anything."
+
+action CLIM LINE when here above and !loaded
+	goto ledge
+	print "O.K."
+
+action TIE LINE when here above
+	print "To what?"
+
+action TO PICK when here above and present Pick
+	print "O.K."
+	set_flag 23
+	destroy2 Pick
+
+occur 0%
+
+action GET QUAR when at ledge and !carried Pick and here Quartz
+	print "I can't,"
+	print "It's imbedded in rock"
+
+action GET QUAR when carried Pick and at ledge and here Quartz
+	print "O.K."
+	destroy2 Quartz
+	get Quartz1
+
+action OPEN SAFE when carried Key1 and here safe
+	get paper
+	print "O.K."
+	print "I got"
+	print something
+
+action LOOK PAPE when carried paper
+	print "I see"
+	print "Disarm Code: 1=Warfin 2=Yoyodyne"
+
+action LOOK CAR when here Car
+	print "I see"
+	print "The cockpit is"
+	print open
+	continue
+
+occur 0%
+	print "I see"
+	print "power terminals,"
+	print "a fuel tank and a jet engine"
+
+occur 0% when !flag 21
+	print "connected by a hose."
+
+occur 0% when flag 11
+	print "Engine is idling."
+
+action GET HOSE when here Car and !flag 21 and !flag 11
+	get hose
+	set_flag 21
+	print "O.K."
+
+action GET HOSE when here hose
+	get hose
+	print "O.K."
+
+action REPL HOSE when carried hose and here Car
+	print "O.K."
+	clear_flag 21
+	destroy2 hose
+
+action GO COCK when here Car
+	goto car
+	print "O.K."
+
+action CLOS COCK when at car and !flag 22
+	print "O.K."
+	set_flag 22
+
+action LOOK DASH when at car
+	print "I see"
+	print "starter button & glove compartment."
+	print "The cockpit is"
+	continue
+
+occur 0% when !flag 22
+	print open
+	print "Fuel gauge reads"
+
+occur 0% when flag 22
+	print closed
+	print "Fuel gauge reads"
+
+occur 0% when flag 19
+	print full
+
+occur 0% when flag 8
+	print full
+
+occur 0% when !flag 19 and !flag 8
+	print empty
+
+action OPEN GLOV when at car and !flag 18
+	print "I got"
+	print something
+	superget Formula
+	continue
+
+occur 0%
+	set_flag 18
+	superget Fluid
+
+action LOOK FORM when carried Formula
+	print "Fuel is made from"
+	print "gasoline, sand, quartz, catalyst."
+
+action LOOK RADI when present radio
+	print "I see"
+	print "a transmit switch"
+	continue
+
+occur 0% when !flag 29
+	print "There's no battery"
+	continue
+
+occur 0% when !flag 14
+	print "There's no antenna"
+	continue
+
+occur 0% when flag 14 and flag 29 and flag 30 and flag 31
+	set_flag0
+	continue
+
+occur 0% when !flag 0
+	print "It's not working."
+	continue
+
+occur 0%
+	clear_flag0
+
+action CONN RADI when present radio
+	print "In 2 words, connect to what?, i.e. CONNECT PIPE"
+
+action CONN ANTE when at equipment and !flag 14 and present radio
+	set_flag 14
+	drop radio
+	print "O.K."
+
+action CONN CABL when present Cables
+	print "To what?"
+
+action CONN BATT when present radio and present battery and !flag 29
+	set_flag 29
+	print "O.K."
+	continue
+
+occur 0%
+	swap battery radio1
+
+action PUSH SWIT when at equipment and here radio1 and flag 14 and flag 30
+	print "To transmit say `TRANSMIT something`"
+
+action MAKE FUEL when at Laboratory and present on and present Quartz1 and present Fluid and present gasoline
+	continue
+
+occur 0% when present Sand and present Formula
+	destroy2 Quartz1
+	destroy2 Fluid
+	destroy2 Sand
+	set_flag0
+
+occur 0% when !flag 0
+	print "I can't do that...yet"
+
+occur 0% when flag 0
+	put gasoline VOID5
+	get fuel
+	print "O.K."
+	clear_flag0
+
+action FUEL CAR when here Car and carried fuel
+	swap fuel Jug
+	set_flag 19
+	print "O.K."
+
+action PUSH BUTT when at car and flag 8
+	print "Car catches fire and blows up."
+	print "I'm fried Banzai."
+	game_over
+
+action PUSH BUTT when at car and !flag 19
+	print nothing
+	print special
+	print happens
+
+action PUSH BUTT when at car and flag 21
+	print "Car catches fire and blows up."
+	print "I'm fried Banzai."
+	game_over
+
+action PUSH BUTT when at car and flag 20
+	print "Car catches fire and blows up."
+	print "I'm fried Banzai."
+	game_over
+
+action PUSH BUTT when at car and !flag 22
+	print "O.K."
+	print "Engine is idling."
+	set_flag 11
+
+action PUSH BUTT when at car and flag 4
+	clear_flag 4
+	set_flag 5
+	print "I drive to Main St for attempt to mountain"
+
+action PUSH BUTT when at car and flag 5
+	clear_flag 5
+	set_flag 6
+	clear_flag 19
+	continue
+
+occur 0%
+	print "I drive into mountain."
+	set_dark
+	look
+
+action GET HOSE when here Car and flag 11
+	print "Car catches fire and blows up."
+	print "I'm fried Banzai."
+	game_over
+
+action OPEN COCK when at car and flag 22
+	clear_flag 22
+	clear_flag 11
+	print "O.K."
+
+action WASH HOSE when carried hose and at lake
+	clear_flag 20
+	print "O.K."
+
+action GET UP when flag 22
+	print "I can't,"
+	print "The cockpit is"
+	print closed
+
+action GET UP when at car and flag 4
+	goto lot1
+	put Car lot1
+	print "O.K."
+
+action GET UP when at car and flag 5
+	goto Hickory
+	put Car Hickory
+	print "O.K."
+
+action GET UP when at car and flag 6
+	goto mountain
+	put Car mountain
+	print "O.K."
+
+action OPEN COCK when at Shaft
+	print "I go thru door. Slam!!!"
+	goto View1
+
+action TO TERM when here Car and present Cables
+	print "O.K."
+	set_flag 9
+	drop Cables
+
+action TO BATT when here Car and present Cables
+	set_flag 10
+	drop Cables
+	drop battery
+	print "O.K."
+
+action LOOK VAT when at Laboratory
+	print "O.K."
+	print "I see"
+	print nothing
+	print special
+
+action FUEL JUG when carried Jug
+	print "How?"
+
+action FUEL CAR when here Car and carried gasoline
+	set_flag 8
+	swap gasoline Jug
+	print "O.K."
+
+action CLIM MOUN when at mountain1
+	print "How?"
+
+action SAY:
+	print "O.K."
+	println_noun
+
+action GO CAR when here Car
+	goto car
+	print "O.K."
+
+action OPEN GLOV when at car
+	print nothing
+	print special
+	print happens
+
+action GET OUT when flag 22
+	print "I can't,"
+	print "The cockpit is"
+	print closed
+
+action GET OUT when at car and flag 4
+	goto lot1
+	put Car lot1
+	print "O.K."
+
+action GET OUT when at car and flag 5
+	goto Hickory
+	put Car Hickory
+	print "O.K."
+
+action GET OUT when at car and flag 6
+	goto mountain
+	put Car mountain
+	print "O.K."
+
+action GO SHED when at Ave1
+	goto equipment
+
+action GET LINE when at ledge and !flag 23
+	get line
+	destroy2 above
+
+action PUSH LINE when at ledge and !flag 23
+	get line
+	destroy2 above
+
+action GET LINE when at ledge and flag 23
+	destroy above
+	superget line
+	set_flag0
+	continue
+
+occur 0% when flag 0
+	clear_flag0
+	superget Pick
+	clear_flag 23
+
+action PUSH LINE when at ledge and flag 23
+	destroy above
+	superget line
+	superget Pick
+	continue
+
+occur 0%
+	clear_flag 23
+	print "O.K."
+	print "I got"
+	print something
+
+action CLOS TOOL when present toolbox1
+	swap toolbox1 toolbox
+
+action OPEN TOOL when present toolbox
+	swap toolbox toolbox1
+
+action LOOK STAI when at Laboratory and !carried Jug and !exists Jug and present on
+	superget Jug
+	print "I see"
+	print something
+	print "under stairs, I get it."
+
+action GO STAI when at Laboratory
+	goto office
+
+action LIGH FLAS when flag 16 and present off
+	print "I can't,"
+	print "batterys are dead"
+
+action LIGH FLAS when present off
+	swap on off
+	look
+	print "O.K."
+
+action UNLI FLAS when present on
+	swap on off
+	look
+	print "O.K."
+
+action GET QUAR when here Quartz1 and !at ledge
+	get Quartz1
+
+action GET ENVE when here Envelope
+	get Envelope
+
+action GO COCK when at Shaft
+	goto View1
+
+action SLEE:
+	goto hereafter
+	look
+	print "An atomic explosion erupts."
+	print "I'm fried Banzai."
+
+action LOOK ME
+	print "O.K."
+	print "I see"
+	print "`Buckaroo Banzai`"
+
+action LOOK HOSE when carried hose and flag 20
+	print "I see"
+	print "residue inside it."
+
+action LOOK HOSE when carried hose and !flag 20
+	print "I see"
+	print "it's clean."
+
+action MAKE FUEL when !carried Formula and at Laboratory
+	print "No formula!"
+
+action MAKE FUEL when at Laboratory and carried on
+	print something
+	print "is missing."
+
+action PUT HOSE when carried hose and here Car
+	print "O.K."
+	clear_flag 21
+	destroy2 hose
+
+action CHAR BATT when carried battery
+	print "How?"
+
+action GET LINE when here line
+	get line
+
+action PUSH SWIT when carried radio
+	print "O.K."
+	print nothing
+	print happens
+
+action TRAN when at _ROOM0
+
+action PUSH CAR when here Car
+	print "Not with these hands."
+
+action USE:
+	print "It doesn't"
+	print work
+
+action SWIM when at lake
+	print "O.K."
+
+action TO:
+	print "Not to that."
+
+action PUSH LINE when here hole and !flag 24
+	print "I can't,"
+	print "it's still attached."
+
+action GET LINE when here hole and !flag 24
+	print "I can't,"
+	print "it's still attached."
+
+action CUT LINE when !carried Pick and here hole
+	print "Not with these hands."
+
+action DIG when !carried Pick
+	print "Not with these hands."
+
+action OPEN PIPE when carried Key1 and !carried Key
+	print "I can't,"
+	print "the key doesn't fit."
+
+action LOOK when flag 15 and !carried on
+	print "I can't,"
+	print "there's no"
+	print light
+
+action OPEN SAFE when carried Key and !carried Key1
+	print "I can't,"
+	print "the key doesn't fit."
+
+action LOOK:
+	print "O.K."
+	print "I see"
+	print nothing
+	print special
+
+action GET INVE
+	inventory
+
+action INVE:
+	inventory
+
+action QUIT:
+	game_over
+
+action SAVE GAME
+	save_game
+
+action HELP:
+	print "Scott won't let me."
+
+action DIG when at beach
+	print "O.K."
+	print nothing
+	print special
+	print happens
+
