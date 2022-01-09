@@ -10,4 +10,4 @@ Play them in your web browser:
 
 [Buckaroo Banzai](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/main/games/ScottAdams/14b%20Buckaroo%20Banzai/adv14b-edit.ssd&cpuMultiplier=2) ([info](https://github.com/ahope1/BeebScott/tree/main/games/ScottAdams/14b%20Buckaroo%20Banzai))
 
-
+[Ghost King](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/main/games/GhostKing/gk.ssd&cpuMultiplier=2 ([info](https://github.com/ahope1/BeebScott/tree/main/games/GhostKing))
