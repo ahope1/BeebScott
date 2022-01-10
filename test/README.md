@@ -1,6 +1,11 @@
 # Tests
 
-You can [run the tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd) in a BBC Micro emulator.
+The file you want is ***cases.DAT***. It contains tests that can be run in any Scott Adams game interpreter program (e.g. [ScottFree](http://ifarchive.org/indexes/if-archive/scott-adams/interpreters/scottfree/)). 
+
+You can [run the tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd) in a BBC Micro emulator right now. 
+
+
+### Files
 
 ***cases.sck*** is written in uncompiled ScottKit format and collates a number of test cases, which were originally discussed [on intfiction.org](https://intfiction.org/t/scott-adams-interpreter-discrepancies/).
 
@@ -10,4 +15,4 @@ You can [run the tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=htt
 
 ***cases.ssd*** is a disc-image that can be loaded into a BBC Micro emulator. It contains the test game data file and the BeebScott interpreter. You can [run the test game](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd) in a BBC Micro emulator.
 
-***cases.DAT*** is a manually reformatted version of *cases_BOL_ADDED.sao*. &nbsp; *cases.DAT* can be (renamed and) loaded into ADVENTUR/CMD, the TRS-80 Scott Adams game interpreter written by Scott Adams himself and/or by Adventure International. 
+***cases.DAT*** is a manually reformatted version of *cases_BOL_ADDED.sao*. &nbsp; *cases.DAT* can be loaded into any Scott Adams game interpreter program. For example, it can be (renamed and) loaded into ADVENTUR/CMD, the TRS-80 Scott Adams game interpreter written by Scott Adams himself and/or by Adventure International. 
