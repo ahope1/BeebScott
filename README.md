@@ -22,4 +22,4 @@ Some games in Scott Adams format have been converted for use with BeebScott. Pla
 
 [***terp.bas***](https://github.com/ahope1/BeebScott/tree/main/code/terp.bas) is the Scott Adams game interpreter program, written in BBC BASIC. It reads in a game data file (which has been converted to BeebScott format by *conv.pl*)  and lets the user play the game on a BBC Micro computer or emulator.
 
-You can [run some test cases](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd).
+You can [run some tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd) in BeebScott.
