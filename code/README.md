@@ -6,4 +6,4 @@
 
 [***load.bas***](https://github.com/ahope1/BeebScott/tree/main/code/load.bas) is the loader program, written in BBC BASIC. It displays the generic intro text, adapted from that in Scott Adams's own TRS-80 interpreter(s), and sets up a custom newline routine in machine code if the game data contains manual newlines.  
 
-You can [run some tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd) in BeebScott.
+You can [play some games](https://github.com/ahope1/BeebScott/tree/main/games), or [run some tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd), in BeebScott.
