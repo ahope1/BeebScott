@@ -4,6 +4,6 @@
 
 [***terp.bas***](https://github.com/ahope1/BeebScott/tree/main/code/terp.bas) is the Scott Adams game interpreter program, written in BBC BASIC. It reads in a game data file (which has been converted to BeebScott format by *conv.pl*)  and lets the user play the game on a BBC Micro computer or emulator. &nbsp; *terp.bas* will need to be compressed ("packed") with [basictool](https://github.com/ZornsLemma/basictool) before being run. 
 
-[***load.bas***](https://github.com/ahope1/BeebScott/tree/main/code/load.bas) is the loader program, written in BBC BASIC. It displays the generic intro text, adapted from Scott Adams's own TRS-80 interpreter(s), and sets up a custom newline routine in machine code if the game data contains manual newlines. It then loads and runs *terp.bas*. 
+[***load.bas***](https://github.com/ahope1/BeebScott/tree/main/code/load.bas) is the loader program, written in BBC BASIC. It displays the generic intro text, adapted from Scott Adams's own TRS-80 interpreter(s); sets up a custom newline routine in machine code if the game data contains manual newlines; and then runs *terp.bas*. 
 
 You can now [play some games](https://github.com/ahope1/BeebScott/tree/main/games) (or [run some tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd)) in BeebScott.
