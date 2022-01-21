@@ -6,6 +6,6 @@
 
 [***load.bas***](https://github.com/ahope1/BeebScott/tree/main/code/load.bas) is the loader program, written in BBC BASIC. It displays the generic intro text, adapted from Scott Adams's own TRS-80 interpreter(s); it sets up a custom newline routine in machine code if the game data contains manual newlines; and it then runs *terp.bas*. 
 
-***template.ssd*** is a bootable floppy disc image in Acorn DFS format, to which the files *conv.pl*, *terp.bas* (renamed $.TERP) and *load.bas* (renamed $.LOAD) should be added with [sweh's MMB/SSD Perl utilities](https://sweh.spuddy.org/Beeb/mmb_utils.html), for example, or with [Disc Image Manager](https://stardot.org.uk/forums/viewtopic.php?p=299825#p299825).
+***template.ssd*** is a bootable floppy disc image in Acorn DFS format, to which the files *conv.pl*, *terp.bas* (renamed $.TERP) and *load.bas* (renamed $.LOAD) should be added with the help of [sweh's MMB/SSD Perl utilities](https://sweh.spuddy.org/Beeb/mmb_utils.html), for example, or [Disc Image Manager](https://stardot.org.uk/forums/viewtopic.php?p=299825#p299825).
 
 You can now [play some games](https://github.com/ahope1/BeebScott/tree/main/games) (or [run some tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd)) in BeebScott.
