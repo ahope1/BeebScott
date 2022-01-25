@@ -277,7 +277,7 @@ for(@rooms)
 {
 	my $room = $_;
 	$room =~ tr/`/'/;
-	$room =~ s/\R/ /;
+	$room =~ s/\R/ /g;
 	push @basic, "DATA $room";
 }
 
@@ -318,6 +318,7 @@ for(@objects)
 {
 	my $object = $_;
 	$object =~ tr/`/'/;
+	$object =~ s/\R/ /g;
 	say "DATA $object";
 }
 say"";
