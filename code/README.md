@@ -1,6 +1,6 @@
 ## Code
 
-[***conv.pl***](https://github.com/ahope1/BeebScott/tree/main/code/conv.pl) **is a Perl script that will read a Scott Adams game file and convert it to BeebScott format.** The input file can be either a TRS-80 .DAT file (a.k.a. a "[ScottFree format](https://www.ifarchive.org/indexes/if-archive/scott-adams/games/scottfree/)" file) or a compiled [ScottKit](https://github.com/MikeTaylor/scottkit) .sao file. The output from *conv.pl* is a file named DAT, which should be added to the BBC Micro disc-image *template.ssd* (below).
+[***conv.pl***](https://github.com/ahope1/BeebScott/tree/main/code/conv.pl) **is a Perl script that will read a Scott Adams game file and convert it to BeebScott format.** The input file can be either a TRS-80 .DAT file (a.k.a. a "[ScottFree format](https://www.ifarchive.org/indexes/if-archive/scott-adams/games/scottfree/)" file) or a compiled [ScottKit](https://github.com/MikeTaylor/scottkit) .sao file. The output from *conv.pl* is a file in BeebSCott format, named DAT, which should be added to the BBC Micro disc-image *template.ssd* (below).
 
 [***terp.bas***](https://github.com/ahope1/BeebScott/tree/main/code/terp.bas) **is a Scott Adams game interpreter program, written in BBC BASIC.** Before being run, *terp.bas* must be compressed ("packed") with [basictool](https://github.com/ZornsLemma/basictool). When run, *terp.bas* will read in a game data file (which has been converted to BeebScott format by *conv.pl*) and enable the user to play the game on a BBC Micro computer or emulator. 
 
