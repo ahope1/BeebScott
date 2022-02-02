@@ -4,7 +4,7 @@ use warnings;
 use feature qw(say);
 use IO::File;
 
-# (1) Reads in either (i) a .sao file created by ScottKit or (ii) an "original" TRS-80 .DAT game data file, and then (2) outputs a BBC BASIC program that will write the game data to a BBC Micro filesystem in a format suitable for use with the BeebScott interpreter.
+# This Perl script reads in either (i) a .sao file created by ScottKit or (ii) an "original" TRS-80 .DAT game data file. The script then processes the data and outputs a datafile named DAT, which can immediately be added to a BBC Micro disc-image and loaded into the BeebScott interpreter directly and played. (Optionally, if you specify the -d flag, this Perl script will also output a BBC BASIC program in plain text (on stdout), which, when tokenised and run on a BBC Micro (or emulator) with 65(C)02 co-processor active, will write the game data to a file named DAT on a BBC Micro filesystem in a format suitable for use with BeebScott.)
 
 # filename (eventually)
 my $fname = $ARGV[0];
@@ -20,11 +20,15 @@ my $n = ' ';
 # delete empty actions?
 my $z = 0;
 
-if (defined $fname && $fname =~ /-[ncz]{1,3}/) 
+# debug?
+my $d = 0;
+
+if (defined $fname && $fname =~ /-[nczd]{1,4}/) 
 { 
 	if (index($fname,'n')!=-1) { $n = '|'; }
 	if (index($fname,'c')!=-1) { $w |= 2; }
 	if (index($fname,'z')!=-1) { $z = 1; }
+	if (index($fname,'d')!=-1) { $d = 1; }
 	$fname = $ARGV[1];
 }
 
@@ -32,7 +36,7 @@ if (defined $fname && $fname =~ /-[ncz]{1,3}/)
 # open file for reading
 my $pname = $0; 
 $pname =~ s{^.*[\/]}{};
-my $usage="Usage: $pname [-n|c|z] filename";
+my $usage="Usage: $pname [-n|c|z|d] filename";
 if ((!defined $fname) || ($fname eq ''))
 {
 	die "$usage\n";
@@ -229,13 +233,16 @@ if ($z == 1)
 }
 
 
-say 'NEW';
-say 'AUTO';
+if ($d == 1)
+{
+	say 'NEW';
+	say 'AUTO';
 
-say 'REM Program must be run on a BBC Micro with a 65(C)02 Co-processor';
-say 'LOMEM=&C000';
-say 'HIMEM=&F800';
-say "ONERROR:ONERROROFF:PRINT:REPORT:PRINT'ERL:CLOSE#0:END\n";
+	say 'REM Program must be run on a BBC Micro with a 65(C)02 Co-processor';
+	say 'LOMEM=&C000';
+	say 'HIMEM=&F800';
+	say "ONERROR:ONERROROFF:PRINT:REPORT:PRINT'ERL:CLOSE#0:END\n";
+}
 
 my @basic;
 push @basic, 'REM header';
@@ -260,33 +267,47 @@ for(my $i = 0; $i <= $words; $i++)
 	elsif ($i==3){ $dirn = substr("EAST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"EAST"/; }
 	elsif ($i==4){ $dirn = substr("WEST",0,$wordlen); $wordpair =~ s/,"$dirn"/,"WEST"/; }
 	elsif ($i==6){ $dirn = substr("DOWN",0,$wordlen); $wordpair =~ s/,"$dirn"/,"DOWN"/; }
-	elsif ($i==18){ $dirn = substr("DROP",0,$wordlen); $wordpair =~ s/^"[^"]*",/"$dirn",/; }
+	elsif ($i==18) # DROP (see BURGLAR.DAT)
+	{ 
+		$wordpair =~ /^"([^"]*)"/;
+		if (length $1 > $wordlen) 
+		{ 
+			$dirn = substr($1,0,$wordlen); 
+			$wordpair =~ s/^"[^"]*",/"$dirn",/; 
+		}
+	}
 	elsif ($i!=0)
 	{ 
 		if ($wordpair =~ /^"\*?([^"]*)","\*?([^"]*)"/) 
 		{ 
 			if (length $1 > $wordlen || length $2 > $wordlen) { die "***\n*** Word too long!: $wordpair\n***\n"; } 
 		}
-		else { die " ***\n*** Malformed word data!: $wordpair\n***\n"; } 
+		else { die "***\n*** Malformed word data!: $wordpair\n***\n"; } 
 	}
 	push @basic, "DATA $wordpair";
+	$words[$i] = $wordpair;
 }
 
 push @basic, "\nREM rooms";
+my @rooms2;
 for(@rooms)
 {
 	my $room = $_;
 	$room =~ tr/`/'/;
 	$room =~ s/\R/ /g;
 	push @basic, "DATA $room";
+	push @rooms2, $room;
 }
+@rooms = @rooms2;
 
 push @basic, "\nREM messages";
+my @messages2;
 for(@messages)
 {
 	my $message = $_;
 	$message =~ tr/`/'/;
 	$message =~ s/\R/$n/g;
+	push @messages2, $message;
 	
 	# test for presence of manual newlines
 	if (($w & 1)==0 && $message =~ /\|/) { $w |= 1; }
@@ -308,20 +329,25 @@ for(@messages)
 		push @basic, "DATA $message";
 	}
 }
+@messages = @messages2;
 
-say "REM optional bit-flags\nDATA $w\n";
+say "REM optional bit-flags\nDATA $w\n" if ($d == 1);
 
-say for @basic;
+if ($d == 1) { say for @basic; }
 
-say"\nREM objects";
+say"\nREM objects" if ($d == 1);
+my @objects2;
 for(@objects)
 {
 	my $object = $_;
 	$object =~ tr/`/'/;
 	$object =~ s/\R/ /g;
-	say "DATA $object";
+	push @objects2, $object;
+	say "DATA $object" if ($d == 1);
 }
-say"";
+@objects = @objects2;
+say"" if ($d == 1);
+
 	
 my $prog = <<'END_MSG';
 
@@ -411,4 +437,124 @@ END
 
 END_MSG
 
-say $prog;
+say $prog if ($d == 1);
+
+open(my $out, '>:raw', 'DAT') or die "Unable to open: $!";
+
+print $out pack('C',0x40);
+print $out pack('L>',$w);
+
+for my $head (($objects,$actions,$words,$rooms,$mx,$start,$treasures,$wordlen,$lt,$messages,$treasury))
+{
+	real_out($head);
+}
+
+for my $action (@actions)
+{
+	if ($action =~ /^([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+)/)
+	{
+		for my $a ($1,$2,$3,$4,$5,$6,$7,$8)
+		{
+			print $out pack('C',0x40);
+			print $out pack('L>',$a);
+		}
+	}
+	else { die " ***\n*** Badly formed action!: $action\n***\n"; }
+}
+
+real_out($nonautoindex);
+
+for(my $i = 0; $i <= $words; $i++)
+{
+	my $wordpair = $words[$i];	
+	if ($wordpair =~ /^"(\*?[^"]*)","(\*?[^"]*)"/) 
+	{
+		string_out($1);
+		string_out($2);
+	} 
+	else { die " ***\n*** Badly formed word data!: $wordpair\n***\n"; } 	
+}
+
+for my $room (@rooms)
+{
+	if ($room =~ /^([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+),([0-9]+),"([^"]*)"/)
+	{
+		for my $a ($1,$2,$3,$4,$5,$6)
+		{
+			real_out($a);
+		}
+		string_out($7);
+	}
+	else { die " ***\n*** Badly formed room data!: $room\n***\n"; } 	
+}
+
+for my $message (@messages)
+{
+	if ($message =~ /^"([^"]*)"/)
+	{
+		if (length $1 > 255) { die " ***\n*** Message too long!: $message\n***\n"; }
+		
+		string_out($1);
+	}
+	else { die " ***\n*** Badly formed message!: $message\n***\n"; } 	
+}
+
+for my $object (@objects)
+{
+	if ($object =~ /^"([^"]*)",([\-]?[0-9]+)/)
+	{
+		string_out($1);
+		real_out($2);
+	}
+	else { die " ***\n*** Badly formed object!: $object\n***\n"; }
+}
+
+close($out) or die "Unable to close: $!";
+
+
+sub real_out 
+{
+	my $data_real = shift;
+	
+	if ($data_real == 0)
+	{
+		print $out pack('C',0xFF);
+		print $out pack('x5',0);
+		return;
+	}
+	
+	my $minus = 0;
+	if ($data_real < 0) { $minus = 1; }
+	$data_real = abs($data_real);
+
+	my $data_exponent = 1 + int(log($data_real) / log(2));
+	$data_real = $data_real / ( 2 ** ($data_exponent - 32));
+	$data_real = $data_real - 0x80000000; # 2147483648;
+
+	my $data_integer = int($data_real);
+	my $data_byte = $data_integer & 0xFF;
+
+	print $out pack('C',0xFF);
+	print $out pack('C',$data_byte);
+
+	$data_byte = ($data_integer & 0xFF00) / 0x100;
+	print $out pack('C',$data_byte);
+
+	$data_byte = ($data_integer & 0xFF0000) / 0x10000;
+	print $out pack('C',$data_byte);
+
+	$data_byte = ($data_integer & 0xFF000000) / 0x1000000;
+	if ($minus == 1) { $data_byte = $data_byte | 0x80; }
+	print $out pack('C',$data_byte);
+
+	$data_byte = $data_exponent + 0x80;
+	print $out pack('C',$data_byte);
+}
+
+sub string_out
+{
+	my $s = shift;
+	print $out pack('C',0x0);
+	print $out pack('C',length $s);
+	print $out pack('A'.length $s, scalar reverse $s);
+}
