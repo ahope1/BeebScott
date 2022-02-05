@@ -3,10 +3,26 @@ use strict;
 use warnings;
 use feature qw(say);
 use IO::File;
+use Getopt::Long;
 
-# This Perl script reads in either (i) a .sao file created by ScottKit or (ii) an "original" TRS-80 .DAT game data file. The script then processes the data and outputs a datafile named DAT, which can immediately be added to a BBC Micro disc-image and loaded into the BeebScott interpreter directly and played. (Optionally, if you specify the -d flag, this Perl script will also output a BBC BASIC program in plain text (on stdout), which, when tokenised and run on a BBC Micro (or emulator) with 65(C)02 co-processor active, will write the game data to a file named DAT on a BBC Micro filesystem in a format suitable for use with BeebScott.)
+# This Perl script reads in either (i) a .sao file created by ScottKit or (ii) an "original" TRS-80 .DAT game data file. The script then processes the data and outputs a datafile named DAT, which can immediately be added to a BBC Micro disc-image and loaded into the BeebScott interpreter and played. (If you specify the optional -d (debug) flag, this Perl script will also output a BBC BASIC program in plain text, which, when tokenised and run on a BBC Micro (or emulator) with 65(C)02 co-processor active, will write the game data to a BBC Micro filesystem in a file named DAT, which should contain exactly the same data as the aforementioned DAT file written directly by this script.)
 
-# filename (eventually)
+my $pname = $0; 
+$pname =~ s{^.*[\/]}{};
+my $usage="\nUsage: $pname [-n|c|z|d] filename\n n Convert newline to | in messages\n c Concatenate successive messages during gameplay\n z Exclude all-zero actions from game data\n d Output a BBC BASIC data-write program\n";
+
+my $newlines=0;
+my $zeros = 0;
+my $concatenate = 0;
+my $debug = 0;
+Getopt::Long::Configure ("bundling");
+GetOptions ("n" => \$newlines,
+            "z"   => \$zeros,
+            "d"   => \$debug,
+            "c"  => \$concatenate)
+or die ("$usage\n");
+            
+# filename
 my $fname = $ARGV[0];
 
 # bit-flags (W%)
@@ -23,24 +39,13 @@ my $z = 0;
 # debug?
 my $d = 0;
 
-if (defined $fname && $fname =~ /-[nczd]{1,4}/) 
-{ 
-	if (index($fname,'n')!=-1) { $n = '|'; }
-	if (index($fname,'c')!=-1) { $w |= 2; }
-	if (index($fname,'z')!=-1) { $z = 1; }
-	if (index($fname,'d')!=-1) { $d = 1; }
-	$fname = $ARGV[1];
-}
-
+if ($newlines==1) { $n = '|'; }
+if ($concatenate==1) { $w |= 2; }
+if ($zeros==1) { $z = 1; }
+if ($debug==1) { $d = 1; }
 
 # open file for reading
-my $pname = $0; 
-$pname =~ s{^.*[\/]}{};
-my $usage="Usage: $pname [-n|c|z|d] filename";
-if ((!defined $fname) || ($fname eq ''))
-{
-	die "$usage\n";
-}
+if ((!defined $fname) || ($fname eq '')) { die "$usage\n"; }
 my $fh = IO::File->new("< $fname") or die "Couldn't open $fname for reading: $!\n$usage\n";
 
 my $gdata = do { local $/; <$fh> };
@@ -208,7 +213,7 @@ if ($gdata =~ /^[\s]*([0-9]+)[\s]+([0-9]+)[\s]+([0-9]+)/)
 	my $advnum = $2;
 	my $checksum = $3;
 }	
-else { die "Malformed footer!\n"; }
+else { die "Malformed trailer!\n"; }
 
 
 # filter out empty actions
@@ -439,7 +444,7 @@ END_MSG
 
 say $prog if ($d == 1);
 
-open(my $out, '>:raw', 'DAT') or die "Unable to open: $!";
+open(my $out, '>:raw', 'DAT') or die "Couldn't open file DAT for output: $!\n";
 
 print $out pack('C',0x40);
 print $out pack('L>',$w);
@@ -509,7 +514,7 @@ for my $object (@objects)
 	else { die " ***\n*** Badly formed object!: $object\n***\n"; }
 }
 
-close($out) or die "Unable to close: $!";
+close($out) or die "Unable to close: $!\n";
 
 
 sub real_out 
