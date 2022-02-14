@@ -1,6 +1,6 @@
 # Ghost King
 
-A copy of the text adventure game [Ghost King](https://ifdb.org/viewgame?id=pv6hkqi34nzn1tdy) converted for use with BeebScott.
+A copy of the text adventure game [Ghost King](https://ifdb.org/viewgame?id=pv6hkqi34nzn1tdy), converted for use with BeebScott.
 
 [**>> Play in browser <<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/main/games/GhostKing/gk.ssd&cpuMultiplier=2)
 
