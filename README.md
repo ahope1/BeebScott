@@ -4,6 +4,8 @@ BeebScott is an interpreter for playing [Scott Adams](http://www.msadams.com/adv
 
 See [a video](https://www.youtube.com/watch?v=lEjDFMw25kw) of BeebScott in action.
 
+Read [a blogpost](https://ahopeful.wordpress.com/2022/02/14/beebscott-the-scott-adams-interpreter-nobody-asked-for/) about BeebScott. 
+
 
 ## Games
 
