@@ -1,6 +1,6 @@
 # Secret Mission
 
-A copy of the text adventure game Secret Mission converted for use with BeebScott. Secret Mission was created by Scott Adams and [published](https://en.wikipedia.org/wiki/List_of_Scott_Adams_Adventure_video_games) by Adventure International in 1979.
+A copy of the text adventure game Secret Mission, converted for use with BeebScott. Secret Mission was created by Scott Adams and [published](https://en.wikipedia.org/wiki/List_of_Scott_Adams_Adventure_video_games) by Adventure International in 1979.
 
 [**>> Play in browser <<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/main/games/ScottAdams/03%20Secret%20Mission/adv03-edited.ssd&cpuMultiplier=2)
 
