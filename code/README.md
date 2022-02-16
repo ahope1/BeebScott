@@ -8,7 +8,7 @@
 
 [***template.ssd***](https://github.com/ahope1/BeebScott/blob/main/code/template.ssd) **is a "blank" bootable floppy disc image in Acorn DFS format.** The file *terp.bas* should be tokenized and compressed with [basictool](https://github.com/ZornsLemma/basictool), and the compressed file should be added to *template.ssd* with the filename TERP. The file *load.bas* should be tokenized with basictool, and the tokenized file should be added to *template.ssd* with the filename LOAD. A game data file named DAT (the output of the *conv.pl* script) should also be added to *template.ssd*. (Files can be added to *template.ssd* with the help of [Disc Image Manager](https://stardot.org.uk/forums/viewtopic.php?p=299825#p299825) or [sweh's MMB/SSD Perl utilities](https://sweh.spuddy.org/Beeb/mmb_utils.html).) 
 
-There's [a YouTube video](https://www.youtube.com/watch?v=lEjDFMw25kw) that demos the use of the above programs and files.
+There's [a YouTube video](https://www.youtube.com/watch?v=lEjDFMw25kw) that demos the use of the above files.
 
 You can now [play some games](https://github.com/ahope1/BeebScott/tree/main/games) (or [run some tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd)) in BeebScott.
 
