@@ -1,6 +1,6 @@
-REM COPYRIGHT SCOTT ADAMS. 1978
+REM Initial version of interpreter program COPYRIGHT SCOTT ADAMS. 1978
 
-REM Interpreter program converted to BBC BASIC in 2020-2021 and renamed "BeebScott"
+REM Program converted to BBC BASIC in 2020-2022 and renamed "BeebScott"
 
 REM B% = top-window-redraw flag 
 MODE7:VDU23,0,10,8;0;0;0;23,0,11,12;0;0;0;:PRINT:DIM S% 255:B%=1:*FX11,0
@@ -280,10 +280,10 @@ REM 54. GOTOy
 DEFPROC740:PROC1050:R%=P%:B%=1:ENDPROC
 
 REM 80. EXRM0
-DEFPROC742:Z%=R%:R%=?arr%:?arr%=Z%:ENDPROC
+DEFPROC742:Z%=R%:R%=?arr%:?arr%=Z%:B%=1:ENDPROC
 
 REM 87. EXC,CR
-DEFPROC743:PROC1050:Z%=R%:R%=arr%?P%:arr%?P%=Z%:ENDPROC
+DEFPROC743:PROC1050:Z%=R%:R%=arr%?P%:arr%?P%=Z%:B%=1:ENDPROC
 
 REM 88. DELAY
 DEFPROC745:IF B% PROCdRM
@@ -342,7 +342,7 @@ REM 68. CLR0 (Clears the flag-bit numbered 0)
 DEFPROC930:P%=0:PROC810a:ENDPROC
 
 REM 69. FILL (Re-fill the artificial light source (obj 9) and pick it up)
-DEFPROC940:SF%=SF% AND NOT (2^16):CT%(8)=LT:IA%(9)=-1:ENDPROC
+DEFPROC940:SF%=SF% AND NOT (2^16):CT%(8)=LT:IA%(9)=-1:B%=1:ENDPROC
 
 REM 77. CT-1
 DEFPROC942:CT%=CT%-1:ENDPROC
