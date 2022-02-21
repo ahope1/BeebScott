@@ -10,7 +10,7 @@
 
 [***example.sh***](https://github.com/ahope1/BeebScott/blob/main/code/example.sh) **contains the list of commands used in the how-to video linked below.** The commands convert the TRS-80 .DAT game file for Scott Adams's first game Adventureland to BeebScott format. They then add the converted file to *template.ssd*, together with the files TERP and LOAD. 
 
-There's [a YouTube video](https://www.youtube.com/watch?v=lEjDFMw25kw) that demos the use of the above files.
+See [a YouTube video](https://www.youtube.com/watch?v=lEjDFMw25kw) that demos the use of the above files.
 
 You can now [play some games](https://github.com/ahope1/BeebScott/tree/main/games) (or [run some tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd)) in BeebScott.
 
