@@ -8,7 +8,7 @@
 
 [***template.ssd***](https://github.com/ahope1/BeebScott/blob/main/code/template.ssd) **is a "blank" bootable floppy disc image in Acorn DFS format.** The file *terp.bas* should be tokenized and compressed with [basictool](https://github.com/ZornsLemma/basictool), and the compressed file should be added to *template.ssd* with the filename TERP. The file *load.bas* should be tokenized with basictool, and the tokenized file should be added to *template.ssd* with the filename LOAD. A game data file named DAT (the output of the *conv.pl* script) should also be added to *template.ssd*. (Files can be added to *template.ssd* with the help of [Disc Image Manager](https://stardot.org.uk/forums/viewtopic.php?p=299825#p299825) or [sweh's MMB/SSD Perl utilities](https://sweh.spuddy.org/Beeb/mmb_utils.html).) 
 
-[***example.sh***](https://github.com/ahope1/BeebScott/blob/main/code/example.sh) **contains the list of commands used in the how-to video linked below.** The commands convert the TRS-80 .DAT game file for Scott Adams's first game Adventureland to BeebScott format. They then add the converted file to *template.ssd*, together with the other files required. 
+[***example.sh***](https://github.com/ahope1/BeebScott/blob/main/code/example.sh) **contains the list of commands used in the how-to video linked below.** The commands convert the TRS-80 .DAT game file for Scott Adams's first game Adventureland to BeebScott format. They then add the converted file to *template.ssd*, together with the files TERP and LOAD. 
 
 There's [a YouTube video](https://www.youtube.com/watch?v=lEjDFMw25kw) that demos the use of the above files.
 
