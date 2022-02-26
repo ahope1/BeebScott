@@ -4,6 +4,11 @@ treasury throne
 
 ########################################
 
+### Generic Test Room
+
+room quit_room "*You have typed QUIT. This is the Quit Room"
+
+
 ### Nounlessness Test Room
 
 room workroom "workroom. * Here you can type AR1 or AR2 or BREAK BOLT or WITH FILE. Scott Adams's TRS-80 interpreter ADVENTUR/CMD would allow BREAK BOLT but not (e.g.) BREAK BLAH. * To proceed to the next test, go EAST"
@@ -252,7 +257,9 @@ occur when here vampire and !carried cross
 action SCO: score
 action LOO: look
 action INV: inventory
-action QUI: game_over
+action QUI:
+	goto quit_room
+	game_over
 
 
 ### Nounlessness Test Actions
