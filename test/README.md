@@ -1,6 +1,6 @@
 # Tests
 
-The file you want is ***cases.DAT***. It contains tests that can be run in any Scott Adams game interpreter program (e.g. [ScottFree](http://ifarchive.org/indexes/if-archive/scott-adams/interpreters/scottfree/)). 
+The file you want is ***cases.DAT***. It contains tests, and it can be loaded and run in any Scott Adams game interpreter program (e.g. [ScottFree](http://ifarchive.org/indexes/if-archive/scott-adams/interpreters/scottfree/)). 
 
 You can [run the tests](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/master/test/cases.ssd) in BeebScott right now. 
 
