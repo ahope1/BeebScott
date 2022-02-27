@@ -259,6 +259,7 @@ action LOO: look
 action INV: inventory
 action QUI:
 	goto quit_room
+	print "The room description should have changed to that of the 'Quit Room'."
 	game_over
 
 
