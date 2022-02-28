@@ -78,7 +78,7 @@
 
 0 0 0 0 0 0 ""
 0 0 0 0 0 0 "*You have typed QUIT. This is the Quit Room"
-0 0 6 0 0 0 "workroom. * Here you can type AR1 or AR2 or BREAK BOLT or WITH FILE. Scott Adams's TRS-80 interpreter ADVENTUR/CMD would allow BREAK BOLT but not (e.g.) BREAK BLAH. * To proceed to the next test, go EAST"
+0 0 6 0 0 0 "workroom. * Here you can type AR1, AR2, QUIT, BREAK BOLT or WITH FILE. Scott Adams's TRS-80 interpreter ADVENTUR/CMD would allow BREAK BOLT but not (e.g.) BREAK BLAH. * To proceed to the next test, go EAST"
 0 0 0 0 0 0 "r10"
 0 0 0 0 0 0 "r23"
 0 0 0 0 0 0 "** This is the temporary room. *"
