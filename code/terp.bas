@@ -94,7 +94,9 @@ IF NV%(0)=0 OR cont% IFV%<>0 X%=CL%:NEXT:cont%=0:ENDPROC
 REM If continue-flag is set: 
 REM  If V is zero but N isn't then reset the continue-flag:
 REM   If auto action, then process conditions, else return. 
-IF NOT cont% ELSE IF V%<>0 ELSE IF N%=0 ELSE cont%=0:IF NV%(0)=0 ELSE X%=CL%:NEXT:ENDPROC
+REMIF NOT cont% ELSE IF V%<>0 ELSE IF N%=0 ELSE cont%=0:IF NV%(0)=0 ELSE X%=CL%:NEXT:ENDPROC
+IF NOT cont% ELSE IF V%<>0 ELSE IF N%=0 ELSE cont%=0:IF NV%(0)=0 ELSE STOP
+
 
 REM If the parsed verb doesn't match V then NEXT action.
 IF cont% ELSE IF NV%(0)<>V% NEXT:PROC990:ENDPROC
@@ -103,7 +105,7 @@ REM If auto action then if RND<=N then start processing conditions, else NEXT ac
 IF cont% ELSE IF NV%(0)<>0 ELSE F%=0:IF RND(100)>N% NEXT:PROC990:ENDPROC
 
 REM If non-auto action, and parsed noun doesn't match N, then NEXT action.
-IF cont% ELSE IF NV%(0)=0 ELSE IF N%<>NV%(1) IF N%<>0 NEXT:PROC990:ENDPROC
+IF cont% ELSE IF NV%(0)=0 ELSE IF (N%<>NV%(1) AND N%<>0) OR (N%=0 AND F4%) NEXT:PROC990:ENDPROC
 
 
 
