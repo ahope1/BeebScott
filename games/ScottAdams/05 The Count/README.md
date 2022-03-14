@@ -1,6 +1,6 @@
 # The Count
 
-A copy of the text adventure game The Count, converted for use with BeebScott. The Count was created by Scott Adams and [published](https://en.wikipedia.org/wiki/List_of_Scott_Adams_Adventure_video_games) by Adventure International in 1979.
+A copy of the text adventure game The Count, converted for use with BeebScott. The Count was originally created by Scott Adams and [published](https://en.wikipedia.org/wiki/List_of_Scott_Adams_Adventure_video_games) by Adventure International in 1979.
 
 [**>> Play in browser <<**](http://bbcmicro.co.uk//jsbeeb/play.php?autoboot&disc=https://raw.githubusercontent.com/ahope1/BeebScott/main/games/ScottAdams/05%20The%20Count/adv05-count.ssd&cpuMultiplier=2)
 
