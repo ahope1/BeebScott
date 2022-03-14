@@ -22,7 +22,7 @@ Some games in Scott Adams format have been converted for use with BeebScott. Pla
 
 ## Code
 
-See [the *code* subfolder](https://github.com/ahope1/BeebScott/tree/main/code/).
+Go to [the *code* subfolder](https://github.com/ahope1/BeebScott/tree/main/code/).
 
 
 ## History
