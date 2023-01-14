@@ -2,7 +2,7 @@
 
 BeebScott is an interpreter for playing [Scott Adams](http://www.msadams.com/adventures.htm) text adventure games on a BBC Micro computer ([or](https://bbc.godbolt.org) [emulator](http://www.mkw.me.uk/beebem/)). BeebScott is written in 8-bit BBC BASIC.
 
-You can watch [a video](https://www.youtube.com/watch?v=lEjDFMw25kw) showing you how to use BeebScott. And [another video](https://www.youtube.com/watch?v=Y9r2r1hbr94), of BeebScott running on real hardware.
+You can watch [a video](https://www.youtube.com/watch?v=lEjDFMw25kw) that shows you how to use BeebScott. And [another video](https://www.youtube.com/watch?v=Y9r2r1hbr94), of BeebScott running on real hardware.
 
 You can read [a blogpost](https://ahopeful.wordpress.com/2022/02/14/beebscott-the-scott-adams-interpreter-nobody-asked-for/) about BeebScott. 
 
